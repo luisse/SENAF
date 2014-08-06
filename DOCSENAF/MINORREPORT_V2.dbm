@@ -1,0 +1,729 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel>
+<schema name="public" protected="true" rect-visible="true" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<database name="minorreport" encoding="UTF8" lc-collate="Spanish, Argentina" lc-ctype="Spanish, Argentina">
+	<role name="postgres"/>
+	<tablespace name="pg_default"/>
+</database>
+
+<sequence name="acos_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="acos">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="52" y="54"/>
+	<column name="id" not-null="true" default-value="nextval('acos_id_seq'::regclass)">
+		<type name="integer"/>
+	</column>
+	<column name="parent_id">
+		<type name="integer"/>
+	</column>
+	<column name="model" default-value="NULL::character varying">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="foreign_key">
+		<type name="integer"/>
+	</column>
+	<column name="alias" default-value="NULL::character varying">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="lft">
+		<type name="integer"/>
+	</column>
+	<column name="rght">
+		<type name="integer"/>
+	</column>
+	<constraint name="acos_pkey" type="pk-constr" factor="100" table="public.acos">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="aros_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<sequence name="aros_acos_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="aros_acos">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="596" y="50"/>
+	<column name="id" not-null="true" default-value="nextval('aros_acos_id_seq'::regclass)">
+		<type name="integer"/>
+	</column>
+	<column name="aro_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="aco_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="_create" not-null="true" default-value="'0'::character varying">
+		<type name="character varying" length="2"/>
+	</column>
+	<column name="_read" not-null="true" default-value="'0'::character varying">
+		<type name="character varying" length="2"/>
+	</column>
+	<column name="_update" not-null="true" default-value="'0'::character varying">
+		<type name="character varying" length="2"/>
+	</column>
+	<column name="_delete" not-null="true" default-value="'0'::character varying">
+		<type name="character varying" length="2"/>
+	</column>
+	<constraint name="aros_acos_pkey" type="pk-constr" factor="100" table="public.aros_acos">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<index name="aro_aco_key" table="public.aros_acos"
+		 concurrent="false" unique="true" fast-update="false"
+		 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="aro_id"/>
+		</idxelement>
+		<idxelement use-sorting="false">
+			<column name="aco_id"/>
+		</idxelement>
+	</index>
+</table>
+
+<table name="aros">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="327" y="53"/>
+	<column name="id" not-null="true" default-value="nextval('aros_id_seq'::regclass)">
+		<type name="integer"/>
+	</column>
+	<column name="parent_id">
+		<type name="integer"/>
+	</column>
+	<column name="model" default-value="NULL::character varying">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="foreign_key">
+		<type name="integer"/>
+	</column>
+	<column name="alias" default-value="NULL::character varying">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="lft">
+		<type name="integer"/>
+	</column>
+	<column name="rght">
+		<type name="integer"/>
+	</column>
+	<constraint name="aros_pkey" type="pk-constr" factor="100" table="public.aros">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="departamentos_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="departamentos">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1101.77" y="464"/>
+	<column name="id" not-null="true" default-value="nextval('departamentos_id_seq'::regclass)">
+		<type name="integer"/>
+	</column>
+	<column name="nombre">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="provincia_id">
+		<type name="smallint"/>
+	</column>
+	<constraint name="PX_departamentos" type="pk-constr" factor="100" table="public.departamentos">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="groups_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="groups">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="88.7657" y="998"/>
+	<column name="id" not-null="true" default-value="nextval('groups_id_seq'::regclass)">
+		<type name="integer"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="character varying" length="45"/>
+	</column>
+	<column name="created">
+		<type name="date"/>
+	</column>
+	<column name="modified">
+		<type name="date"/>
+	</column>
+	<constraint name="PK_groups" type="pk-constr" factor="100" table="public.groups">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="grupopersonas_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="grupopersonas">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="28" y="224.2"/>
+	<column name="id" not-null="true" default-value="nextval('grupopersonas_id_seq'::regclass)">
+		<type name="integer"/>
+	</column>
+	<column name="created">
+		<type name="date"/>
+	</column>
+	<column name="modified">
+		<type name="date"/>
+	</column>
+	<column name="descripcion">
+		<type name="character varying" length="20"/>
+	</column>
+	<constraint name="pk_gruposfamilia" type="pk-constr" factor="100" table="public.grupopersonas">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="grupxfamilias_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="grupxfamilias">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="137" y="354.2"/>
+	<column name="id" not-null="true" default-value="nextval('grupxfamilias_id_seq'::regclass)">
+		<type name="integer"/>
+	</column>
+	<column name="tipofamilia_id" not-null="true">
+		<type name="smallint"/>
+	</column>
+	<column name="grupxpersona_id" not-null="true">
+		<type name="smallint"/>
+	</column>
+	<constraint name="pk_grupxfamilias_id" type="pk-constr" factor="100" table="public.grupxfamilias">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="grupxpersonas_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="grupxpersonas">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="479" y="224.2"/>
+	<column name="id" not-null="true" default-value="nextval('grupxpersonas_id_seq'::regclass)">
+		<type name="integer"/>
+	</column>
+	<column name="persona_id" not-null="true">
+		<type name="smallint"/>
+	</column>
+	<column name="grupopersona_id" not-null="true">
+		<type name="smallint"/>
+	</column>
+	<constraint name="pk_grupxpersonas" type="pk-constr" factor="100" table="public.grupxpersonas">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="localidades_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="localidades">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1073" y="310.2"/>
+	<column name="id" not-null="true" default-value="nextval('localidades_id_seq'::regclass)">
+		<type name="integer"/>
+	</column>
+	<column name="nombre">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="departamento_id">
+		<type name="smallint"/>
+	</column>
+	<constraint name="PK_localidades" type="pk-constr" factor="100" table="public.localidades">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="parentescos_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="parentescos">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="753" y="680.2"/>
+	<column name="id" not-null="true" default-value="nextval('parentescos_id_seq'::regclass)">
+		<type name="integer"/>
+	</column>
+	<column name="descripcion" not-null="true">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="parent_id" default-value="0">
+		<type name="smallint"/>
+	</column>
+	<column name="created">
+		<type name="date"/>
+	</column>
+	<column name="modified">
+		<type name="date"/>
+	</column>
+	<constraint name="pk_parentescos" type="pk-constr" factor="100" table="public.parentescos">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="perparentescos_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="perparentescos">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="788" y="236.6"/>
+	<column name="id" not-null="true" default-value="nextval('perparentescos_id_seq'::regclass)">
+		<type name="integer"/>
+	</column>
+	<column name="persona_id" not-null="true">
+		<type name="smallint"/>
+	</column>
+	<column name="parentesco_id" not-null="true">
+		<type name="smallint"/>
+	</column>
+	<column name="personapar_id">
+		<type name="smallint"/>
+	</column>
+	<constraint name="px_persparentescos" type="pk-constr" factor="100" table="public.perparentescos">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="personas_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="personas">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="439" y="426.6"/>
+	<column name="id" not-null="true" default-value="nextval('personas_id_seq'::regclass)">
+		<type name="integer"/>
+	</column>
+	<column name="nombre">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="apellido">
+		<type name="character varying" length="30"/>
+	</column>
+	<column name="sexo">
+		<type name="character"/>
+	</column>
+	<column name="nn" not-null="true">
+		<type name="boolean"/>
+	</column>
+	<column name="provincia_id" not-null="true">
+		<type name="smallint"/>
+	</column>
+	<column name="localidade_id" not-null="true">
+		<type name="smallint"/>
+	</column>
+	<column name="departamento_id" not-null="true">
+		<type name="smallint"/>
+	</column>
+	<column name="tipopersona_id" not-null="true">
+		<type name="smallint"/>
+	</column>
+	<constraint name="pk_personas" type="pk-constr" factor="100" table="public.personas">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="provincias_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="provincias">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1103" y="642.6"/>
+	<column name="id" not-null="true" default-value="nextval('provincias_id_seq'::regclass)">
+		<type name="integer"/>
+		<comment><![CDATA[IDENTIFICADOR]]></comment>
+	</column>
+	<column name="nombre">
+		<type name="character varying" length="50"/>
+	</column>
+	<constraint name="PK_PROVINCIAS" type="pk-constr" factor="100" table="public.provincias">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="tipofamilias_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="tipofamilias">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="108" y="485.6"/>
+	<column name="id" not-null="true" default-value="nextval('tipofamilias_id_seq'::regclass)">
+		<type name="integer"/>
+	</column>
+	<column name="descripcion" not-null="true">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="detalle">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="created">
+		<type name="date"/>
+	</column>
+	<column name="modified">
+		<type name="date"/>
+	</column>
+	<constraint name="pk_tipofamilia" type="pk-constr" factor="100" table="public.tipofamilias">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="tipopersonas_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="tipopersonas">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="435" y="746.6"/>
+	<column name="id" not-null="true" default-value="nextval('tipopersonas_id_seq'::regclass)">
+		<type name="integer"/>
+	</column>
+	<column name="descripcion" not-null="true">
+		<type name="character varying" length="30"/>
+	</column>
+	<column name="created">
+		<type name="date"/>
+	</column>
+	<column name="modified">
+		<type name="date"/>
+	</column>
+	<constraint name="PK_tipopersonas" type="pk-constr" factor="100" table="public.tipopersonas">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="userpersonas_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="userpersonas">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="116" y="647"/>
+	<column name="id" not-null="true" default-value="nextval('userpersonas_id_seq'::regclass)">
+		<type name="integer"/>
+	</column>
+	<column name="user_id" not-null="true">
+		<type name="smallint"/>
+	</column>
+	<column name="persona_id">
+		<type name="smallint"/>
+	</column>
+	<constraint name="PK_userpersonas" type="pk-constr" factor="100" table="public.userpersonas">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="users_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="users">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="91" y="774"/>
+	<column name="id" not-null="true" default-value="nextval('users_id_seq'::regclass)">
+		<type name="integer"/>
+	</column>
+	<column name="username" not-null="true">
+		<type name="character varying" length="45"/>
+	</column>
+	<column name="password" not-null="true">
+		<type name="character varying" length="45"/>
+	</column>
+	<column name="email" not-null="true">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="created">
+		<type name="date"/>
+	</column>
+	<column name="modified">
+		<type name="date"/>
+	</column>
+	<column name="state">
+		<type name="smallint"/>
+	</column>
+	<column name="group_id" not-null="true">
+		<type name="smallint"/>
+	</column>
+	<constraint name="PK_users" type="pk-constr" factor="100" table="public.users">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<constraint name="fk_departamentos_provincias" type="fk-constr"	 comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.provincias" table="public.departamentos">
+	<columns names="provincia_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+<constraint name="fk_grupxpersonas" type="fk-constr"	 comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.grupxpersonas" table="public.grupxfamilias">
+	<columns names="grupxpersona_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+<constraint name="fk_tipofamilias" type="fk-constr"	 comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.tipofamilias" table="public.grupxfamilias">
+	<columns names="tipofamilia_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+<constraint name="fk_grupopersonas" type="fk-constr"	 comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.grupopersonas" table="public.grupxpersonas">
+	<columns names="grupopersona_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+<constraint name="fk_personas" type="fk-constr"	 comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.personas" table="public.grupxpersonas">
+	<columns names="persona_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+<constraint name="fk_localidad_departamento" type="fk-constr"	 comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.departamentos" table="public.localidades">
+	<columns names="departamento_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+<constraint name="fk_parentescos" type="fk-constr"	 comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.parentescos" table="public.parentescos">
+	<columns names="parent_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+<constraint name="fk_perparentescos_personapar" type="fk-constr"	 comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.personas" table="public.perparentescos">
+	<columns names="personapar_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+<constraint name="fx_perparentescos_parentescos" type="fk-constr"	 comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.parentescos" table="public.perparentescos">
+	<columns names="parentesco_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+<constraint name="fx_persona_perparentescos" type="fk-constr"	 comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.personas" table="public.perparentescos">
+	<columns names="persona_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+<constraint name="fk_personas_provincias" type="fk-constr"	 comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.provincias" table="public.personas">
+	<columns names="provincia_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+<constraint name="fk_personas_tipopersonas" type="fk-constr"	 comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.tipopersonas" table="public.personas">
+	<columns names="tipopersona_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+<constraint name="fx_personas_departamentos" type="fk-constr"	 comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.departamentos" table="public.personas">
+	<columns names="departamento_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+<constraint name="fx_personas_localidades" type="fk-constr"	 comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.localidades" table="public.personas">
+	<columns names="localidade_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+<constraint name="fk_userpersonas_personas" type="fk-constr"	 comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.personas" table="public.userpersonas">
+	<columns names="persona_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+<constraint name="fx_userpersonas_user" type="fk-constr"	 comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.users" table="public.userpersonas">
+	<columns names="user_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+<constraint name="fk_users_groups" type="fk-constr"	 comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.groups" table="public.users">
+	<columns names="group_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+<relationship name="rel_departamentos_provincias" type="relfk"
+	 src-table="public.departamentos"
+	 dst-table="public.provincias"
+	 src-required="true" dst-required="true"/>
+
+<relationship name="rel_grupxfamilias_grupxpersonas" type="relfk"
+	 src-table="public.grupxfamilias"
+	 dst-table="public.grupxpersonas"
+	 src-required="true" dst-required="true"/>
+
+<relationship name="rel_grupxfamilias_tipofamilias" type="relfk"
+	 src-table="public.grupxfamilias"
+	 dst-table="public.tipofamilias"
+	 src-required="true" dst-required="true"/>
+
+<relationship name="rel_grupxpersonas_grupopersonas" type="relfk"
+	 src-table="public.grupxpersonas"
+	 dst-table="public.grupopersonas"
+	 src-required="true" dst-required="true"/>
+
+<relationship name="rel_grupxpersonas_personas" type="relfk"
+	 src-table="public.grupxpersonas"
+	 dst-table="public.personas"
+	 src-required="true" dst-required="true"/>
+
+<relationship name="rel_localidades_departamentos" type="relfk"
+	 src-table="public.localidades"
+	 dst-table="public.departamentos"
+	 src-required="true" dst-required="true"/>
+
+<relationship name="rel_parentescos_parentescos" type="relfk"
+	 src-table="public.parentescos"
+	 dst-table="public.parentescos"
+	 src-required="true" dst-required="true">
+	<line>
+		<position x="1044" y="719.96"/>
+	<position x="1044" y="670.2"/>
+	<position x="940.333" y="670.2"/>
+	</line>
+</relationship>
+
+<relationship name="rel_perparentescos_personas" type="relfk"
+	 src-table="public.perparentescos"
+	 dst-table="public.personas"
+	 src-required="true" dst-required="true"/>
+
+<relationship name="rel_perparentescos_parentescos" type="relfk"
+	 src-table="public.perparentescos"
+	 dst-table="public.parentescos"
+	 src-required="true" dst-required="true"/>
+
+<relationship name="rel_personas_provincias" type="relfk"
+	 src-table="public.personas"
+	 dst-table="public.provincias"
+	 src-required="true" dst-required="true"/>
+
+<relationship name="rel_personas_tipopersonas" type="relfk"
+	 src-table="public.personas"
+	 dst-table="public.tipopersonas"
+	 src-required="true" dst-required="true"/>
+
+<relationship name="rel_personas_departamentos" type="relfk"
+	 src-table="public.personas"
+	 dst-table="public.departamentos"
+	 src-required="true" dst-required="true"/>
+
+<relationship name="rel_personas_localidades" type="relfk"
+	 src-table="public.personas"
+	 dst-table="public.localidades"
+	 src-required="true" dst-required="true"/>
+
+<relationship name="rel_userpersonas_personas" type="relfk"
+	 src-table="public.userpersonas"
+	 dst-table="public.personas"
+	 src-required="true" dst-required="true"/>
+
+<relationship name="rel_userpersonas_users" type="relfk"
+	 src-table="public.userpersonas"
+	 dst-table="public.users"
+	 src-required="true" dst-required="true"/>
+
+<relationship name="rel_users_groups" type="relfk"
+	 src-table="public.users"
+	 dst-table="public.groups"
+	 src-required="true" dst-required="true"/>
+
+</dbmodel>
