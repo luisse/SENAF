@@ -30,7 +30,7 @@ class AccesorapidosController extends AppController{
 	
 	function index(){
 		//$tallercito = $this->Session->read('tallercito');
-		$this->set('title_for_layout','Ministerio de Minoridad');
+		$this->set('title_for_layout','Sistema - SENAF');
 		/*Totales de Bicicleta a reparar*/
 		$filter='';
 		$filtermensajesmant='';
