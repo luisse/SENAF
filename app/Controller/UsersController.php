@@ -41,7 +41,7 @@ class UsersController extends AppController{
 	*/
 	function login(){
 		$this->layout = 'login';
-		$this->set('title_for_layout','Sistema de Minoridad');
+		$this->set('title_for_layout','Sistema de Secretaría de estado de Niñez adolescencia y familia');
 		if(!empty($this->request->data)){
 			if ($this->Auth->login()) {
 				$user = $this->User->validateLogin($this->request->data['User']);
