@@ -1,91 +1,129 @@
 <?php
 /**
  *
+ * PHP versions 4 and 5
  *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright 2005-2009, Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @copyright     Copyright 2005-2009, Cake Software Foundation, Inc. (http://cakefoundation.org)
  * @link          http://cakephp.org CakePHP(tm) Project
- * @package       Cake.Console.Templates.default.views
+ * @package       cake
+ * @subpackage    cake.cake.console.libs.templates.views
  * @since         CakePHP(tm) v 1.2.0.5234
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 ?>
-<div class="<?php echo $pluralVar; ?> index">
-	<h2><?php echo "<?php echo __('{$pluralHumanName}'); ?>"; ?></h2>
-	<table cellpadding="0" cellspacing="0">
-	<tr>
-	<?php foreach ($fields as $field): ?>
-		<th><?php echo "<?php echo \$this->Paginator->sort('{$field}'); ?>"; ?></th>
-	<?php endforeach; ?>
-		<th class="actions"><?php echo "<?php echo __('Actions'); ?>"; ?></th>
-	</tr>
+<?php echo "<?php echo \$this->Html->script(array('/js/categorias/index.js','jquery.toastmessage'),array('block'=>'scriptjs'));?>\n";?>
+<?php echo "<?php echo \$this->Html->css('message', null, array('inline' => false))?>\n";?>	
+<?php echo "<?php echo \$this->element('flash_message')?>\n"; ?>
+<div class="panel panel-transacciones">
+	<div class="panel-heading">
+		<i class="fa fa-list fa-lg"></i>&nbsp;<?php echo "<?php echo __('{$pluralHumanName}')?>"?>
+    </div>
+	<br>
+	<div class="table-responsive">
+<div class="panel-body">
+	<div class="table-responsive">
+	<table  class="table table-striped table-bordered table-hover dataTable table-responsive">
+	<thead>
+		<tr>
+		<?php  foreach ($fields as $field):?>
+			<th><?php echo "<?php echo \$this->Paginator->sort('{$field}');?>";?></th>
+		<?php endforeach;?>
+			<th><?php echo "<?php __('Acciones');?>";?></th>
+		</tr>
+	</thead>
+	<tbody>
 	<?php
-	echo "<?php foreach (\${$pluralVar} as \${$singularVar}): ?>\n";
+	echo "<?php
+	foreach (\${$pluralVar} as \${$singularVar}):
+		?>\n";
 	echo "\t<tr>\n";
 		foreach ($fields as $field) {
 			$isKey = false;
-			if (!empty($associations['belongsTo'])) {
-				foreach ($associations['belongsTo'] as $alias => $details) {
-					if ($field === $details['foreignKey']) {
-						$isKey = true;
-						echo "\t\t<td>\n\t\t\t<?php echo \$this->Html->link(\${$singularVar}['{$alias}']['{$details['displayField']}'], array('controller' => '{$details['controller']}', 'action' => 'view', \${$singularVar}['{$alias}']['{$details['primaryKey']}'])); ?>\n\t\t</td>\n";
-						break;
-					}
-				}
-			}
 			if ($isKey !== true) {
-				echo "\t\t<td><?php echo h(\${$singularVar}['{$modelClass}']['{$field}']); ?>&nbsp;</td>\n";
+				echo "\t\t<td><?php echo \${$singularVar}['{$modelClass}']['{$field}']; ?>&nbsp;</td>\n";
 			}
 		}
 
 		echo "\t\t<td class=\"actions\">\n";
-		echo "\t\t\t<?php echo \$this->Html->link(__('View'), array('action' => 'view', \${$singularVar}['{$modelClass}']['{$primaryKey}'])); ?>\n";
-		echo "\t\t\t<?php echo \$this->Html->link(__('Edit'), array('action' => 'edit', \${$singularVar}['{$modelClass}']['{$primaryKey}'])); ?>\n";
-		echo "\t\t\t<?php echo \$this->Form->postLink(__('Delete'), array('action' => 'delete', \${$singularVar}['{$modelClass}']['{$primaryKey}']), null, __('Are you sure you want to delete # %s?', \${$singularVar}['{$modelClass}']['{$primaryKey}'])); ?>\n";
-		echo "\t\t</td>\n";
-	echo "\t</tr>\n";
+	?>
+		<div class="btn-group">
+			<a class="btn btn-primary" href="#"><i class="fa fa-plus-circle fa-fw"></i> </a>
+				<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+					<span class="fa fa-caret-down"></span></a>
+					<ul class="dropdown-menu">
+					<li>
+					<?php echo "\t\t<?php 
+							echo \$this->Html->link('<i class=\"fa fa-edit fa-fw\"></i>&nbsp;'.__('Modificar'),array('controller'=>'{$pluralVar}',
+								'action'=>'edit',\${$singularVar}['{$singularVar}']['{$primaryKey}']),
+								array('onclick'=>'','escape'=>false),
+								'');?>"?>
 
-	echo "<?php endforeach; ?>\n";
-	?>
-	</table>
-	<p>
-	<?php echo "<?php
-	echo \$this->Paginator->counter(array(
-	'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
-	));
-	?>"; ?>
-	</p>
-	<div class="paging">
-	<?php
-		echo "<?php\n";
-		echo "\t\techo \$this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));\n";
-		echo "\t\techo \$this->Paginator->numbers(array('separator' => ''));\n";
-		echo "\t\techo \$this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));\n";
-		echo "\t?>\n";
-	?>
-	</div>
-</div>
-<div class="actions">
-	<h3><?php echo "<?php echo __('Actions'); ?>"; ?></h3>
-	<ul>
-		<li><?php echo "<?php echo \$this->Html->link(__('New " . $singularHumanName . "'), array('action' => 'add')); ?>"; ?></li>
+					</li>
+						<li>
+								<?php echo "\t\t<?php echo \$this->Html->link('<i class=\"fa fa-trash-o fa-fw\"></i>&nbsp;'.__('Borrar'),array('controller'=>'{$pluralVar}',
+											'action'=>'delete',\${$singularVar}['{$singularVar}']['{$primaryKey}']),
+											array('onclick'=>\"return confirm('¿Desea Borrar el Registro Seleccionado?')\",'escape'=>false),'');?>"?>
+						</li>
+					  </ul>
+			</div>
+		</td>
+	</tr>
 <?php
-	$done = array();
-	foreach ($associations as $type => $data) {
-		foreach ($data as $alias => $details) {
-			if ($details['controller'] != $this->name && !in_array($details['controller'], $done)) {
-				echo "\t\t<li><?php echo \$this->Html->link(__('List " . Inflector::humanize($details['controller']) . "'), array('controller' => '{$details['controller']}', 'action' => 'index')); ?> </li>\n";
-				echo "\t\t<li><?php echo \$this->Html->link(__('New " . Inflector::humanize(Inflector::underscore($alias)) . "'), array('controller' => '{$details['controller']}', 'action' => 'add')); ?> </li>\n";
-				$done[] = $details['controller'];
-			}
-		}
-	}
+	echo "<?php endforeach; ?>\n";
 ?>
-	</ul>
+</tbody>
+	<tfoot>
+		<tr>
+		<td colspan="7" class='row1'>
+			<center>
+			<div class="pagination">
+					<?php 
+					echo "<?php echo \$paginador = \$this->paginator->numbers();";
+					echo "<?php echo if(!empty($paginador)): ?>";
+					?>
+						<center>
+							<ul class="pagination">
+							  <li><?php echo "<?php echo \$this->paginator->prev('<< ', null, null, array('class'=>'paginator'));?>\n" ?></li>
+							  <li><?php echo "<?php echo \$this->paginator->numbers(array('separator'=>''));?>\n"?></li>
+							  <li><?php echo "<?php echo \$this->paginator->next('>>', null, null, array('class'=>'paginator'));?>\n"?></li>
+							</ul>
+						</center>
+					<?php echo "<?php endif;?>"?>
+			</div>
+			</center>
+		</td>
+		</tr>
+	</tfoot>
+</table>
+</center>
+</div>
+<div class="row">	
+	<div class="col-lg-6">
+		<center>
+		<?php echo "<?php
+			echo \$this->Html->link('<button type=\"button\" class=\"btn btn-success btn-lw\" title=\"Agregar Categoria\">
+																	<span class=\"glyphicon  glyphicon-plus\"></span>Agregar</button>',array('controller'=>'{$pluralVar}',
+										'action'=>'add',''),
+										array('escape'=>false),
+					'');		
+	?>"?>
+		</center>
+	</div>
+	<div class="col-lg-6">
+		<center>
+		<button type="button" class="btn btn-danger btn-lw" id='cancelar'>
+		  <span class="glyphicon glyphicon glyphicon-off"></span>&nbsp;<?php echo "<?php echo __('Cancelar')?>\n"?>
+		</button>	
+		</center>
+	</div>
+</div>		
+</div>
+<div id='message' style='hidden'>
+	<?php echo "<?php \$this->Session->flash() ?>\n"?>
 </div>
