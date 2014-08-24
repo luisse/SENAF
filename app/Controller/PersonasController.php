@@ -49,17 +49,14 @@ class PersonasController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Persona->create();
 			if ($this->Persona->save($this->request->data)) {
-				$this->Session->setFlash(__('El persona a sido guardado.'));
+				$this->Session->setFlash(__('The persona has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('El persona no se pudo grabar. Por favor, intente de nuevo.'));
+				$this->Session->setFlash(__('The persona could not be saved. Please, try again.'));
 			}
 		}
-		$provincias = $this->Persona->Provincium->find('list');
-		$localidades = $this->Persona->Localidade->find('list');
-		$departamentos = $this->Persona->Departamento->find('list');
-		$tipopersonas = $this->Persona->Tipopersona->find('list');
-		$this->set(compact('provincias', 'localidades', 'departamentos', 'tipopersonas'));
+		$estciviles = $this->Persona->Estcivile->find('list');
+		$this->set(compact('estciviles'));
 	}
 
 /**
@@ -75,20 +72,17 @@ class PersonasController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Persona->save($this->request->data)) {
-				$this->Session->setFlash(__('El persona a sido guardado.'));
+				$this->Session->setFlash(__('The persona has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('El persona no se pudo guardar. Por favor, intente de nuevo.'));
+				$this->Session->setFlash(__('The persona could not be saved. Please, try again.'));
 			}
 		} else {
 			$options = array('conditions' => array('Persona.' . $this->Persona->primaryKey => $id));
 			$this->request->data = $this->Persona->find('first', $options);
 		}
-		$provincias = $this->Persona->Provincium->find('list');
-		$localidades = $this->Persona->Localidade->find('list');
-		$departamentos = $this->Persona->Departamento->find('list');
-		$tipopersonas = $this->Persona->Tipopersona->find('list');
-		$this->set(compact('provincias', 'localidades', 'departamentos', 'tipopersonas'));
+		$estciviles = $this->Persona->Estcivile->find('list');
+		$this->set(compact('estciviles'));
 	}
 
 /**
@@ -105,9 +99,9 @@ class PersonasController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Persona->delete()) {
-			$this->Session->setFlash(__('El persona a sido borrado.'));
+			$this->Session->setFlash(__('The persona has been deleted.'));
 		} else {
-			$this->Session->setFlash(__('El persona no se pudo borrar. Por favor, intente de nuevo.'));
+			$this->Session->setFlash(__('The persona could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}}

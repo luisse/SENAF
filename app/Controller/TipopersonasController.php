@@ -21,7 +21,7 @@ class TipopersonasController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->set('title_for_layout','Tipo de Personas');
+		$this->set('title_for_layout','Tipo de Persona');
 		$this->Tipopersona->recursive = 0;
 		$this->set('tipopersonas', $this->Paginator->paginate());
 	}

@@ -35,7 +35,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Sistema Gestion de Minoridad</a>
+                <a class="navbar-brand" href="#"><?php echo __('Sistema Gestion de Niñez, Adolescensia y Familia');?></a>
             </div>
             <!-- /.navbar-header -->
 

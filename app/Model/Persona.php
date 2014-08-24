@@ -3,13 +3,8 @@ App::uses('AppModel', 'Model');
 /**
  * Persona Model
  *
- * @property Provincia $Provincia
- * @property Localidade $Localidade
- * @property Departamento $Departamento
- * @property Tipopersona $Tipopersona
- * @property Grupxpersona $Grupxpersona
- * @property Perparentesco $Perparentesco
- * @property Userpersona $Userpersona
+ * @property Estcivile $Estcivile
+ * @property Tipdocxper $Tipdocxper
  */
 class Persona extends AppModel {
 
@@ -19,102 +14,52 @@ class Persona extends AppModel {
  * @var array
  */
 	public $validate = array(
-		'nombre' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-			'maxLength' => array(
-				'rule' => array('maxLength'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
 		'apellido' => array(
 			'notEmpty' => array(
 				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+				'message' => 'Debe Ingresar el Apellido'
 			),
-			'maxLength' => array(
-				'rule' => array('maxLength'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+		),
+		'nombre' => array(
+			'notEmpty' => array(
+				'rule' => array('notEmpty'),
+				'message' => 'Debe Ingresar el Nombre'
 			),
 		),
 		'sexo' => array(
 			'notEmpty' => array(
 				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+				'message' => 'Debe Ingresar el Sexo'
+			)
+		),
+		'fnac' => array(
+			'date' => array(
+				'rule' => array('date'),
+				'message' => 'Debe Ingresar una Fecha valida Día/Mes/Año'
+			),
+			'notEmpty' => array(
+				'rule' => array('notEmpty'),
+				'message' => 'Debe Ingresar una Fecha Valida'
+			),
+		),
+		'estcivile_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				'message' => 'Debe Ingresar el Esado Civil'
+			),
+		),
+		'email' => array(
+			'email' => array(
+				'rule' => array('email'),
+				'message' => 'Debe Ingresar un correo valido'
 			),
 		),
 		'nn' => array(
 			'boolean' => array(
 				'rule' => array('boolean'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+				'message' => 'NN debe ser un valor tipo booleano'
 			),
-		),
-		'provincia_id' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'localidade_id' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'departamento_id' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'tipopersona_id' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
+		)
 	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
@@ -125,30 +70,9 @@ class Persona extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'Provincia' => array(
-			'className' => 'Provincia',
-			'foreignKey' => 'provincia_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'Localidade' => array(
-			'className' => 'Localidade',
-			'foreignKey' => 'localidade_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'Departamento' => array(
-			'className' => 'Departamento',
-			'foreignKey' => 'departamento_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'Tipopersona' => array(
-			'className' => 'Tipopersona',
-			'foreignKey' => 'tipopersona_id',
+		'Estcivile' => array(
+			'className' => 'Estcivile',
+			'foreignKey' => 'estcivile_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -161,34 +85,8 @@ class Persona extends AppModel {
  * @var array
  */
 	public $hasMany = array(
-		'Grupxpersona' => array(
-			'className' => 'Grupxpersona',
-			'foreignKey' => 'persona_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'Perparentesco' => array(
-			'className' => 'Perparentesco',
-			'foreignKey' => 'persona_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'Userpersona' => array(
-			'className' => 'Userpersona',
+		'Tipdocxper' => array(
+			'className' => 'Tipdocxper',
 			'foreignKey' => 'persona_id',
 			'dependent' => false,
 			'conditions' => '',

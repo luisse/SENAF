@@ -3,7 +3,7 @@ App::uses('AuthComponent', 'Controller/Component');
 class UsersController extends AppController{
 	var $name = 'Users';
 	var $components = array('RequestHandler','Session','Email','Paginator', 'Acl', 'Security');
-	var $uses = array('User');
+	var $uses = array('User','Persona');
 	var $helpers = array('Html','Form','Time');
     public $actsAs = array('Acl' => array('type' => 'requester'));
 	
@@ -19,18 +19,24 @@ class UsersController extends AppController{
         $this->set('title_for_layout',__('Administración Datos de Usuario')); 
 		$ls_filtro =' 1=1 ';
 		//usuario administrador sin filtros puede ver todos los usuarios
-		if($this->Session->read('tipousr') == 2){
+		if($this->Session->read('tipousr') <> 6){
 			$ls_filtro = ' AND User.id = '.$this->Session->read('user_id');
 		}	
+		
 		$ls_filtronotexist=' 1=1 ';	
 		$ls_notexist = '';
-		if(!empty($this->request->data)){
+		//if(!empty($this->request->data)){
 			$this->paginate=array('limit' => 8,
 							'page' => 1,
 							'order'=>array('username'=>'desc'),
-							'conditions'=>$ls_filtro.$ls_notexist);				
+							'conditions'=>$ls_filtro.$ls_notexist,
+							'fields'=>array('User.id','User.username','Persona.email','Persona.apellido','Persona.nombre'),
+							'joins'=>array(array('table'=>'personas',
+															'alias'=>'Persona',
+															'type'=>'LEFT',
+															'conditions'=>array('Persona.id = User.persona_id'))));				
 			$this->set('users', $this->paginate());
-		}
+		//}
 	}
 	
 	function login2(){
@@ -133,10 +139,10 @@ class UsersController extends AppController{
     function initDB(){
                 $group = $this->User->Group;
                 //root todos los permisos
-                //$group->id=1;
-                //$this->Acl->allow($group,'controllers');
+                $group->id=6;
+                $this->Acl->allow($group,'controllers');
                 //Clientes
-                $group->id=2;
+                //$group->id=2;
                
                 /**$this->Acl->deny($group,'controllers');
                 $this->Acl->allow($group,'controllers/Users/edit');
@@ -295,22 +301,20 @@ class UsersController extends AppController{
 	/*
 	 * Funcion: un usuario profesor puede dar de alta usuarios alumnos
 	 * */
-	function addcliente(){
+	function addusuario(){
 		//$this->layout = 'usersadd';
 		$this->set('title_for_layout','Registración de Usuario Cliente');
 		$this->set('errorval','');
 		if($this->request->is('post')){
 			$this->User->create();
 			$this->request->data['User']['group_id'] = 2;
-			//$this->request->data['User']['tallercito_id'] = $this->Session->read('tallercito_id');
 			$thid->request->data['User']['state']=2;
-			//$this->request->data['Cliente']['tallercito_id'] = $this->Session->read('tallercito_id');
 			$this->request->data['Cliente']['documento'] = str_replace('.', '', $this->request->data['Cliente']['documento']);
 			//Encryptamos la contraseña con MD5
 			$this->User->set($this->request->data);
-			$this->Cliente->set($this->request->data);
+			$this->Persona->set($this->request->data);
 			$validaUser = $this->User->validates();
-			$validaDatosGen= $this->Cliente->validates();
+			$validaDatosGen= $this->Persona->validates();
 			if(($validaDatosGen == true || empty($validaDatosGen)) && $validaUser = 1){
 				if($this->User->addusersall($this->request->data)){
 					//enviamos un correo para poder realizar la confirmación del mail
@@ -329,6 +333,9 @@ class UsersController extends AppController{
 					$this->Session->setFlash(__('El usuario no se pudo dar de Alta.', true));
 				}
 			}
+		}else{
+			$estciviles = $this->Persona->Estcivile->find('list',array('fields'=>array('Estcivile.id','Estcivile.descrip')));
+			$this->set(compact('estciviles'));			
 		}
 	}
 	

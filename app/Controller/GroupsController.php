@@ -49,10 +49,10 @@ class GroupsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Group->create();
 			if ($this->Group->save($this->request->data)) {
-				$this->Session->setFlash(__('The group has been saved.'));
+				$this->Session->setFlash(__('El Registro fue Guardado.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The group could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('No se pudo Guardar el Registro. Por Favor Intente de Nuevo.'));
 			}
 		}
 	}
@@ -66,14 +66,14 @@ class GroupsController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->Group->exists($id)) {
-			throw new NotFoundException(__('Invalid group'));
+			throw new NotFoundException(__('Invalido group'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Group->save($this->request->data)) {
-				$this->Session->setFlash(__('The group has been saved.'));
+				$this->Session->setFlash(__('El Registro Fue Actualizado.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The group could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('No se pudo actualizar el registro. Por favor intente de nuevo.'));
 			}
 		} else {
 			$options = array('conditions' => array('Group.' . $this->Group->primaryKey => $id));
@@ -95,20 +95,21 @@ class GroupsController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Group->delete()) {
-			$this->Session->setFlash(__('The group has been deleted.'));
+			$this->Session->setFlash(__('El Registro fue eliminado.'));
 		} else {
-			$this->Session->setFlash(__('The group could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('No se pudo borrar el registro. Por favor intente de nuevo.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
 
 	public function beforeFilter() {
-    		parent::beforeFilter();
-		    $this->Auth->allow('*');
-		    // For CakePHP 2.1 and up
-		    $this->Auth->allow();    		
-    		// For CakePHP 2.1 and up
-    		//$this->Auth->allow();
+	    parent::beforeFilter();
+	
+	    // For CakePHP 2.0
+	    $this->Auth->allow('*');
+	
+	    // For CakePHP 2.1 and up
+	    $this->Auth->allow();
 	}
 
 }

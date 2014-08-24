@@ -13,36 +13,43 @@
 	<thead>
 		<tr>
 					<th><?php echo $this->Paginator->sort('id');?></th>
-					<th><?php echo $this->Paginator->sort('nombre');?></th>
 					<th><?php echo $this->Paginator->sort('apellido');?></th>
+					<th><?php echo $this->Paginator->sort('nombre');?></th>
 					<th><?php echo $this->Paginator->sort('sexo');?></th>
+					<th><?php echo $this->Paginator->sort('fnac');?></th>
+					<th><?php echo $this->Paginator->sort('ffallec');?></th>
+					<th><?php echo $this->Paginator->sort('estcivile_id');?></th>
+					<th><?php echo $this->Paginator->sort('email');?></th>
 					<th><?php echo $this->Paginator->sort('nn');?></th>
-					<th><?php echo $this->Paginator->sort('provincia_id');?></th>
-					<th><?php echo $this->Paginator->sort('localidade_id');?></th>
-					<th><?php echo $this->Paginator->sort('departamento_id');?></th>
-					<th><?php echo $this->Paginator->sort('tipopersona_id');?></th>
+					<th><?php echo $this->Paginator->sort('usuariocrea');?></th>
+					<th><?php echo $this->Paginator->sort('ipcrea');?></th>
+					<th><?php echo $this->Paginator->sort('created');?></th>
+					<th><?php echo $this->Paginator->sort('usuarioactu');?></th>
+					<th><?php echo $this->Paginator->sort('ipactu');?></th>
+					<th><?php echo $this->Paginator->sort('modified');?></th>
 					<th><?php __('Acciones');?></th>
 		</tr>
 	</thead>
 	<tbody>
 	<?php
-	$i = 0;
 	foreach ($personas as $persona):
-		$class = "row0";
-		if ($i++ % 2 == 0) {
-			$class = ' class="row1"';
-		}
-	?>
-	<tr<?php echo $class;?>>
+		?>
+	<tr>
 		<td><?php echo $persona['Persona']['id']; ?>&nbsp;</td>
-		<td><?php echo $persona['Persona']['nombre']; ?>&nbsp;</td>
 		<td><?php echo $persona['Persona']['apellido']; ?>&nbsp;</td>
+		<td><?php echo $persona['Persona']['nombre']; ?>&nbsp;</td>
 		<td><?php echo $persona['Persona']['sexo']; ?>&nbsp;</td>
+		<td><?php echo $persona['Persona']['fnac']; ?>&nbsp;</td>
+		<td><?php echo $persona['Persona']['ffallec']; ?>&nbsp;</td>
+		<td><?php echo $persona['Persona']['estcivile_id']; ?>&nbsp;</td>
+		<td><?php echo $persona['Persona']['email']; ?>&nbsp;</td>
 		<td><?php echo $persona['Persona']['nn']; ?>&nbsp;</td>
-		<td><?php echo $persona['Persona']['provincia_id']; ?>&nbsp;</td>
-		<td><?php echo $persona['Persona']['localidade_id']; ?>&nbsp;</td>
-		<td><?php echo $persona['Persona']['departamento_id']; ?>&nbsp;</td>
-		<td><?php echo $persona['Persona']['tipopersona_id']; ?>&nbsp;</td>
+		<td><?php echo $persona['Persona']['usuariocrea']; ?>&nbsp;</td>
+		<td><?php echo $persona['Persona']['ipcrea']; ?>&nbsp;</td>
+		<td><?php echo $persona['Persona']['created']; ?>&nbsp;</td>
+		<td><?php echo $persona['Persona']['usuarioactu']; ?>&nbsp;</td>
+		<td><?php echo $persona['Persona']['ipactu']; ?>&nbsp;</td>
+		<td><?php echo $persona['Persona']['modified']; ?>&nbsp;</td>
 		<td class="actions">
 		<div class="btn-group">
 			<a class="btn btn-primary" href="#"><i class="fa fa-plus-circle fa-fw"></i> </a>
@@ -51,19 +58,17 @@
 					<ul class="dropdown-menu">
 					<li>
 							<?php 
-							echo ->link('<i class="fa fa-edit fa-fw"></i>&nbsp;'.__('Modificar'),array('controller'=>'personas',
+							echo $this->Html->link('<i class="fa fa-edit fa-fw"></i>&nbsp;'.__('Modificar'),array('controller'=>'personas',
 								'action'=>'edit',$persona['persona']['id']),
 								array('onclick'=>'','escape'=>false),
-								'');?>								
-				
-						</li>
+								'');?>
+					</li>
 						<li>
-										<?php echo ->link('<i class="fa fa-trash-o fa-fw"></i>&nbsp;'.__('Borrar'),array('controller'=>'personas',
+										<?php echo $this->Html->link('<i class="fa fa-trash-o fa-fw"></i>&nbsp;'.__('Borrar'),array('controller'=>'personas',
 											'action'=>'delete',$persona['persona']['id']),
 											array('onclick'=>"return confirm('¿Desea Borrar el Registro Seleccionado?')",'escape'=>false),'');?>						</li>
 					  </ul>
 			</div>
-		
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -73,7 +78,7 @@
 		<td colspan="7" class='row1'>
 			<center>
 			<div class="pagination">
-					<?php echo $paginador = ->numbers();<?php echo if(!empty()): ?>						<center>
+					<?php echo $paginador = $this->paginator->numbers();<?php echo if(!empty()): ?>						<center>
 							<ul class="pagination">
 							  <li><?php echo $this->paginator->prev('<< ', null, null, array('class'=>'paginator'));?>
 </li>
@@ -81,9 +86,9 @@
 </li>
 							  <li><?php echo $this->paginator->next('>>', null, null, array('class'=>'paginator'));?>
 </li>
-							</ul>	
-						</center>	
-					endif;?>			</div>
+							</ul>
+						</center>
+					<?php endif;?>			</div>
 			</center>
 		</td>
 		</tr>
@@ -96,7 +101,7 @@
 		<center>
 		<?php
 			echo $this->Html->link('<button type="button" class="btn btn-success btn-lw" title="Agregar Categoria">
-																	<span class="glyphicon  glyphicon-plus"></span>Agregar</button>',array('controller'=>'categorias',
+																	<span class="glyphicon  glyphicon-plus"></span>Agregar</button>',array('controller'=>'personas',
 										'action'=>'add',''),
 										array('escape'=>false),
 					'');		
@@ -112,5 +117,5 @@
 </div>		
 </div>
 <div id='message' style='hidden'>
-	<?php ->flash() ?>
+	<?php $this->Session->flash() ?>
 </div>

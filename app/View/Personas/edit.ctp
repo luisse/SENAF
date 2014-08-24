@@ -1,19 +1,19 @@
-<?php		<?php echo ->script(array('/js/personas/add.js','fmensajes.js','fgenerales.js','jquery.toastmessage'),array('block'=>'scriptjs')); ?>
-<?php		<?php echo ->css('message', null, array('inline' => false))?>
-<?php		<?php echo ('flash_message')?>
-<?php		<?php echo ->create('Persona',array('action'=>'edit',	
+		<?php echo ->script(array('/js/personas/add.js','fmensajes.js','fgenerales.js','jquery.toastmessage'),array('block'=>'scriptjs')); ?>
+		<?php echo ->css('message', null, array('inline' => false))?>
+		<?php echo ('flash_message')?>
+		<?php echo ->create('Persona',array('action'=>'edit',	
 				'inputDefaults' => array(
-									'div' => 'form-group',
-									'wrapInput' => false,
-									'class' => 'form-control'
-									),
+							'div' => 'form-group',
+							'wrapInput' => false,
+							'class' => 'form-control'
+							),
 				'class' => 'well'));?>
 <fieldset>
-	<legend><?php		<?php echo __('Nueva Persona') ?></legend>
+	<legend>		<?php echo __('Nueva Persona') ?></legend>
 		
 			<div class="row">
 				<div class="col-lg-10">
-				<?php echo $this->Form->input('id',,array('label' => __('Persona'),
+				<?php echo $this->Form->input('id',array('label' => __('Persona'),
 													'placeholder'=>'Ingrese Persona',
 													'class'=>'form-control input-sm',
 													'error'=>array('attributes' =>array('class'=>'alert alert-danger'))))?>
@@ -21,7 +21,7 @@
 			</div>
 					<div class="row">
 				<div class="col-lg-10">
-				<?php echo $this->Form->input('nombre',,array('label' => __('Persona'),
+				<?php echo $this->Form->input('apellido',array('label' => __('Persona'),
 													'placeholder'=>'Ingrese Persona',
 													'class'=>'form-control input-sm',
 													'error'=>array('attributes' =>array('class'=>'alert alert-danger'))))?>
@@ -29,7 +29,7 @@
 			</div>
 					<div class="row">
 				<div class="col-lg-10">
-				<?php echo $this->Form->input('apellido',,array('label' => __('Persona'),
+				<?php echo $this->Form->input('nombre',array('label' => __('Persona'),
 													'placeholder'=>'Ingrese Persona',
 													'class'=>'form-control input-sm',
 													'error'=>array('attributes' =>array('class'=>'alert alert-danger'))))?>
@@ -37,7 +37,7 @@
 			</div>
 					<div class="row">
 				<div class="col-lg-10">
-				<?php echo $this->Form->input('sexo',,array('label' => __('Persona'),
+				<?php echo $this->Form->input('sexo',array('label' => __('Persona'),
 													'placeholder'=>'Ingrese Persona',
 													'class'=>'form-control input-sm',
 													'error'=>array('attributes' =>array('class'=>'alert alert-danger'))))?>
@@ -45,7 +45,7 @@
 			</div>
 					<div class="row">
 				<div class="col-lg-10">
-				<?php echo $this->Form->input('nn',,array('label' => __('Persona'),
+				<?php echo $this->Form->input('fnac',array('label' => __('Persona'),
 													'placeholder'=>'Ingrese Persona',
 													'class'=>'form-control input-sm',
 													'error'=>array('attributes' =>array('class'=>'alert alert-danger'))))?>
@@ -53,7 +53,7 @@
 			</div>
 					<div class="row">
 				<div class="col-lg-10">
-				<?php echo $this->Form->input('provincia_id',,array('label' => __('Persona'),
+				<?php echo $this->Form->input('ffallec',array('label' => __('Persona'),
 													'placeholder'=>'Ingrese Persona',
 													'class'=>'form-control input-sm',
 													'error'=>array('attributes' =>array('class'=>'alert alert-danger'))))?>
@@ -61,7 +61,7 @@
 			</div>
 					<div class="row">
 				<div class="col-lg-10">
-				<?php echo $this->Form->input('localidade_id',,array('label' => __('Persona'),
+				<?php echo $this->Form->input('estcivile_id',array('label' => __('Persona'),
 													'placeholder'=>'Ingrese Persona',
 													'class'=>'form-control input-sm',
 													'error'=>array('attributes' =>array('class'=>'alert alert-danger'))))?>
@@ -69,7 +69,7 @@
 			</div>
 					<div class="row">
 				<div class="col-lg-10">
-				<?php echo $this->Form->input('departamento_id',,array('label' => __('Persona'),
+				<?php echo $this->Form->input('email',array('label' => __('Persona'),
 													'placeholder'=>'Ingrese Persona',
 													'class'=>'form-control input-sm',
 													'error'=>array('attributes' =>array('class'=>'alert alert-danger'))))?>
@@ -77,7 +77,39 @@
 			</div>
 					<div class="row">
 				<div class="col-lg-10">
-				<?php echo $this->Form->input('tipopersona_id',,array('label' => __('Persona'),
+				<?php echo $this->Form->input('nn',array('label' => __('Persona'),
+													'placeholder'=>'Ingrese Persona',
+													'class'=>'form-control input-sm',
+													'error'=>array('attributes' =>array('class'=>'alert alert-danger'))))?>
+				</div>
+			</div>
+					<div class="row">
+				<div class="col-lg-10">
+				<?php echo $this->Form->input('usuariocrea',array('label' => __('Persona'),
+													'placeholder'=>'Ingrese Persona',
+													'class'=>'form-control input-sm',
+													'error'=>array('attributes' =>array('class'=>'alert alert-danger'))))?>
+				</div>
+			</div>
+					<div class="row">
+				<div class="col-lg-10">
+				<?php echo $this->Form->input('ipcrea',array('label' => __('Persona'),
+													'placeholder'=>'Ingrese Persona',
+													'class'=>'form-control input-sm',
+													'error'=>array('attributes' =>array('class'=>'alert alert-danger'))))?>
+				</div>
+			</div>
+					<div class="row">
+				<div class="col-lg-10">
+				<?php echo $this->Form->input('usuarioactu',array('label' => __('Persona'),
+													'placeholder'=>'Ingrese Persona',
+													'class'=>'form-control input-sm',
+													'error'=>array('attributes' =>array('class'=>'alert alert-danger'))))?>
+				</div>
+			</div>
+					<div class="row">
+				<div class="col-lg-10">
+				<?php echo $this->Form->input('ipactu',array('label' => __('Persona'),
 													'placeholder'=>'Ingrese Persona',
 													'class'=>'form-control input-sm',
 													'error'=>array('attributes' =>array('class'=>'alert alert-danger'))))?>

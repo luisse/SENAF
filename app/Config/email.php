@@ -44,7 +44,7 @@ class EmailConfig {
 
 	public $default = array(
 		'transport' => 'Mail',
-		'from' => 'gestiondocumental.proime@gmail.com',
+		'from' => '',
 		//'charset' => 'utf-8',
 		//'headerCharset' => 'utf-8',
 	);
@@ -55,8 +55,8 @@ class EmailConfig {
 		'host' => 'ssl://smtp.gmail.com',
 		'port' => 465,
 		'timeout' => 30,
-		'username' => 'gestiondocumental.proime@gmail.com',
-		'password' => '2468Gestion',
+		'username' => '',
+		'password' => '',
 		'client' => null,
 		'log' => false,
 		//'charset' => 'utf-8',

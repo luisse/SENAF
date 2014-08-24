@@ -11,19 +11,19 @@
 <table class="admintable" cellspacing="1" width='100%' border='0'>
 				<tr>
 					<td class="key"><label for="name"><?php echo __('Usuario:',true)?></label></td>
-					<td><?php echo $this->Form->input('username',array('label'=>false,'class'=>'inputboxl','size'=>'20'))?></td>
+					<td><?php echo $this->Form->input('User.username',array('label'=>false,'class'=>'inputboxl','size'=>'20'))?></td>
 					<td></td>
 					<td></td>		
 				</tr>
 				<tr>
 					<td class="key"><label for="name"><?php echo __('Contraseña:',true)?></label></td>
-					<td><?php echo $this->Form->input('password',array('label'=>false,'class'=>'inputboxl','size'=>'20'))?></td>
+					<td><?php echo $this->Form->input('User.password',array('label'=>false,'class'=>'inputboxl','size'=>'20'))?></td>
 					<td></td>
 					<td></td>		
 				</tr>
 				<tr>
 					<td class="key"><label for="name"><?php echo __('Repetir Contraseña:',true)?></label></td>
-					<td><?php echo $this->Form->input('password_repit',array('label'=>false,'class'=>'inputboxl','size'=>'20','type'=>'password'))?></td>
+					<td><?php echo $this->Form->input('User.password_repit',array('label'=>false,'class'=>'inputboxl','size'=>'20','type'=>'password'))?></td>
 					<td></td>
 					<td></td>		
 				</tr>

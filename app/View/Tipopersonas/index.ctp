@@ -1,10 +1,10 @@
-<?php echo $this->Html->script(array('/js/categorias/index.js','jquery.toastmessage'),array('block'=>'scriptjs'));?>
+<?php echo $this->Html->script(array('/js/tipopersonas/index.js','jquery.toastmessage'),array('block'=>'scriptjs'));?>
 <?php echo $this->Html->css('message', null, array('inline' => false))?>
 	
 <?php echo $this->element('flash_message')?>
 <div class="panel panel-transacciones">
 	<div class="panel-heading">
-		<i class="fa fa-list fa-lg"></i>&nbsp;<?php echo __('Tipopersonas')?>    </div>
+		<i class="fa fa-list fa-lg"></i>&nbsp;<?php echo __('Tipo de Persona')?>    </div>
 	<br>
 	<div class="table-responsive">
 <div class="panel-body">

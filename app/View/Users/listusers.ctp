@@ -3,8 +3,10 @@
 <table id="dataTables-example" class="table table-striped table-bordered table-hover dataTable table-responsive table-condensed">
 	<thead>
 		<tr>
-			<th  tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1"  aria-label="Rendering engine: activate to sort column ascending"><div class="sort"><?php echo $this->Paginator->sort('Usuario');?></div></th>
-			<th  tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1"  aria-label="Rendering engine: activate to sort column ascending"><div class="sort"><?php echo $this->Paginator->sort('EMail');?></div></th>
+			<th  tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1"  aria-label="Rendering engine: activate to sort column ascending"><div class="sort"><?php echo $this->Paginator->sort('username','Usuario');?></div></th>
+			<th  tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1"  aria-label="Rendering engine: activate to sort column ascending"><div class="sort"><?php echo $this->Paginator->sort('Persona.email','EMail');?></div></th>
+			<th  tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1"  aria-label="Rendering engine: activate to sort column ascending"><div class="sort"><?php echo $this->Paginator->sort('Persona.apellido','Appellido');?></div></th>			
+			<th  tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1"  aria-label="Rendering engine: activate to sort column ascending"><div class="sort"><?php echo $this->Paginator->sort('Persona.nombre','Nombre');?></div></th>			
 			<th><?php echo __('Acciones');?></th>
 		</tr>
 	</thead>
@@ -17,7 +19,10 @@
 	
 	<tr>
 		<td><?php echo $user['User']['username']; ?>&nbsp;</td>
-		<td><?php echo $user['User']['email']; ?>&nbsp;</td>
+		<td><?php echo $user['Persona']['email']; ?>&nbsp;</td>
+		<td><?php echo $user['Persona']['apellido']; ?>&nbsp;</td>
+		<td><?php echo $user['Persona']['nombre']; ?>&nbsp;</td>		
+
 		<td class="actions">
 					<div class="btn-group">
 					  <a class="btn btn-primary" href="#"><i class="fa fa-plus-circle fa-fw"></i> </a>
