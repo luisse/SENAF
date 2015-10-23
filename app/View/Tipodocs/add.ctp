@@ -1,6 +1,6 @@
 		<?php echo $this->Html->script(array('/js/tipodocs/add.js','fmensajes.js','fgenerales.js','jquery.toastmessage'),array('block'=>'scriptjs')); ?>
 		<?php echo $this->Html->css('message', null, array('inline' => false))?>
-		<?php echo ('flash_message')?>
+		<?php echo $this->element('flash_message')?>
 		<?php echo $this->Form->create('Tipodoc',array('action'=>'add',	
 				'inputDefaults' => array(
 							'div' => 'form-group',
@@ -9,7 +9,7 @@
 							),
 				'class' => 'well'));?>
 <fieldset>
-	<legend>		<?php echo __('Nueva Tipodoc') ?></legend>
+	<legend>		<?php echo __('Nuevo Tipo de Documento') ?></legend>
 		
 			<div class="row">
 				<div class="col-lg-10">
@@ -29,14 +29,14 @@
 			</div>
 		</fieldset>
 <div class="row">	
-	<div class="col-lg-6">
+	<div class="col-xs-6 col-sm-6">
 		<center>
 		<button type="button" class="btn btn-success btn-lw" id='guardar'>
 		  <span class="glyphicon glyphicon glyphicon-save"></span>&nbsp;<?php echo __('Guardar') ?>
 		</button>	
 		</center>
 	</div>
-	<div class="col-lg-6">
+	<div class="col-xs-6 col-sm-6">
 		<center>
 		<button type="button" class="btn btn-danger btn-lw" id='cancelar'>
 		  <span class="glyphicon glyphicon glyphicon-off"></span>&nbsp;<?php echo __(' Cancelar')?>

@@ -113,7 +113,7 @@
  *	`manager_index()` and `/manager/controller/index`
  *
  */
-	//Configure::write('Routing.prefixes', array('admin'));
+Configure::write('Routing.prefixes', array('n'));
 
 /**
  * Turn off all caching application-wide.
@@ -176,7 +176,8 @@
  *
  */
 	Configure::write('Session', array(
-		'defaults' => 'php'
+		'defaults' => 'php',
+		'timeout'=>160
 	));
 
 /**

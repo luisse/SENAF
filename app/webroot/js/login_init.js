@@ -49,7 +49,7 @@ function procesar(){
 		  return false
 	  }
 	  if(password =='' || typeof(password) == 'undefined'){
-		  mensaje('Debe Ingresar una ConstraseÃ±a','Inicio de Sesión')
+		  mensaje('Debe Ingresar una Constraseña','Inicio de Sesión')
 		  return false
 	  }
 	validarUsuarioAjax()

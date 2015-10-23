@@ -15,16 +15,32 @@ class Parentesco extends AppModel {
  * @var array
  */
 	public $validate = array(
-		'descripcion' => array(
+		'descrip' => array(
 			'notEmpty' => array(
 				'rule' => array('notEmpty'),
 				'message' => 'Debe Ingresar la descripción'
 			),
 			'maxLength' => array(
-				'rule' => array('maxLength',30),
-				'message' => 'La Descripción debe tener menos de 30 catacteres'
+				'rule' => array('maxLength',50),
+				'message' => 'La Descripción debe tener menos de 50 catacteres'
+			),
+			'descrUnique' => array(
+				'rule' => array('descrUnique'),
+				'message' => 'La Descripción ya Existe',
+				'on' => 'create' // Limit validation to 'create' or 'update' operations
+			)
+		),
+		'definicion' => array(
+			'notEmpty' => array(
+				'rule' => array('notEmpty'),
+				'message' => 'Debe Ingresar la Definición'
+			),
+			'maxLength' => array(
+				'rule' => array('maxLength',700),
+				'message' => 'La Definición debe tener menos de 700 catacteres'
 			),
 		),
+
 	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
@@ -49,7 +65,7 @@ class Parentesco extends AppModel {
  *
  * @var array
  */
-	public $hasMany = array(
+	/**public $hasMany = array(
 		'Perparentesco' => array(
 			'className' => 'Perparentesco',
 			'foreignKey' => 'parentesco_id',
@@ -63,6 +79,14 @@ class Parentesco extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		)
-	);
-
+	);**/
+	
+	
+	public function descrUnique(){
+		$count = $this->find('count',array('conditions'=>array("Upper(descrip) like Upper('%".$this->data['Parentesco']['descrip']."%')")));
+		if($count > 0)
+			return false;
+		else
+			return true;
+	}
 }

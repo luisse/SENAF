@@ -32,7 +32,7 @@ App::uses('AppShell', 'Console');
 		foreach ($mensajesmantenimientos as $mensajesmantenimiento){
 			if($mensajesmantenimiento['Mensajesmantenimiento']['enviarcorreo'] == 1){
 				$this->Email->to = $mensajesmantenimiento['User']['email'];        
-				$this->Email->subject = 'Tallercito Bike  - Mantenimiento de Bicicleta';
+				$this->Email->subject = 'SENAyF  - Secretaria de Estado';
 				$this->Email->from = 'tallercitobike@gmail.com';        
 				$this->Email->template = 'prueba'; 
 				$this->Email->sendAs = 'both';

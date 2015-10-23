@@ -5833,7 +5833,7 @@ td.visible-print {
     position: relative;
 }
 .left-inner-addon input {
-    padding-left: 30px;    
+    padding-left: 30px;
 }
 .left-inner-addon i {
     position: absolute;
@@ -5885,6 +5885,22 @@ td.visible-print {
 }
 .panel-transacciones > .panel-footer + .panel-collapse .panel-body {
   border-bottom-color: #CEB707;
+}
+
+/*Panel de Ingresos de Transacciones*/
+.panel-personas {
+  border-color: #77ACE5;
+}
+.panel-personas > .panel-heading {
+  color: #FFFFFF;
+  background-color: #93B9E3;
+  border-color: #77ACE5;
+}
+.panel-personas > .panel-heading + .panel-collapse .panel-body {
+  border-top-color: #77ACE5;
+}
+.panel-personas > .panel-footer + .panel-collapse .panel-body {
+  border-bottom-color: #77ACE5;
 }
 
 /*
@@ -6101,4 +6117,80 @@ td.visible-print {
   right: -10px;
   font-size: 10px;
   font-weight: 400;
+}
+
+/*Panel de Login*/
+.panel-login {
+  border-color: #d64b24;
+}
+.panel-login > .panel-heading {
+  color: #FFFFFF;
+  background-color: #eb612f;
+  border-color: #d64b24;
+}
+.panel-login > .panel-heading + .panel-collapse .panel-body {
+  border-top-color: #d64b24;
+}
+.panel-login > .panel-footer + .panel-collapse .panel-body {
+  border-bottom-color: #d64b24;
+}
+
+
+
+.btn-login {
+  color: #fff;
+  background-color: #eb612f;
+  border-color: #d64b24;
+}
+.btn-login:hover,
+.btn-login:focus,
+.btn-login:active,
+.btn-login.active,
+.open .dropdown-toggle.btn-login {
+  color: #fff;
+  background-color: #ED8A66;
+  border-color: #EC6E40;
+}
+.btn-login:active,
+.btn-login.active,
+.open .dropdown-toggle.btn-login {
+  background-image: none;
+}
+.btn-login.disabled,
+.btn-login[disabled],
+fieldset[disabled] .btn-login,
+.btn-login.disabled:hover,
+.btn-login[disabled]:hover,
+fieldset[disabled] .btn-login:hover,
+.btn-login.disabled:focus,
+.btn-login[disabled]:focus,
+fieldset[disabled] .btn-login:focus,
+.btn-login.disabled:active,
+.btn-login[disabled]:active,
+fieldset[disabled] .btn-login:active,
+.btn-login.disabled.active,
+.btn-login[disabled].active,
+fieldset[disabled] .btn-login.active {
+  background-color: #ED8A66;
+  border-color: #EC6E40;
+}
+.btn-login .badge {
+  color: #428bca;
+  background-color: #fff;
+}
+
+
+
+
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#central{
+    position:relative;
+    left: 50%;
+    right:50%;
+    margin-left: -100px;
 }

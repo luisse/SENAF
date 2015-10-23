@@ -18,10 +18,10 @@
  */
 ?>
 <?php
-echo "\t\t<?php echo $this->Html->script(array('/js/{$pluralVar}/add.js','fmensajes.js','fgenerales.js','jquery.toastmessage'),array('block'=>'scriptjs')); ?>\n";
-echo "\t\t<?php echo $this->Html->css('message', null, array('inline' => false))?>\n";			
-echo "\t\t<?php echo $this->element('flash_message')?>\n";
-echo "\t\t<?php echo $this->Form->create('{$modelClass}',array('action'=>'{$action}',	
+echo "\t\t<?php echo \$this->Html->script(array('/js/{$pluralVar}/{$action}.js','fmensajes.js','fgenerales.js','jquery.toastmessage'),array('block'=>'scriptjs')); ?>\n";
+echo "\t\t<?php echo \$this->Html->css('message', null, array('inline' => false))?>\n";			
+echo "\t\t<?php echo \$this->element('flash_message')?>\n";
+echo "\t\t<?php echo \$this->Form->create('{$modelClass}',array('action'=>'{$action}',	
 				'inputDefaults' => array(
 							'div' => 'form-group',
 							'wrapInput' => false,

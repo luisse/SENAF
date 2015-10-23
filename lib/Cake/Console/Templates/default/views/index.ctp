@@ -84,8 +84,8 @@
 			<center>
 			<div class="pagination">
 					<?php 
-					echo "<?php echo \$paginador = \$this->paginator->numbers();";
-					echo "<?php echo if(!empty($paginador)): ?>";
+					echo "<?php echo \$paginador = \$this->paginator->numbers();?>\n";
+					echo "<?php if(!empty(\$paginador)): ?>\n";
 					?>
 						<center>
 							<ul class="pagination">

@@ -34,7 +34,7 @@ class Domicilio extends AppModel {
 		'depto_id' => array(
 			'notEmpty' => array(
 				'rule' => array('notEmpty'),
-				'message' => 'Dene Seleccionar el Departamento'
+				'message' => 'Debe Seleccionar el Departamento'
 			),
 		),
 		'municipio_id' => array(
@@ -58,15 +58,15 @@ class Domicilio extends AppModel {
 		'calle_id' => array(
 			'notEmpty' => array(
 				'rule' => array('notEmpty'),
-				'message' => 'Debe Seleccionar la Calle'
+				'message' => 'Debe Ingresar la Calle'
 			),
-		),
+		)/***,
 		'piso' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				'message' => 'El Piso debe ser Numérico'
 			),
-		)
+		)****/
 	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
@@ -127,4 +127,52 @@ class Domicilio extends AppModel {
 			'order' => ''
 		)
 	);
+	
+	public function guardarasocgroup($data){
+		if(!empty($data)){
+			$datasource = $this->getDataSource();
+			ClassRegistry::init('Grupsocxdomi');
+			ClassRegistry::init('Coord');
+			$Coord = new Coord();
+			$Grupsocxdomi = new Grupsocxdomi();
+			$this->create();
+			$datasource->begin($this);
+
+			if($this->save($data)){
+				$grupsocxdomis['Grupsocxdomi']['grupsociale_id']=$data['Domicilio']['grupsociale_id'];
+				$grupsocxdomis['Grupsocxdomi']['domicilio_id']=$this->id;
+				print_r($data);
+				$Grupsocxdomi->create();
+				if($Grupsocxdomi->save($grupsocxdomis)){
+					
+					if(!empty($data['Domicilio']['latitude']) && $data['Domicilio']['latitude']!='' &&
+						!empty($data['Domicilio']['longitude']) && $data['Domicilio']['longitude']!=''){
+						$coord['Coord']['latitud']=$data['Domicilio']['latitude'];
+						$coord['Coord']['longitud']=$data['Domicilio']['longitude'];
+						$coord['Coord']['domicilio_id']=$this->id;
+						$coord['Coord']['fecha']=date('Y-m-d H:i:s');
+						$coord['Coord']['descrip']=$data['Domicilio']['detallecoord'];
+						$result = $Coord->guardarcoordom($coord);
+						print_r($result);
+						if(!$result){
+							$datasource->rollback($this);
+							$datasource->rollback($this);
+							return false;
+						}
+					}
+					$datasource->commit($this);
+					$datasource->commit($this);
+					return true;
+				}else{
+					$datasource->rollback($this);
+					$datasource->rollback($this);
+					return false;
+				}
+				
+			}else{
+				$datasource->rollback($this);
+				return false;
+			}
+		}
+	}
 }

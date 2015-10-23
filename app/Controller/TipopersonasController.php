@@ -106,4 +106,30 @@ class TipopersonasController extends AppController {
 				$this->Session->setFlash(__('Error: No se puede eliminar el registro. Atributo asignado a registro'));
 		}				
 		return $this->redirect(array('action' => 'index'));
-	}}
+	}
+	
+	public function beforeFilter() {
+	    parent::beforeFilter();
+	
+	    // For CakePHP 2.0
+	    $this->Auth->allow('*');
+	
+	    // For CakePHP 2.1 and up
+	    $this->Auth->allow();
+	}
+
+	public function beforeRender(){
+			/***SEGURIDAD CON ACL INACTIVA SI NO HAY TABLAS CARGADAS try{
+				$result =	$this->Acl->check(array(
+					'model' => 'Group',       # The name of the Model to check agains
+					'foreign_key' => 1 # The foreign key the Model is bind to
+					), 'Users/'.$this->params['action']);
+				//SI NO TIENE PERMISOS DA ERROR!!!!!!
+	        	if(!$result)
+	        		$this->redirect(array('controller' => 'accesorapidos','action'=>'seguridaderror','Users-'.$this->params['action']));
+			}catch(Exeption $e){
+				
+			}***/	
+	}
+	
+}

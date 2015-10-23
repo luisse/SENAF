@@ -6,11 +6,11 @@
         <h4 class="modal-title" id="myModalLabel"><?php echo $title?></h4>
       </div>
       <div class="modal-body">
-        <div class="alert alert-warning" ><span class='glyphicon glyphicon-exclamation-sign  btn-lg' id='mensaje'></span></div>
+        <div class="alert alert-danger" ><span class='glyphicon glyphicon-exclamation-sign  btn-lg' id='mensaje'></span></div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-info btn-lw" data-dismiss="modal">
-        	<span class="glyphicon glyphicon glyphicon-off"></span><?php echo $buttondesc?>
+        	<span class="glyphicon glyphicon glyphicon-off"></span>&nbsp;<?php echo $buttondesc?>
         </button>
       </div>
     </div>

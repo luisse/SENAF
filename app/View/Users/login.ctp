@@ -1,7 +1,7 @@
-    <div class="container">
+<div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
-                <div class="login-panel panel panel-default">
+                <div class="login-panel panel panel-login">
                     <div class="panel-heading">
                         <h3 class="panel-title">Por Favor Inicia Sesión</h3>
                     </div>
@@ -40,17 +40,10 @@
                                 </div>
 								<div class='row'>
 									<div class="col-lg-5">
-										<label class="checkbox">
-											<div class="checker">
-												<span>
-													<input name="remember" type="checkbox" name="record"><?php echo __('Recuerdame');?>
-												</span>
-											</div>
-										</label>
 									</div>
 									<div class="col-lg-3">
 										<!-- Change this to a button or input when using this as a form -->
-										<button type="button" class="btn btn-success btn-lg" id='ingresar'>
+										<button type="button" class="btn btn-login btn-lg" id='ingresar'>
 										  <?php echo __('Iniciar Sesión');?> <span class="glyphicon glyphicon-log-in"></span>
 										</button>									
 									</div>
@@ -64,4 +57,4 @@
                 </div>
             </div>
         </div>
-    </div>
+</div>

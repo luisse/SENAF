@@ -1,4 +1,4 @@
-<?php echo $this->Html->script(array('/js/users/index.js','jquery.maskedinput','jquery.toastmessage'),array('block'=>'scriptjs'));?>
+<?php echo $this->Html->script(array('/js/users/index.js','jquery.numeric','jquery.toastmessage'),array('block'=>'scriptjs'));?>
 <?php echo $this->Html->css('message', null, array('inline' => false))?>		
 <?php echo $this->element('flash_message')?>
 <script>
@@ -7,7 +7,7 @@
 
 <div class="panel  panel-listados">
     <div class="panel-heading">
-		<i class="fa fa-users fa-fw"></i> <?php echo __('Datos de Usuarios');?>
+		<i class="fa fa-users fa-fw"></i> <?php echo __('Usuarios del Sistema');?>
     </div>
     <!-- /.panel-heading -->
     <div class="panel-body">
@@ -18,12 +18,12 @@
 			<div class="tab-content">
 			  <div class="tab-pane active" id="tabs-1">
 					<!-- <form id="filteralumno" accept-charset="utf-8" method="post" action="#">  -->
-					<?php echo $this->Form->create('User',array('action'=>'#','id'=>'filteralumno'));?>
+					<?php echo $this->Form->create('User',array('action'=>'#','id'=>'usuariofilter'));?>
 					<?php echo $this->Form->input('typeuser',array('type'=>'hidden','value'=>'1')); ?>    
 				<fieldset>
 					<div class="row">	
 						<div class="col-lg-3">			
-							<?php echo $this->Form->input('Cliente.documento', array(
+							<?php echo $this->Form->input('Persona.nrodoc', array(
 									'label' => __('Documento '),
 									'type'=>'text',
 									'placeholder' => __('Nro de Documento'),
@@ -33,18 +33,18 @@
 						</div>
 					</div>			
 					<div class="row">
-						 <div class="col-lg-4">
-							<?php echo $this->Form->input('Cliente.nombre', array(
-									'label' => __('Nombre '),
-									'placeholder' => __('Nombre'),
+						<div  class="col-lg-4">
+							<?php echo $this->Form->input('Persona.apellido', array(
+									'label' => __('Apellido '),
+									'placeholder' => __('Ingrese Apellido a Buscar'),
 									'class'=>'form-control input-sm',
 									'size'=>30
 								))?>
 						</div>
-						<div  class="col-lg-4">
-							<?php echo $this->Form->input('Cliente.apellido', array(
-									'label' => __('Apellido '),
-									'placeholder' => __('Apellido'),
+						<div class="col-lg-4">
+							<?php echo $this->Form->input('Persona.nombre', array(
+									'label' => __('Nombre '),
+									'placeholder' => __('Ingrse Nombre a Buscar'),
 									'class'=>'form-control input-sm',
 									'size'=>30
 								))?>
@@ -61,7 +61,10 @@
 				</fieldset>
 				<?php echo $this->Form->end()?>
 			</div>
-		</div>			
+		</div>
+		<div id='cargandodatos' style='display:none;top: 50%;left: 50%;text-align:center'>
+			<?php echo $this->Html->image('carga.gif')?>
+		</div>	
 		<div id='listusers'>
 		</div>
 	</div>

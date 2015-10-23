@@ -22,14 +22,14 @@
 			</div>
 		</fieldset>
 <div class="row">	
-	<div class="col-lg-6">
+	<div class="col-xs-6 col-sm-6">
 		<center>
 		<button type="button" class="btn btn-success btn-lw" id='guardar'>
 		  <span class="glyphicon glyphicon glyphicon-save"></span>&nbsp;<?php echo __('Guardar') ?>
 		</button>	
 		</center>
 	</div>
-	<div class="col-lg-6">
+	<div class="col-xs-6 col-sm-6">
 		<center>
 		<button type="button" class="btn btn-danger btn-lw" id='cancelar'>
 		  <span class="glyphicon glyphicon glyphicon-off"></span>&nbsp;<?php echo __('Cancelar')?>

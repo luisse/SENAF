@@ -17,7 +17,7 @@
 	<div id="border-top" class="h_green">
 		<div>
 			<div>
-				<span class="version">VersiÃ³n 1.0</span>
+				<span class="version">Versión 1.0</span>
 				<span class="title"></span>
 			</div>
 		</div>
@@ -46,7 +46,7 @@
 	</div>
 	<div id="footer">
 		<p class="copyright">
-			<a href="" target="_blank">Tallercito Bike</a>
+			<a href="" target="_blank">SENAyF</a>
 			es software libre liberado bajo la <a href="http://www.gnu.org/licenses/gpl-2.0.html">Licencia GNU/GPL</a>.	</p>
 	
 	</div>

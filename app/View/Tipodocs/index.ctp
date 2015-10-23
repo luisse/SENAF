@@ -50,20 +50,28 @@
 	<tfoot>
 		<tr>
 		<td colspan="7" class='row1'>
-			<center>
-			<div class="pagination">
-					<?php echo $paginador = $this->paginator->numbers();?>
-					<?php if(!empty($paginador)): ?></div>
-						<center>
-							<ul class="pagination">
-							  <li><?php echo $this->paginator->prev('<< ', null, null, array('class'=>'paginator'));?></li>
-							  <li><?php echo $this->paginator->numbers(array('separator'=>''));?></li>
-							  <li><?php echo $this->paginator->next('>>', null, null, array('class'=>'paginator'));?></li>
-							</ul>
-						</center>
-					<?php endif;?>			
-			</div>
-			</center>
+				<center>
+						<?php 
+							$paginador = $this->paginator->numbers(array(
+								    'before' => '',
+								    'separator' => '',
+								    'currentClass' => 'active',
+								    'tag' => 'li',
+									 'currentTag' => 'a',
+								    'after' => ''));
+						?>				
+						<div class="pagination">
+							<?php if(!empty($paginador)): ?>
+							<nav>
+								<ul class="pagination">
+  								  <li><?php echo $this->paginator->prev('<< ', null, null, array('class'=>'paginator'));?></li>
+								  <li><?php echo $paginador;?></li>
+								  <li><?php echo $this->paginator->next('>>', null, null, array('class'=>'paginator'));?></li>
+								</ul>
+							</nav>
+						<?php endif;?>			
+						</div>
+				</center>
 		</td>
 		</tr>
 	</tfoot>
@@ -71,7 +79,7 @@
 </center>
 </div>
 <div class="row">	
-	<div class="col-lg-6">
+	<div class="col-xs-6 col-sm-6">
 		<center>
 		<?php
 			echo $this->Html->link('<button type="button" class="btn btn-success btn-lw" title="Agregar Categoria">
@@ -81,7 +89,7 @@
 					'');		
 	?>		</center>
 	</div>
-	<div class="col-lg-6">
+	<div class="col-xs-6 col-sm-6">
 		<center>
 		<button type="button" class="btn btn-danger btn-lw" id='cancelar'>
 		  <span class="glyphicon glyphicon glyphicon-off"></span>&nbsp;<?php echo __('Cancelar')?>

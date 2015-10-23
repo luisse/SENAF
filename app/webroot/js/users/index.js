@@ -21,7 +21,7 @@ $(document).ready(function(){
 );
 
 function IniciarEventos(){
-	$('#ClienteDocumento').mask('99.999.999',{placeholder:" "});
+	$('#PersonaNrodoc').numeric()
 	//icons GO
 	$('.ui-state-default').hover(
 			function(){ $(this).addClass('ui-state-hover'); }, 
@@ -36,9 +36,10 @@ function IniciarEventos(){
 function reloadList(rlink,tipofiltro){
 	var serialize
 	if(tipofiltro == 1)
-		serialize=$('#filteralumno').serialize()
+		serialize=$('#usuariofilter').serialize()
 	if(tipofiltro == 2)
-		serialize=$('#filterprof').serialize()
+		serialize=$('#usuariofilter').serialize()
+	$('#cargandodatos').show(1)	
 	$.post(rlink,serialize,
 			function(data) {
 				$('#listusers').html(data);
@@ -49,7 +50,9 @@ function reloadList(rlink,tipofiltro){
 			        //recarmamos el proceso de carga
 			        return false;
 			    });
-	})
+	}).always(function() {
+		$('#cargandodatos').hide(1)
+	});
 }
 
 

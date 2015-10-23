@@ -24,22 +24,17 @@ class ParentescosController extends AppController {
 	public function index() {
 		$this->set('title_for_layout',__('Parentescos'));
 		$this->Parentesco->recursive = 0;
-		$this->paginate=array('limit' => 5,
+		$this->paginate=array('limit' => 10,
 						'page' => 1,
-						'order'=>array('parent_id'=>'desc','id'=>'asc'),
-						'conditions'=>array('Parentesco.parent_id IS NULL'));
+						'fields'=>array('Parentesco.id','Parentesco.descrip','Parentesco.definicion','Parentescorecip.descrip'),
+						'order'=>array('parentesco_id'=>'desc','id'=>'asc'),
+						'joins'=>array(array('table'=>'parentescos',
+												'alias'=>'Parentescorecip',
+												'type'=>'LEFT',
+												'conditions'=>array('Parentesco.id = Parentescorecip.parentesco_id')))
+					);
 		$parentescos = $this->Paginator->paginate();
-		$i=0;
-		$subparentescos=array();
-		foreach($parentescos as $parentesco){
-			$subparentesco = $this->Parentesco->find('all',array('conditions'=>array('Parentesco.parent_id'=>$parentesco['Parentesco']['id'])));
-			if(!empty($subparentesco)){
-				$subparentescos[$i]=$subparentesco;
-				$i++;
-			}
-		}		
-			
-		$this->set(compact('parentescos','subparentescos'));
+		$this->set(compact('parentescos'));
 	}
 
 /**
@@ -73,24 +68,22 @@ class ParentescosController extends AppController {
 				$this->Session->setFlash(__('El Parentesco no se pudo grabar. Por favor, intente de nuevo.'));
 			}
 		}
-		$parentParentescos = $this->Parentesco->ParentParentesco->find('list');
-		$this->set(compact('parentParentescos'));
 	}
 /**
  * addsub method
  *
  * @return void
  */
-	public function addsub($parent_id = null) {
+	public function addsub($parentesco_id = null) {
 		$this->set('title_for_layout',__('Agregar Sub Parentesco'));
-		if(!empty($parent_id)) 
-			$this->Session->write('parent_id',$parent_id);
+		if(!empty($parentesco_id)) 
+			$this->Session->write('parentesco_id',$parentesco_id);
 		else
-			$parent_id=$this->Session->read('parent_id');
+			$parentesco_id=$this->Session->read('parentesco_id');
 			
 		if ($this->request->is('post')) {
 			$this->Parentesco->create();
-			if(!empty($parent_id)) $this->request->data['Parentesco']['parent_id'] = $parent_id;	
+			if(!empty($parentesco_id)) $this->request->data['Parentesco']['parentesco_id'] = $parentesco_id;	
 			if ($this->Parentesco->save($this->request->data)) {
 				$this->Session->setFlash(__('El Parentesco a sido guardado.'));
 				return $this->redirect(array('action' => 'index'));
@@ -148,4 +141,22 @@ class ParentescosController extends AppController {
 				$this->Session->setFlash(__('Error: No se puede eliminar el registro. Atributo asignado a registro'));
 		}	
 		return $this->redirect(array('action' => 'index'));
-	}}
+	}
+	public function beforeFilter() {
+	    parent::beforeFilter();
+
+	}
+
+	public function beforeRender(){
+			try{
+				$result =	$this->Acl->check(array(
+					'model' => 'Group',       # The name of the Model to check agains
+					'foreign_key' => $this->Session->read('tipousr') # The foreign key the Model is bind to
+					), ucfirst($this->params['controller']).'/'.$this->params['action']);
+				if(!$result)
+	        		$this->redirect(array('controller' => 'accesorapidos','action'=>'seguridaderror',$this->params['controller'].'-'.$this->params['action']));
+			}catch(Exeption $e){
+				
+			}
+	}	
+}

@@ -1,120 +1,101 @@
-<?php echo $this->Html->script(array('/js/categorias/index.js','jquery.toastmessage'),array('block'=>'scriptjs'));?>
-<?php echo $this->Html->css('message', null, array('inline' => false))?>
-	
+<?php echo $this->Html->script(array('/js/personas/index.js','jquery.toastmessage','jquery.numeric'),array('block'=>'scriptjs'));?>
+<?php echo $this->Html->css('message', null, array('inline' => false))?>	
 <?php echo $this->element('flash_message')?>
-<div class="panel panel-transacciones">
+<script>
+	var link="<?php echo $this->Html->url(array('controller'=>'personas','action'=>'listpersonas')) ?>"
+</script>
+
+<div class="panel panel-personas">
 	<div class="panel-heading">
-		<i class="fa fa-list fa-lg"></i>&nbsp;<?php echo __('Personas')?>    </div>
+		<i class="fa fa-list fa-lg"></i>&nbsp;<?php echo __('Listado de Personas')?>    </div>
 	<br>
-	<div class="table-responsive">
+<div class="table-responsive">
 <div class="panel-body">
-	<div class="table-responsive">
-	<table  class="table table-striped table-bordered table-hover dataTable table-responsive">
-	<thead>
-		<tr>
-					<th><?php echo $this->Paginator->sort('id');?></th>
-					<th><?php echo $this->Paginator->sort('apellido');?></th>
-					<th><?php echo $this->Paginator->sort('nombre');?></th>
-					<th><?php echo $this->Paginator->sort('sexo');?></th>
-					<th><?php echo $this->Paginator->sort('fnac');?></th>
-					<th><?php echo $this->Paginator->sort('ffallec');?></th>
-					<th><?php echo $this->Paginator->sort('estcivile_id');?></th>
-					<th><?php echo $this->Paginator->sort('email');?></th>
-					<th><?php echo $this->Paginator->sort('nn');?></th>
-					<th><?php echo $this->Paginator->sort('usuariocrea');?></th>
-					<th><?php echo $this->Paginator->sort('ipcrea');?></th>
-					<th><?php echo $this->Paginator->sort('created');?></th>
-					<th><?php echo $this->Paginator->sort('usuarioactu');?></th>
-					<th><?php echo $this->Paginator->sort('ipactu');?></th>
-					<th><?php echo $this->Paginator->sort('modified');?></th>
-					<th><?php __('Acciones');?></th>
-		</tr>
-	</thead>
-	<tbody>
-	<?php
-	foreach ($personas as $persona):
-		?>
-	<tr>
-		<td><?php echo $persona['Persona']['id']; ?>&nbsp;</td>
-		<td><?php echo $persona['Persona']['apellido']; ?>&nbsp;</td>
-		<td><?php echo $persona['Persona']['nombre']; ?>&nbsp;</td>
-		<td><?php echo $persona['Persona']['sexo']; ?>&nbsp;</td>
-		<td><?php echo $persona['Persona']['fnac']; ?>&nbsp;</td>
-		<td><?php echo $persona['Persona']['ffallec']; ?>&nbsp;</td>
-		<td><?php echo $persona['Persona']['estcivile_id']; ?>&nbsp;</td>
-		<td><?php echo $persona['Persona']['email']; ?>&nbsp;</td>
-		<td><?php echo $persona['Persona']['nn']; ?>&nbsp;</td>
-		<td><?php echo $persona['Persona']['usuariocrea']; ?>&nbsp;</td>
-		<td><?php echo $persona['Persona']['ipcrea']; ?>&nbsp;</td>
-		<td><?php echo $persona['Persona']['created']; ?>&nbsp;</td>
-		<td><?php echo $persona['Persona']['usuarioactu']; ?>&nbsp;</td>
-		<td><?php echo $persona['Persona']['ipactu']; ?>&nbsp;</td>
-		<td><?php echo $persona['Persona']['modified']; ?>&nbsp;</td>
-		<td class="actions">
-		<div class="btn-group">
-			<a class="btn btn-primary" href="#"><i class="fa fa-plus-circle fa-fw"></i> </a>
-				<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-					<span class="fa fa-caret-down"></span></a>
-					<ul class="dropdown-menu">
-					<li>
-							<?php 
-							echo $this->Html->link('<i class="fa fa-edit fa-fw"></i>&nbsp;'.__('Modificar'),array('controller'=>'personas',
-								'action'=>'edit',$persona['persona']['id']),
-								array('onclick'=>'','escape'=>false),
-								'');?>
-					</li>
-						<li>
-										<?php echo $this->Html->link('<i class="fa fa-trash-o fa-fw"></i>&nbsp;'.__('Borrar'),array('controller'=>'personas',
-											'action'=>'delete',$persona['persona']['id']),
-											array('onclick'=>"return confirm('¿Desea Borrar el Registro Seleccionado?')",'escape'=>false),'');?>						</li>
-					  </ul>
+    <div class="table-responsive">
+			<ul class="nav nav-tabs">
+			  <li class="active"><a href="#tabs-1"><?php echo __('Filtro Personas') ?></a></li>
+			</ul>
+			<div class="tab-content">
+			  <div class="tab-pane active" id="tabs-1">
+					<!-- <form id="filteralumno" accept-charset="utf-8" method="post" action="#">  -->
+					<?php echo $this->Form->create('User',array('action'=>'#','id'=>'personafilter'));?>
+					<?php echo $this->Form->input('typeuser',array('type'=>'hidden','value'=>'1')); ?>    
+				<fieldset>
+					<div class="row">	
+						<div class="col-lg-3">			
+							<?php echo $this->Form->input('Persona.nrodoc', array(
+									'label' => __('Documento '),
+									'type'=>'text',
+									'placeholder' => __('Nro de Documento'),
+									'class'=>'form-control input-sm',
+									'size'=>10
+								))?>
+						</div>
+						<div  class="col-lg-1">
+							<label><?php echo 'Es NN'?></label>
+							<div class='checkbox'>
+									<?php echo $this->Form->input('Persona.nn', array(
+											'label' => false,
+											'type'=>'checkbox'/*,
+											'class'=>'form-control input-sm'*/
+										))?>
+							</div>
+						
+						</div> 						
+						<div class="col-lg-1">			
+							<?php echo $this->Form->input('Persona.id', array(
+									'label' => __('Identificador'),
+									'type'=>'text',
+									'placeholder' => __('Identificador'),
+									'class'=>'form-control input-sm',
+									'size'=>5
+								))?>
+						</div>
+						<div class="col-lg-4">			
+							<?php echo $this->Form->input('Persona.detalle', array(
+									'label' => __('Detalles Morfológicos'),
+									'type'=>'text',
+									'placeholder' => __('Detalles'),
+									'class'=>'form-control input-sm',
+									'size'=>5
+								))?>
+						</div>						
+												
+					</div>			
+					<div class="row">
+						<div  class="col-lg-4">
+							<?php echo $this->Form->input('Persona.apellido', array(
+									'label' => __('Apellido '),
+									'placeholder' => __('Ingrese Apellido a Buscar'),
+									'class'=>'form-control input-sm',
+									'size'=>30
+								))?>
+						</div>
+						<div class="col-lg-4">
+							<?php echo $this->Form->input('Persona.nombre', array(
+									'label' => __('Nombre '),
+									'placeholder' => __('Ingrse Nombre a Buscar'),
+									'class'=>'form-control input-sm',
+									'size'=>30
+								))?>
+						</div>
+						<div  class="col-lg-2">
+							<br>
+							<button type="button" class="btn btn-info btn-lw" id='buscar'>
+									<span class="glyphicon glyphicon-search"></span> <?php echo __('Buscar');?>
+							</button>
+						</div>    
+					    
+				    </div>
+				</div>
+				</fieldset>
+				<?php echo $this->Form->end()?>
 			</div>
-		</td>
-	</tr>
-<?php endforeach; ?>
-</tbody>
-	<tfoot>
-		<tr>
-		<td colspan="7" class='row1'>
-			<center>
-			<div class="pagination">
-					<?php echo $paginador = $this->paginator->numbers();<?php echo if(!empty()): ?>						<center>
-							<ul class="pagination">
-							  <li><?php echo $this->paginator->prev('<< ', null, null, array('class'=>'paginator'));?>
-</li>
-							  <li><?php echo $this->paginator->numbers(array('separator'=>''));?>
-</li>
-							  <li><?php echo $this->paginator->next('>>', null, null, array('class'=>'paginator'));?>
-</li>
-							</ul>
-						</center>
-					<?php endif;?>			</div>
-			</center>
-		</td>
-		</tr>
-	</tfoot>
-</table>
-</center>
-</div>
-<div class="row">	
-	<div class="col-lg-6">
-		<center>
-		<?php
-			echo $this->Html->link('<button type="button" class="btn btn-success btn-lw" title="Agregar Categoria">
-																	<span class="glyphicon  glyphicon-plus"></span>Agregar</button>',array('controller'=>'personas',
-										'action'=>'add',''),
-										array('escape'=>false),
-					'');		
-	?>		</center>
-	</div>
-	<div class="col-lg-6">
-		<center>
-		<button type="button" class="btn btn-danger btn-lw" id='cancelar'>
-		  <span class="glyphicon glyphicon glyphicon-off"></span>&nbsp;<?php echo __('Cancelar')?>
-		</button>	
-		</center>
-	</div>
-</div>		
+	</div>			
+	<div id='cargandodatos' style='display:none;top: 50%;left: 50%;text-align:center'>
+		<?php echo $this->Html->image('carga.gif')?>
+	</div>		
+	<div id='personas'></div>
 </div>
 <div id='message' style='hidden'>
 	<?php $this->Session->flash() ?>

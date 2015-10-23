@@ -1,7 +1,7 @@
 <?php
 /**
  * Bake Template for Controller action generation.
- *
+ * 
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -53,12 +53,12 @@
 			$this-><?php echo $currentModelName; ?>->create();
 			if ($this-><?php echo $currentModelName; ?>->save($this->request->data)) {
 <?php if ($wannaUseSession): ?>
-				$this->Session->setFlash(__('The <?php echo strtolower($singularHumanName); ?> has been saved.'));
+				$this->Session->setFlash(__('El Registro fue Guardado.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The <?php echo strtolower($singularHumanName); ?> could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('No se pudo Guardar el Registro. Por Favor Intente de Nuevo.'));
 <?php else: ?>
-				return $this->flash(__('The <?php echo strtolower($singularHumanName); ?> has been saved.'), array('action' => 'index'));
+				return $this->flash(__('El Registro fue Guardado.'), array('action' => 'index'));
 <?php endif; ?>
 			}
 		}
@@ -89,17 +89,17 @@
  */
 	public function <?php echo $admin; ?>edit($id = null) {
 		if (!$this-><?php echo $currentModelName; ?>->exists($id)) {
-			throw new NotFoundException(__('Invalid <?php echo strtolower($singularHumanName); ?>'));
+			throw new NotFoundException(__('Invalido <?php echo strtolower($singularHumanName); ?>'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this-><?php echo $currentModelName; ?>->save($this->request->data)) {
 <?php if ($wannaUseSession): ?>
-				$this->Session->setFlash(__('The <?php echo strtolower($singularHumanName); ?> has been saved.'));
+				$this->Session->setFlash(__('El Registro Fue Actualizado.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The <?php echo strtolower($singularHumanName); ?> could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('No se pudo actualizar el registro. Por favor intente de nuevo.'));
 <?php else: ?>
-				return $this->flash(__('The <?php echo strtolower($singularHumanName); ?> has been saved.'), array('action' => 'index'));
+				return $this->flash(__('El Registro fue actualizado.'), array('action' => 'index'));
 <?php endif; ?>
 			}
 		} else {
@@ -138,9 +138,9 @@
 		$this->request->onlyAllow('post', 'delete');
 		if ($this-><?php echo $currentModelName; ?>->delete()) {
 <?php if ($wannaUseSession): ?>
-			$this->Session->setFlash(__('The <?php echo strtolower($singularHumanName); ?> has been deleted.'));
+			$this->Session->setFlash(__('El Registro fue eliminado.'));
 		} else {
-			$this->Session->setFlash(__('The <?php echo strtolower($singularHumanName); ?> could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('No se pudo borrar el registro. Por favor intente de nuevo.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 <?php else: ?>

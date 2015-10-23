@@ -36,7 +36,7 @@ class TipodocsController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->Tipodoc->exists($id)) {
-			throw new NotFoundException(__('Invalid tipodoc'));
+			throw new NotFoundException(__('Identificador Invalido'));
 		}
 		$options = array('conditions' => array('Tipodoc.' . $this->Tipodoc->primaryKey => $id));
 		$this->set('tipodoc', $this->Tipodoc->find('first', $options));
@@ -52,10 +52,10 @@ class TipodocsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Tipodoc->create();
 			if ($this->Tipodoc->save($this->request->data)) {
-				$this->Session->setFlash(__('The tipodoc has been saved.'));
+				$this->Session->setFlash(__('El Registro Fue Guardado.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The tipodoc could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('No se pudo guardar el tipo de coumento. Por Favor intente de nuevo.'));
 			}
 		}
 	}
@@ -70,7 +70,7 @@ class TipodocsController extends AppController {
 	public function edit($id = null) {
 		$this->set('title_for_layout','Actualizar Tipo de Documento');		
 		if (!$this->Tipodoc->exists($id)) {
-			throw new NotFoundException(__('Invalid tipodoc'));
+			throw new NotFoundException(__('Identificador Invalido'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Tipodoc->save($this->request->data)) {
@@ -97,12 +97,42 @@ class TipodocsController extends AppController {
 		if (!$this->Tipodoc->exists()) {
 			throw new NotFoundException(__('Invalid tipodoc'));
 		}
-
-		if ($this->Tipodoc->delete()) {
-			$this->Session->setFlash(__('El Tipo de Documento fue Borrado.'));
-		} else {
-			$this->Session->setFlash(__('El Tipo de Documento no puede ser Borrado. Por Favor intente de nuevo.'));
-		}
+		try {
+			if ($this->Tipodoc->delete()) {
+				$this->Session->setFlash(__('El Tipo de Documento fue Borrado.'));
+			} else {
+				$this->Session->setFlash(__('El Tipo de Documento no puede ser Borrado. Por Favor intente de nuevo.'));
+			}
+		}catch(Exception $e){
+			$this->Session->setFlash(__('Error: No se puede eliminar el registro. Atributo asignado a registro'));
+		}				
 		return $this->redirect(array('action' => 'index'));
 	}
+	
+	public function beforeFilter() {
+	    parent::beforeFilter();
+	    /***$aclseguridad = $this->session->read('aclseguridad');
+	    if(!empty($aclseguridad)){
+	    	if(!empty($aclseguridad[ucfirst($this->params['controller'])][$this->params['action']])){
+	    		if(!$aclseguridad[ucfirst($this->params['controller'])][$this->params['action']]){
+	    			$this->redirect(array('controller' => 'accesorapidos','action'=>'seguridaderror',ucfirst($this->params['controller']).'-'.$this->params['action']));
+	    			return;
+	    		}else{
+	    			return;
+	    		}
+	    	}
+	    }***/
+	     
+		try{
+			$result =	$this->Acl->check(array(
+				'model' => 'Group',       # The name of the Model to check agains
+				'foreign_key' => $this->Session->read('tipousr') # The foreign key the Model is bind to
+				), ucfirst($this->params['controller']).'/'.$this->params['action']);
+			if(!$result)
+        		$this->redirect(array('controller' => 'accesorapidos','action'=>'seguridaderror',$this->params['controller'].'-'.$this->params['action']));
+		}catch(Exeption $e){
+				
+		}	    
+	}
+	
 }

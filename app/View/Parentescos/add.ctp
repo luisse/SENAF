@@ -11,23 +11,32 @@
 <fieldset>
 	<legend><?php echo __('Nuevo Parentesco') ?></legend>
 			<div class="row">
-				<div class="col-lg-10">
-				<?php echo $this->Form->input('descripcion',array('label' => __('Parentesco'),
-													'placeholder'=>'Ingrese Parentesco',
+				<div class="col-lg-5">
+				<?php echo $this->Form->input('Parentesco.descrip',array('label' => __('Descripción'),
+													'placeholder'=>'Ingrese Descripción',
 													'class'=>'form-control input-sm',
 													'error'=>array('attributes' =>array('class'=>'alert alert-danger'))))?>
 				</div>
 			</div>
+			<div class="row">			
+				<div class="col-lg-10">
+				<?php echo $this->Form->input('Parentesco.definicion',array('label' => __('Definición'),
+													'placeholder'=>'Ingrese Definición',
+													'class'=>'form-control input-sm',	
+													'type'=>'textarea',													
+													'error'=>array('attributes' =>array('class'=>'alert alert-danger'))))?>
+				</div>			
+			</div>
 		</fieldset>
 <div class="row">	
-	<div class="col-lg-6">
+	<div class="col-xs-6 col-sm-6">
 		<center>
 		<button type="button" class="btn btn-success btn-lw" id='guardar'>
 		  <span class="glyphicon glyphicon glyphicon-save"></span>&nbsp;<?php echo __('Guardar') ?>
 		</button>	
 		</center>
 	</div>
-	<div class="col-lg-6">
+	<div class="col-xs-6 col-sm-6">
 		<center>
 		<button type="button" class="btn btn-danger btn-lw" id='cancelar'>
 		  <span class="glyphicon glyphicon glyphicon-off"></span>&nbsp;<?php echo __(' Cancelar')?>

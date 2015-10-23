@@ -21,6 +21,9 @@ class EstcivilesController extends AppController {
  * @return void
  */
 	public function index() {
+		$this->paginate=array('limit' => 8,
+							'page' => 1,
+							'order'=>array('descrip'=>'desc'));				
 		$this->Estcivile->recursive = 0;
 		$this->set('estciviles', $this->Paginator->paginate());
 	}
@@ -93,12 +96,38 @@ class EstcivilesController extends AppController {
 		if (!$this->Estcivile->exists()) {
 			throw new NotFoundException(__('Identificador Invalido'));
 		}
-		//$this->request->onlyAllow('post', 'delete');
-		if ($this->Estcivile->delete()) {
-			$this->Session->setFlash(__('El Registro fue Borrado.'));
-		} else {
-			$this->Session->setFlash(__('No se pudo borrar el registro. Por favor, intente de nuevo.'));
+		try {
+			if ($this->Estcivile->delete()) {
+				$this->Session->setFlash(__('El Registro fue Borrado.'));
+			} else {
+				$this->Session->setFlash(__('No se pudo borrar el registro. Por favor, intente de nuevo.'));
+			}
+		}catch(Exception $e){
+			$this->Session->setFlash(__('Error: No se puede eliminar el registro. Atributo asignado a registro'));
 		}
+				
 		return $this->redirect(array('action' => 'index'));
+	}
+	public function beforeFilter() {
+	    parent::beforeFilter();
+	
+	    // For CakePHP 2.0
+	   // $this->Auth->allow('*');
+	
+	    // For CakePHP 2.1 and up
+	   // $this->Auth->allow();
+	}
+	
+	public function beforeRender(){
+			try{
+			$result =	$this->Acl->check(array(
+					'model' => 'Group',       # The name of the Model to check agains
+					'foreign_key' => $this->Session->read('tipousr') # The foreign key the Model is bind to
+			), ucfirst($this->params['controller']).'/'.$this->params['action']);
+			if(!$result)
+				$this->redirect(array('controller' => 'accesorapidos','action'=>'seguridaderror',ucfirst($this->params['controller']).'-'.$this->params['action']));
+		}catch(Exeption $e){
+	
+		}
 	}
 }

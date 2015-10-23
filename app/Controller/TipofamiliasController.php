@@ -47,7 +47,7 @@ class TipofamiliasController extends AppController {
  * @return void
  */
 	public function add() {
-		$this->set('title_for_layout','Agregar - Tipo de Familias');		
+		$this->set('title_for_layout','Agregar - Tipo de Familia');		
 		if ($this->request->is('post')) {
 			$this->Tipofamilia->create();
 			if ($this->Tipofamilia->save($this->request->data)) {
@@ -107,4 +107,21 @@ class TipofamiliasController extends AppController {
 		}
 			
 		return $this->redirect(array('action' => 'index'));
-	}}
+	}
+
+	
+	
+	public function beforeFilter() {
+	    parent::beforeFilter();
+		try{
+			$result =	$this->Acl->check(array(
+				'model' => 'Group',       # The name of the Model to check agains
+				'foreign_key' => $this->Session->read('tipousr') # The foreign key the Model is bind to
+				), ucfirst($this->params['controller']).'/'.$this->params['action']);
+			if(!$result)
+        		$this->redirect(array('controller' => 'accesorapidos','action'=>'seguridaderror',$this->params['controller'].'-'.$this->params['action']));
+		}catch(Exeption $e){
+				
+		}	    
+	}
+}

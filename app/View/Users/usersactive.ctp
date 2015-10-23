@@ -7,6 +7,7 @@
 						),
 			'class' => 'well'
 ));?>
+<?php if(!empty($usersdata)):?>
 <fieldset>
 	<legend><?php echo __('Confirmar Datos de Usuario')?></legend>
 			<?php echo $this->Form->input('User.id',array('type'=>'hidden','value'=>$usersdata['User']['id']))?>
@@ -22,29 +23,29 @@
 				<div class="col-lg-3">			
 					<?php echo $this->Form->input('User.email',array('label' => __('Correo Electrónico'),
 													'class'=>'form-control input-sm',
-													'value'=>$usersdata['User']['email'],
+													'value'=>$personas['Persona']['email'],
 													'error'=>array('attributes' =>array('class'=>'alert alert-danger'))))?></td>
 				</div>
 			</div>
-			<?php if(!empty($clientes)):?>
-			<?php echo $this->Form->hidden('Cliente.id')?>
+			<?php if(!empty($personas)):?>
+			<?php echo $this->Form->hidden('Persona.id')?>
 	<div class="row">	
 		<div class="col-lg-3">
-			<?php echo $this->Form->input('Cliente.documento',array('label' => __('Nro de Documento'),
+			<?php echo $this->Form->input('Persona.documento',array('label' => __('Nro de Documento'),
 													'size'=>'3',
 													'class'=>'form-control input-sm',
-													'value'=>$clientes['Cliente']['documento'],
+													'value'=>$personas['Persona']['documento'],
 													'error'=>array('attributes' =>array('class'=>'alert alert-danger'))))?>
 		</div>
-			<div class="col-lg-3">
+			<div class="col-lg-4">
 				<label>Fecha de Nacimiento</label>
 				<div class="form-group">
 		            <div class='input-group date' id='datetimepicker1' data-date-format="DD/MM/YYYY">
-						<?php echo $this->Form->input('Cliente.fechanac',array('label'=>false,
+						<?php echo $this->Form->input('Persona.fecnac',array('label'=>false,
 															'placeholder' => __('Fecha de Nacimiento'),
 															'size'=>'7',
 															'type'=>'text',
-															'value'=>$this->Time->format('d/m/Y',$clientes['Cliente']['fechanac']),						
+															'value'=>$this->Time->format('d/m/Y',$personas['Persona']['fechanac']),						
 															'class'=>'form-control input-sm',
 															'error'=>array('attributes' =>array('class'=>'alert alert-danger'))))?>
 						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
@@ -55,28 +56,28 @@
 	</div>
 	<div class="row">	
 		<div class="col-lg-5">	
-				<?php echo $this->Form->input('Cliente.apellido',array('label'=>__('Apellido'),
+				<?php echo $this->Form->input('Persona.apellido',array('label'=>__('Apellido'),
 														'placeholder' => __('Ingrese Apellido'),
 														'size'=>'7',
 														'class'=>'form-control input-sm',
-														'value'=>$clientes['Cliente']['apellido'],				
+														'value'=>$personas['Persona']['apellido'],				
 														'error'=>array('attributes' =>array('class'=>'alert alert-danger'))))?>
 			</div>
 			<div class="col-lg-5">													
-				<?php echo $this->Form->input('Cliente.nombre',array('label'=>__('Nombre'),
+				<?php echo $this->Form->input('Persona.nombre',array('label'=>__('Nombre'),
 														'placeholder' => __('Ingrese Nombre'),
 														'size'=>'7',
-														'value'=>$clientes['Cliente']['nombre'],				
+														'value'=>$personas['Persona']['nombre'],				
 														'class'=>'form-control input-sm',
 														'error'=>array('attributes' =>array('class'=>'alert alert-danger'))))?>
 			</div>
 		</div>	
 		<div class="row">	
 			<div class="col-lg-2">	
-			<?php echo $this->Form->input('Cliente.telefono',array('label'=>__('Telefono'),
+			<?php echo $this->Form->input('Persona.telefono',array('label'=>__('Telefono'),
 														'placeholder' => __('Ingrese Telefono'),
 														'size'=>'2',
-														'value'=>$clientes['Cliente']['telefono'],			
+														'value'=>$personas['Persona']['telefono'],			
 														'class'=>'form-control input-sm',
 														'error'=>array('attributes' =>array('class'=>'alert alert-danger'))))?>
 			</div>
@@ -84,35 +85,35 @@
 		<div class="row">	
 			<div class="col-lg-4">
 														
-				<?php echo $this->Form->input('Cliente.domicilio',array('label'=>__('Domiclio'),
+				<?php echo $this->Form->input('Persona.domicilio',array('label'=>__('Domiclio'),
 														'placeholder' => __('Ingrese Domiclio'),
 														'size'=>'10',
 														'class'=>'form-control input-sm',
-														'value'=>$clientes['Cliente']['domicilio'],				
+														//'value'=>$personas['Persona']['domicilio'],				
 														'error'=>array('attributes' =>array('class'=>'alert alert-danger'))))?>
 			</div>
 			<div class="col-lg-2">
-				<?php echo $this->Form->input('Cliente.dpto',array('label'=>__('Dpto'),
+				<?php echo $this->Form->input('Persona.dpto',array('label'=>__('Dpto'),
 															'placeholder' => __('Departamento'),
 															'size'=>'2',
 															'class'=>'form-control input-sm',
-															'value'=>$clientes['Cliente']['dpto'],				
+															//'value'=>$personas['Persona']['dpto'],				
 															'error'=>array('attributes' =>array('class'=>'alert alert-danger'))))?>
 			</div>
 			<div class="col-lg-2">
-			<?php echo $this->Form->input('Cliente.piso',array('label'=>__('Piso'),
+			<?php echo $this->Form->input('Persona.piso',array('label'=>__('Piso'),
 															'placeholder' => __('Piso'),
 															'size'=>'2',
 															'class'=>'form-control input-sm',
-															'value'=>$clientes['Cliente']['piso'],			
+															//'value'=>$personas['Persona']['piso'],			
 															'error'=>array('attributes' =>array('class'=>'alert alert-danger'))))?>
 			</div>
 			<div class="col-lg-2">																																																
-			<?php echo $this->Form->input('Cliente.block',array('label'=>__('Block'),
+			<?php echo $this->Form->input('Persona.block',array('label'=>__('Block'),
 															'placeholder' => __('Block'),
 															'size'=>'2',
 															'class'=>'form-control input-sm',
-															'value'=>$clientes['Cliente']['block'],			
+															//'value'=>$personas['Persona']['block'],			
 															'error'=>array('attributes' =>array('class'=>'alert alert-danger'))))?>
 			</div>
 		</div>
@@ -128,3 +129,11 @@
 	</div>
 </div>
 <?php echo $this->Form->end();?>
+<?php endif;?>
+
+<?php if(empty($usersdata)):?>
+<fieldset>
+	<legend><?php echo __('No se encuentra el usuario en el Sistema. Por Favor Contacte con el Administrador')?></legend>
+	<?php echo $this->Html->image('personanoexistente.jpg', array('alt' => 'WTF usuario?'));?>	
+</fieldset>
+<?php endif;?>

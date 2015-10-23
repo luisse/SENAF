@@ -92,6 +92,11 @@ class ClientesController extends AppController {
 	public function seleccionarclientemov(){
 		$this->layout = 'bmodalbox';
 	}
+
+	public function seleccionarclientegrupo($rowpos = null){
+		$this->layout = 'bmodalbox';
+		$this->set('rowpos',$rowpos);
+	}
 	
 	public function listarclientes(){
 			$this->layout = '';

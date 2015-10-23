@@ -21,10 +21,17 @@ $(document).ready(function(){
 })
 
 function IniciarEventos(){
+	$("#PersonaFnac").datetimepicker({pickTime: false,language:'es'});
+	$("#PersonaFfallec").datetimepicker({pickTime: false,language:'es'});
+	$('#PersonaTipodocId').attr('readonly',true)
+	$('#TipdocxperNrodoc').attr('readonly',true)
+	formateafecha('PersonaFnac');
+	formateafecha('PersonaFfallec');
+
 	$('#guardar').click(guardardatos)
 	$('#cancelar').click(function(){window.history.back()})	
 }
 
 function guardardatos(){
-	$('form#TypeproductEditForm').submit()	
+	$('form#PersonaEditForm').submit()	
 }

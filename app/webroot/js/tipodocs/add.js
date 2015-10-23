@@ -27,5 +27,5 @@ function IniciarEventos(){
 }
 
 function guardardatos(){
-	$('form#<MODELO>AddForm').submit()	
+	$('form#TipodocAddForm').submit()	
 }

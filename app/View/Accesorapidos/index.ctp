@@ -1,9 +1,7 @@
 <?php echo $this->Html->script(array('/js/accesorapidos/index.js','jquery.maskedinput'),array('block'=>'scriptjs'));?>
-<?php
-
-//determinamos si mostramos el ícono de shimano service center
-$tallercito = $this->Session->read('tallercito');
-?>
+<script>
+var peopleseach="<?php echo $this->Html->url(array('controller'=>'fts','action'=>'getpers')) ?>"
+</script>
 <!--     BLOQUE DE BOTONES -->
 
 <div class="row">
@@ -50,10 +48,10 @@ $tallercito = $this->Session->read('tallercito');
         <div class="small-box bg-red">
         	<div class="inner">
             	<h3>
-                	<?php echo '' ?> <sup style="font-size: 20px"><?php echo __('Encuentas')?></sup>
+                	<?php echo '' ?> <sup style="font-size: 20px"><?php echo __('Encuesta')?></sup>
                  </h3>
                  <p>
-                 	<?php echo __('Encuentas') ?>
+                 	<?php echo __('Encuestas') ?>
                  </p>
               </div>
 
@@ -98,5 +96,60 @@ $tallercito = $this->Session->read('tallercito');
 			<div id='informacion'></div>
 		</div>
 	</div>		
+</div>
+<!-- SEACH PEOPLE GLOBAL INTERFACE -->
+<div class="center-block">
+<div class="row">
+
+		<?php echo $this->Form->create('#',array('action'=>'#',
+			'inputDefaults' => array(
+							'div' => 'form-group',
+							'wrapInput' => false,
+							'class' => 'form-control'
+							),
+				'id'=>'buscarpersona',
+				'class' => 'well'
+			));?>
+
+			<fieldset>
+				<div class="row">
+					<div class="col-lg-6">
+					    <div class="input-group">
+									<?php echo $this->Form->input('Persona.buscar', array(
+										'label' => false,
+										'type'=>'text',
+										'placeholder' => __('Ingrese Datos para Busqueda'),
+										'class'=>'form-control'
+									))?>
+					         <span class="input-group-btn">
+					        <button class="btn btn-default" type="button" id='buscar'><i class="glyphicon glyphicon-search"></i></button>
+					      </span>
+					    </div>
+					 </div>
+				 </div>
+				 <div class ='row'>
+				 	<div class="col-lg-6">
+						<label class="checkbox-inline">
+								<?php echo $this->Form->checkbox('Persona.buscarpersona',array('div'=>false,'checked'))?>						
+						  <?php echo __('Solo Resultado Exactos')?>
+						</label>
+					</div>
+				 </div>
+				 <div class='row' >
+				 <br>
+				 	<center>
+				 	<div id='cargandodatos' style='display:none'>
+				 		<?php echo $this->Html->image('carga.gif')?>
+				 	</div>
+				 	</center>
+				 </div>
+				 <div class='row'>
+				 	<div id='resultsearch'></div>
+				 </div>
+			</fieldset>	
+						 
+			<?php echo $this->Form->end()?>
+		
+</div>
 </div>
 <?php echo $this->element('modalbox')?>

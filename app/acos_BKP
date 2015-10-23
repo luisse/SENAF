@@ -1,0 +1,480 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.1.15
+-- Dumped by pg_dump version 9.1.15
+-- Started on 2015-02-22 19:26:21 ART
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 161 (class 1259 OID 22452)
+-- Dependencies: 2056 2057 6
+-- Name: acos; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE acos (
+    id integer NOT NULL,
+    parent_id integer,
+    model character varying(255) DEFAULT NULL::character varying,
+    foreign_key integer,
+    alias character varying(255) DEFAULT NULL::character varying,
+    lft integer,
+    rght integer
+);
+
+
+ALTER TABLE public.acos OWNER TO postgres;
+
+--
+-- TOC entry 162 (class 1259 OID 22460)
+-- Dependencies: 161 6
+-- Name: acos_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE acos_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.acos_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2168 (class 0 OID 0)
+-- Dependencies: 162
+-- Name: acos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE acos_id_seq OWNED BY acos.id;
+
+
+--
+-- TOC entry 2058 (class 2604 OID 22745)
+-- Dependencies: 162 161
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY acos ALTER COLUMN id SET DEFAULT nextval('acos_id_seq'::regclass);
+
+
+--
+-- TOC entry 2162 (class 0 OID 22452)
+-- Dependencies: 161 2164
+-- Data for Name: acos; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY acos (id, parent_id, model, foreign_key, alias, lft, rght) FROM stdin;
+36	32	\N	\N	edit	69	70
+78	74	\N	\N	formatDate	153	154
+3	2	\N	\N	index	3	4
+37	32	\N	\N	delete	71	72
+4	2	\N	\N	ejemplobootstrap	5	6
+62	56	\N	\N	getclient	121	122
+5	2	\N	\N	listarclientes	7	8
+38	32	\N	\N	buildAcl	73	74
+6	2	\N	\N	buildAcl	9	10
+91	84	\N	\N	uploadFiles	179	180
+7	2	\N	\N	uploadFiles	11	12
+39	32	\N	\N	uploadFiles	75	76
+2	1	\N	\N	Accesorapidos	2	15
+8	2	\N	\N	formatDate	13	14
+32	1	\N	\N	Archxpersonas	62	79
+40	32	\N	\N	formatDate	77	78
+10	9	\N	\N	index	17	18
+63	56	\N	\N	seleccionarcliente	123	124
+11	9	\N	\N	view	19	20
+12	9	\N	\N	add	21	22
+13	9	\N	\N	edit	23	24
+42	41	\N	\N	retornalxmlbarrios	81	82
+14	9	\N	\N	delete	25	26
+64	56	\N	\N	seleccionarclientemov	125	126
+15	9	\N	\N	buildAcl	27	28
+43	41	\N	\N	buildAcl	83	84
+16	9	\N	\N	uploadFiles	29	30
+84	1	\N	\N	Domicilios	166	183
+9	1	\N	\N	Afinidades	16	33
+17	9	\N	\N	formatDate	31	32
+80	79	\N	\N	retornalxmldeptos	157	158
+44	41	\N	\N	uploadFiles	85	86
+65	56	\N	\N	seleccionarclientegrupo	127	128
+19	18	\N	\N	index	35	36
+41	1	\N	\N	Barrios	80	89
+45	41	\N	\N	formatDate	87	88
+20	18	\N	\N	view	37	38
+21	18	\N	\N	add	39	40
+22	18	\N	\N	edit	41	42
+92	84	\N	\N	formatDate	181	182
+66	56	\N	\N	listarclientes	129	130
+23	18	\N	\N	delete	43	44
+47	46	\N	\N	index	91	92
+24	18	\N	\N	verarchivo	45	46
+25	18	\N	\N	listarchivos	47	48
+48	46	\N	\N	view	93	94
+26	18	\N	\N	tomarfotopersona	49	50
+81	79	\N	\N	buildAcl	159	160
+67	56	\N	\N	editimage	131	132
+27	18	\N	\N	fileupload	51	52
+49	46	\N	\N	add	95	96
+28	18	\N	\N	addfileupload	53	54
+29	18	\N	\N	buildAcl	55	56
+50	46	\N	\N	edit	97	98
+30	18	\N	\N	uploadFiles	57	58
+18	1	\N	\N	Archivos	34	61
+31	18	\N	\N	formatDate	59	60
+68	56	\N	\N	mostrarfoto	133	134
+51	46	\N	\N	delete	99	100
+33	32	\N	\N	index	63	64
+93	1	\N	\N	Estciviles	184	201
+52	46	\N	\N	autocompletarcalle	101	102
+34	32	\N	\N	view	65	66
+82	79	\N	\N	uploadFiles	161	162
+35	32	\N	\N	add	67	68
+69	56	\N	\N	clientedeuda	135	136
+53	46	\N	\N	buildAcl	103	104
+70	56	\N	\N	listarclientedeuda	137	138
+54	46	\N	\N	uploadFiles	105	106
+46	1	\N	\N	Calles	90	109
+55	46	\N	\N	formatDate	107	108
+79	1	\N	\N	Deptos	156	165
+83	79	\N	\N	formatDate	163	164
+71	56	\N	\N	buildAcl	139	140
+57	56	\N	\N	index	111	112
+101	93	\N	\N	formatDate	199	200
+58	56	\N	\N	view	113	114
+72	56	\N	\N	uploadFiles	141	142
+59	56	\N	\N	add	115	116
+56	1	\N	\N	Clientes	110	145
+60	56	\N	\N	edit	117	118
+94	93	\N	\N	index	185	186
+61	56	\N	\N	delete	119	120
+73	56	\N	\N	formatDate	143	144
+85	84	\N	\N	index	167	168
+75	74	\N	\N	retornalxmldepartamentos	147	148
+116	111	\N	\N	delete	229	230
+86	84	\N	\N	view	169	170
+76	74	\N	\N	buildAcl	149	150
+95	93	\N	\N	view	187	188
+77	74	\N	\N	uploadFiles	151	152
+74	1	\N	\N	Departamentos	146	155
+87	84	\N	\N	add	171	172
+108	102	\N	\N	buildAcl	213	214
+96	93	\N	\N	add	189	190
+88	84	\N	\N	edit	173	174
+89	84	\N	\N	delete	175	176
+103	102	\N	\N	index	203	204
+97	93	\N	\N	edit	191	192
+90	84	\N	\N	buildAcl	177	178
+113	111	\N	\N	view	223	224
+104	102	\N	\N	view	205	206
+98	93	\N	\N	delete	193	194
+109	102	\N	\N	uploadFiles	215	216
+99	93	\N	\N	buildAcl	195	196
+100	93	\N	\N	uploadFiles	197	198
+102	1	\N	\N	Groups	202	219
+105	102	\N	\N	add	207	208
+110	102	\N	\N	formatDate	217	218
+106	102	\N	\N	edit	209	210
+107	102	\N	\N	delete	211	212
+114	111	\N	\N	add	225	226
+117	111	\N	\N	buildAcl	231	232
+112	111	\N	\N	index	221	222
+124	120	\N	\N	edit	245	246
+115	111	\N	\N	edit	227	228
+111	1	\N	\N	Grupopersonas	220	237
+119	111	\N	\N	formatDate	235	236
+118	111	\N	\N	uploadFiles	233	234
+123	120	\N	\N	add	243	244
+121	120	\N	\N	index	239	240
+122	120	\N	\N	view	241	242
+125	120	\N	\N	delete	247	248
+126	120	\N	\N	beforerender	249	250
+127	120	\N	\N	buildAcl	251	252
+128	120	\N	\N	uploadFiles	253	254
+129	120	\N	\N	formatDate	255	256
+131	130	\N	\N	index	259	260
+120	1	\N	\N	Grupsociales	238	257
+132	130	\N	\N	view	261	262
+133	130	\N	\N	add	263	264
+134	130	\N	\N	edit	265	266
+135	130	\N	\N	delete	267	268
+136	130	\N	\N	buildAcl	269	270
+137	130	\N	\N	uploadFiles	271	272
+130	1	\N	\N	Grupsocxdomis	258	275
+138	130	\N	\N	formatDate	273	274
+164	1	\N	\N	Parentescos	326	345
+173	164	\N	\N	formatDate	343	344
+140	139	\N	\N	retornalxmllocalidades	277	278
+197	183	\N	\N	mostrarseguimiento	391	392
+141	139	\N	\N	buildAcl	279	280
+142	139	\N	\N	uploadFiles	281	282
+175	174	\N	\N	index	347	348
+139	1	\N	\N	Localidades	276	285
+143	139	\N	\N	formatDate	283	284
+226	219	\N	\N	agregarfila	451	452
+198	183	\N	\N	personaexiste	393	394
+176	174	\N	\N	view	349	350
+145	144	\N	\N	retornalxmldeptos	287	288
+146	144	\N	\N	buildAcl	289	290
+177	174	\N	\N	add	351	352
+147	144	\N	\N	uploadFiles	291	292
+144	1	\N	\N	Municipios	286	295
+148	144	\N	\N	formatDate	293	294
+199	183	\N	\N	getpersona	395	396
+178	174	\N	\N	edit	353	354
+150	149	\N	\N	index	297	298
+151	149	\N	\N	listoficinas	299	300
+179	174	\N	\N	delete	355	356
+152	149	\N	\N	view	301	302
+200	183	\N	\N	seguimientopersonas	397	398
+153	149	\N	\N	add	303	304
+180	174	\N	\N	buildAcl	357	358
+154	149	\N	\N	edit	305	306
+155	149	\N	\N	delete	307	308
+181	174	\N	\N	uploadFiles	359	360
+156	149	\N	\N	buildAcl	309	310
+174	1	\N	\N	Permisos	346	363
+157	149	\N	\N	uploadFiles	311	312
+182	174	\N	\N	formatDate	361	362
+149	1	\N	\N	Oficinas	296	315
+158	149	\N	\N	formatDate	313	314
+201	183	\N	\N	buildAcl	399	400
+160	159	\N	\N	display	317	318
+161	159	\N	\N	buildAcl	319	320
+184	183	\N	\N	index	365	366
+162	159	\N	\N	uploadFiles	321	322
+202	183	\N	\N	uploadFiles	401	402
+159	1	\N	\N	Pages	316	325
+163	159	\N	\N	formatDate	323	324
+185	183	\N	\N	view	367	368
+165	164	\N	\N	index	327	328
+186	183	\N	\N	add	369	370
+166	164	\N	\N	view	329	330
+203	183	\N	\N	formatDate	403	404
+167	164	\N	\N	add	331	332
+187	183	\N	\N	edit	371	372
+168	164	\N	\N	addsub	333	334
+169	164	\N	\N	edit	335	336
+188	183	\N	\N	delete	373	374
+170	164	\N	\N	delete	337	338
+171	164	\N	\N	buildAcl	339	340
+172	164	\N	\N	uploadFiles	341	342
+189	183	\N	\N	listpersonas	375	376
+190	183	\N	\N	listpersonassel	377	378
+191	183	\N	\N	demophoto	379	380
+192	183	\N	\N	getlocalize	381	382
+365	361	\N	\N	edit	727	728
+193	183	\N	\N	seleccionarpersonasgrupo	383	384
+194	183	\N	\N	seleccionarclientegrupsociale	385	386
+195	183	\N	\N	seleccionarpersonasvinculos	387	388
+196	183	\N	\N	sissegpersona	389	390
+361	1	\N	\N	Buttonusers	720	733
+367	361	\N	\N	addbuttongrup	731	732
+372	368	\N	\N	edit	741	742
+1	\N	\N	\N	controllers	1	746
+368	1	\N	\N	Userbuttongets	734	745
+183	1	\N	\N	Personas	364	407
+362	361	\N	\N	index	721	722
+366	361	\N	\N	delete	729	730
+369	368	\N	\N	index	735	736
+373	368	\N	\N	delete	743	744
+214	204	\N	\N	modificargrupopersona	427	428
+235	231	\N	\N	edit	469	470
+215	204	\N	\N	editgrupsave	429	430
+227	219	\N	\N	existepersonagrupo	453	454
+216	204	\N	\N	buildAcl	431	432
+250	245	\N	\N	delete	499	500
+217	204	\N	\N	uploadFiles	433	434
+205	204	\N	\N	index	409	410
+228	219	\N	\N	buildAcl	455	456
+204	1	\N	\N	Persxgrupsociales	408	437
+206	204	\N	\N	view	411	412
+218	204	\N	\N	formatDate	435	436
+207	204	\N	\N	add	413	414
+236	231	\N	\N	delete	471	472
+208	204	\N	\N	edit	415	416
+229	219	\N	\N	uploadFiles	457	458
+220	219	\N	\N	index	439	440
+209	204	\N	\N	delete	417	418
+210	204	\N	\N	borrarpersona	419	420
+242	240	\N	\N	buildAcl	483	484
+221	219	\N	\N	listperxoficinas	441	442
+211	204	\N	\N	existepersgruposoc	421	422
+219	1	\N	\N	Persxoficinas	438	461
+212	204	\N	\N	agregarfila	423	424
+230	219	\N	\N	formatDate	459	460
+213	204	\N	\N	existepersonagrupo	425	426
+222	219	\N	\N	view	443	444
+237	231	\N	\N	buildAcl	473	474
+223	219	\N	\N	add	445	446
+247	245	\N	\N	view	493	494
+224	219	\N	\N	edit	447	448
+232	231	\N	\N	index	463	464
+225	219	\N	\N	delete	449	450
+238	231	\N	\N	uploadFiles	475	476
+243	240	\N	\N	uploadFiles	485	486
+233	231	\N	\N	view	465	466
+231	1	\N	\N	Persxparentescos	462	479
+239	231	\N	\N	formatDate	477	478
+234	231	\N	\N	add	467	468
+256	254	\N	\N	view	511	512
+240	1	\N	\N	Provincias	480	489
+244	240	\N	\N	formatDate	487	488
+245	1	\N	\N	Tiparchivos	490	507
+248	245	\N	\N	add	495	496
+241	240	\N	\N	retornalxmlprovincias	481	482
+251	245	\N	\N	buildAcl	501	502
+246	245	\N	\N	index	491	492
+255	254	\N	\N	index	509	510
+249	245	\N	\N	edit	497	498
+253	245	\N	\N	formatDate	505	506
+252	245	\N	\N	uploadFiles	503	504
+258	254	\N	\N	edit	515	516
+257	254	\N	\N	add	513	514
+259	254	\N	\N	delete	517	518
+260	254	\N	\N	existetipdocper	519	520
+261	254	\N	\N	buildAcl	521	522
+262	254	\N	\N	uploadFiles	523	524
+263	254	\N	\N	formatDate	525	526
+265	264	\N	\N	index	529	530
+360	183	\N	\N	seleccionapersona	405	406
+363	361	\N	\N	view	723	724
+370	368	\N	\N	view	737	738
+254	1	\N	\N	Tipdocxpers	508	527
+266	264	\N	\N	view	531	532
+267	264	\N	\N	add	533	534
+268	264	\N	\N	edit	535	536
+269	264	\N	\N	delete	537	538
+270	264	\N	\N	buildAcl	539	540
+271	264	\N	\N	uploadFiles	541	542
+272	264	\N	\N	formatDate	543	544
+264	1	\N	\N	Tipodocs	528	545
+307	300	\N	\N	uploadFiles	613	614
+332	309	\N	\N	cambiarcontraseniauser	663	664
+300	1	\N	\N	Userpersonas	600	617
+274	273	\N	\N	index	547	548
+308	300	\N	\N	formatDate	615	616
+275	273	\N	\N	view	549	550
+309	1	\N	\N	Users	618	673
+276	273	\N	\N	add	551	552
+277	273	\N	\N	edit	553	554
+333	309	\N	\N	buildAcl	665	666
+310	309	\N	\N	index	619	620
+278	273	\N	\N	delete	555	556
+279	273	\N	\N	buildAcl	557	558
+311	309	\N	\N	listusers	621	622
+280	273	\N	\N	uploadFiles	559	560
+273	1	\N	\N	Tipofamilias	546	563
+281	273	\N	\N	formatDate	561	562
+350	348	\N	\N	view	701	702
+334	309	\N	\N	uploadFiles	667	668
+312	309	\N	\N	login2	623	624
+283	282	\N	\N	index	565	566
+351	348	\N	\N	add	703	704
+284	282	\N	\N	view	567	568
+313	309	\N	\N	login	625	626
+285	282	\N	\N	add	569	570
+335	309	\N	\N	formatDate	669	670
+286	282	\N	\N	edit	571	572
+314	309	\N	\N	logout	627	628
+287	282	\N	\N	delete	573	574
+288	282	\N	\N	buildAcl	575	576
+315	309	\N	\N	confirmmail	629	630
+289	282	\N	\N	uploadFiles	577	578
+352	348	\N	\N	edit	705	706
+282	1	\N	\N	Tipopersonas	564	581
+290	282	\N	\N	formatDate	579	580
+316	309	\N	\N	add	631	632
+337	336	\N	\N	index	675	676
+292	291	\N	\N	index	583	584
+338	336	\N	\N	listvinculopers	677	678
+317	309	\N	\N	initDB	633	634
+293	291	\N	\N	view	585	586
+353	348	\N	\N	delete	707	708
+294	291	\N	\N	add	587	588
+318	309	\N	\N	delete	635	636
+295	291	\N	\N	edit	589	590
+296	291	\N	\N	delete	591	592
+339	336	\N	\N	view	679	680
+319	309	\N	\N	edit	637	638
+297	291	\N	\N	buildAcl	593	594
+340	336	\N	\N	add	681	682
+298	291	\N	\N	uploadFiles	595	596
+291	1	\N	\N	Tipousuarios	582	599
+299	291	\N	\N	formatDate	597	598
+320	309	\N	\N	verdetalleusuario	639	640
+354	348	\N	\N	buildAcl	709	710
+341	336	\N	\N	edit	683	684
+301	300	\N	\N	index	601	602
+321	309	\N	\N	userajaxlogin	641	642
+302	300	\N	\N	view	603	604
+342	336	\N	\N	delete	685	686
+303	300	\N	\N	add	605	606
+322	309	\N	\N	userajaxloginremote	643	644
+304	300	\N	\N	edit	607	608
+355	348	\N	\N	uploadFiles	711	712
+305	300	\N	\N	delete	609	610
+323	309	\N	\N	addusuario	645	646
+306	300	\N	\N	buildAcl	611	612
+343	336	\N	\N	agregarfila	687	688
+344	336	\N	\N	existepersonagrupo	689	690
+348	1	\N	\N	Vinculos	698	715
+324	309	\N	\N	usersactive	647	648
+356	348	\N	\N	formatDate	713	714
+325	309	\N	\N	confirmarusuario	649	650
+345	336	\N	\N	buildAcl	691	692
+326	309	\N	\N	emailmensaje	651	652
+357	1	\N	\N	AclExtras	716	717
+327	309	\N	\N	valdelete	653	654
+346	336	\N	\N	uploadFiles	693	694
+336	1	\N	\N	Vinculopers	674	697
+328	309	\N	\N	cambiarcontrasenia	655	656
+347	336	\N	\N	formatDate	695	696
+329	309	\N	\N	editimage	657	658
+358	1	\N	\N	BoostCake	718	719
+330	309	\N	\N	mostrarfoto	659	660
+349	348	\N	\N	index	699	700
+331	309	\N	\N	mostrarusuario	661	662
+364	361	\N	\N	add	725	726
+371	368	\N	\N	add	739	740
+\.
+
+
+--
+-- TOC entry 2169 (class 0 OID 0)
+-- Dependencies: 162
+-- Name: acos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('acos_id_seq', 373, true);
+
+
+--
+-- TOC entry 2060 (class 2606 OID 22804)
+-- Dependencies: 161 161 2165
+-- Name: acos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY acos
+    ADD CONSTRAINT acos_pkey PRIMARY KEY (id);
+
+
+-- Completed on 2015-02-22 19:26:21 ART
+
+--
+-- PostgreSQL database dump complete
+--
+

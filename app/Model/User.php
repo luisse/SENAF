@@ -2,20 +2,34 @@
 App::uses('AuthComponent', 'Controller/Component');
 
 class User extends AppModel{
-   	public $actsAs = array('Acl' => array('type' => 'requester'));
+   	public $actsAs = array('Acl' => array('type' => 'requester', 'enabled' => false));
 	var $name = 'User';
 	var $validate=array('username'=>array('alphaNumeric'=>
-								array('rule'=>'alphaNumeric','requiered'=>true,
-								'message'=>'Solo puede Ingresar Letras y Numeros'),
-								'userunique'=>array('rule'=>'userunique','message'=>'(*) Usuario Existente'),
-								'caracteres'=>array('rule'=>array('between',5,20),
-								'message'=>'(*) El Usuario Debe Contener entre 5 y 20 Caracteres')),
+											array('rule'=>'alphaNumeric','requiered'=>true,
+											'message'=>'Solo puede Ingresar Letras y Numeros'),
+											'userunique'=>array('rule'=>'userunique','message'=>'(*) Usuario Existente'),
+											'caracteres'=>array('rule'=>array('between',5,20),
+								'message'=>'(*) El Usuario Debe Contener entre 5 y 20 Caracteres'),
+								'notEmpty' => array(
+											'rule' => array('notEmpty'),
+											'message' => 'Debe Ingresar un usuario')),
 								'password'=>array('passwordequal'=>array('rule'=>'passwordequal',
 								'message'=>'(*) Los Password Ingresados deben ser Iguales')),
-								'email'=>array('emails'=>array('rule'=>'email',
-								'message'=>'(*) El Email es incorrecto','requiered'=>true),
-								'mailunico'=>array('rule'=>'mailunico',
-								'message'=>'(*) El Email Ingresado ya Existe')));
+								'image' => array(
+												'extension' => array(
+													'rule' => array('extension',array('jpg','png')),
+													'message' => 'Solo se pueden subir archivos JPG'
+												),
+												'upload-file' => array(
+													'rule' => array('uploadFile'),
+													'message' => 'Error al Cargar el Archivo'
+												),
+												'fileSize' => array(
+													'rule' => array('fileSize', '<=', '1MB'),
+													'message' => 'La Imagen debe ser menor igual a un 1MB'
+												)
+											)
+								);
 /**
  * belongsTo associations
  *
@@ -32,12 +46,31 @@ class User extends AppModel{
         );
 
 	/*
+	 * Funcion: permite cargar la imagen del usuario
+	 */
+        
+	function uploadFile($data){
+			App::uses('CimageComponent','Controller/Component');
+			$cimage = new CimageComponent(new ComponentCollection());			
+			/*imagen tamanio normal*/
+			$fileData = $cimage->ImagenToBlob($this->data['User']['image']['tmp_name'],110,50);
+			$this->data['User']['image']=base64_encode($fileData);
+			//print_r($this->data);
+			return true;
+	}        
+	/*
 	 * Funcion: permite validar el login para el inicio de sesion'
 	 */
 	function validateLogin($data){
 		if(strlen($data['username'])<=0) return false;
 		if(strlen($data['password'])<=0) return false;		
-		$user = $this->find('first',array('conditions' => array('User.username'=>$data['username'],'User.password'=>AuthComponent::password($data['password']),'User.state'=>'1')));
+		$user = $this->find('first',array('conditions' => array('User.username'=>$data['username'],'User.password'=>AuthComponent::password($data['password']),'User.state'=>'1'),
+											'joins'=>array(array('table'=>'personas',
+															'alias'=>'Persona',
+															'type'=>'LEFT',
+															'conditions'=>array('Persona.id = User.persona_id'))),
+											'fields'=>array('User.id','User.group_id','User.image','User.username','Persona.id',
+															'Persona.apellido','Persona.nombre','Persona.email','User.cambiarcontrasenia')));
 		if(empty($user) == false){
 			return $user;
 		}
@@ -61,36 +94,23 @@ class User extends AppModel{
 		return $valid;
 	}
 
-	/*
-	* Funcion: permite validar que el correo electrnico sea unico
-	*/
-	function mailunico(){
-		return $this->isUnique(array('email'=>$this->data['User']['email']));
-	}
 	
 	/*
 	 * Funcion: permite insertar un nuevo usuario
 	 * */
 	function addusersall($data = null){
 		if(!empty($data)){
+			$data['User']['password']=AuthComponent::password($data['User']['password']);
+			$data['User']['password_repit']=AuthComponent::password($data['User']['password_repit']);		
 			$datasource = $this->getDataSource();
-			ClassRegistry::init('Cliente');
-			$Cliente = new Cliente();
-			$this->create();
+			ClassRegistry::init('Persona');
+			$Persona = new Persona();
 			$datasource->begin($this);
-			if($this->save($data)){
-				$data['Cliente']['user_id'] = $this->id;
-				//$datasource->begin($this);
-				$result = $Cliente->GuardarCliente($data['Cliente']);
-					if($result == true){
-								$datasource->commit($this);
-								$datasource->commit($this);
-								return true;
-					}else{
-								$datasource->rollback($this);
-								$datasource->rollback($this);
-								return false;
-					}	
+			$result = $Persona->GuardarPersona($data);
+			$result=true;
+			if($result){
+				$datasource->commit($this);
+				return true;
 			}else{
 				$datasource->rollback($this);					
 				return false;
@@ -98,6 +118,11 @@ class User extends AppModel{
 		}
 	}
 	
+	
+	function guardaruser($data){
+		$this->create();
+		return $this->save($data);
+	}
 
 	function beforeSave($options= array())
 	{
@@ -155,6 +180,7 @@ class User extends AppModel{
     }
     
 	function bindNode($user) {
+		//$data = AuthComponent::user();
 	    return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);
 	}    	
 

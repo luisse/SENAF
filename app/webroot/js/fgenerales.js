@@ -110,8 +110,6 @@ function retornaFechaDate(ps_fecha){
        li_anio_desde = parseInt(lst_fecha[2])	   
 	   if(li_dia_desde>31) return -4
 	   if(li_mes_desde>12) return -4
-	   
-
        ld_fecha = new Date(li_mes_desde+'/'+li_dia_desde+'/'+li_anio_desde)
 	   return ld_fecha
 }
@@ -163,6 +161,19 @@ function formateafecha(nom_object){
 	
 	ls_fecha=ls_dia+'/'+ls_mes+'/'+lst_fecha[0]
 	$('#'+nom_object).val(ls_fecha);
+	
+}
+
+
+function formateafechastr(as_fecha){
+	if(as_fecha =='' || typeof(as_fecha) == 'undefined') return ''
+	lst_fecha = as_fecha.split('-')
+    ls_dia = lst_fecha[2]
+    //mes
+    ls_mes = lst_fecha[1]
+	
+	as_fecha=ls_dia+'/'+ls_mes+'/'+lst_fecha[0]
+	return as_fecha
 	
 }
 
@@ -414,7 +425,7 @@ function diasfecha(fechadesde){
 * @url: url que recupera los datos del xmlp
 * @controlcargar: control que se debería cargar
 */
-function cargardropdown(controlget,url,controlcargar){
+function cargardropdown(controlget,url,controlcargar,addvacio){
   var li_value = $('#'+controlget).val()
   $(controlcargar).val('')
   if(li_value == 0 || typeof(li_value)=='undefined') return
@@ -423,19 +434,24 @@ function cargardropdown(controlget,url,controlcargar){
           datatype:'xml',
           success:function(data){
                   var xml;
-		var options = '';
+                  var options = '';
 				xml = data;
                $(xml).find('datos').each(function(){
                //Cargamos el drow dow con las provincias
-			var li_id = $(this).find('id').text()
-			var ls_name = $(this).find('nombre').text()
-			options += '<option value="' +li_id+ '">' + ls_name + '</option>'
+            	   	var li_id = $(this).find('id').text()
+            	   	var ls_name = $(this).find('descrip').text()
+            	   	options += '<option value="' +li_id+ '">' + ls_name + '</option>'
 
-		});//close each
-		//cargamos el drop down
-		if(options == '') options = '<option value="0">Desconocido</option>'
-		$('#'+controlcargar).html(options)
-		$('#'+controlcargar).show()
+               });//close each
+               //cargamos el drop down
+               if(options == '' || addvacio == 'S'){ 
+            	   options += '<option value="0"></option>'
+               }
+               $('#'+controlcargar).html(options)
+               $('#'+controlcargar).show()
+               if(addvacio == 'S' && typeof(addvacio) != 'undefined'){ 
+            	   $("#"+controlcargar).val('')
+               }
           },
           error:function(xtr,fr,ds){
                   mensaje('No se pudieron recuperar las Provincias Asociadas. Verifique la conexión al server','Plan','')

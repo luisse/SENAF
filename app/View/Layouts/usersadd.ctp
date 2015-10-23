@@ -28,52 +28,32 @@
 	?>
 </head>
 <body>
-    <div id="wrapper">
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-				<div class='row'>
-					<?php if(!empty($usersdata)):?>
-					<div class="col-lg-5">
-					<?php  
-							echo $this->Html->image(array ( 'controller' =>
-									'tallercitos' , 'action' => 'mostrarimagen' ,
-									$usersdata['User']['tallercito_id']),
-									array ( 'title' =>'Logo del Taller') );
-							?>
-					
-					</div>
-					<?php endif;?>
-					<div class="col-lg-7">
-						<a class="navbar-brand" href="#">Sistema Gestion de Taller 1.0</a>
-					</div>
-				</div>
-            </div>
-            <!-- /.navbar-header -->
-		</nav>    		
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header"></h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-				<!-- /.row -->
-				<div class="row">
-					<div class="col-lg-12">
-						<?php echo $this->fetch('content'); ?>
-					</div>
-					<!-- /.col-lg-8 (nested) -->
-				</div>
-   </div>
-</div>
-<!-- /#page-wrapper -->
-</div>
-<!-- /#wrapper -->
+
+    <!-- Static navbar -->
+    <div class="navbar navbar-default navbar-static-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Barra de Navegación</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><?php echo __('Sistema Gestion de Niñez, Adolescensia y Familia')?></a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="../navbar-fixed-top/">Acerca de...</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+    <div class="container">
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+		<?php echo $this->fetch('content'); ?>	  
+      </div>
+    </div> <!-- /container -->
 	<!-- Le javascript
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->

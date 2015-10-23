@@ -23,23 +23,44 @@ $(document).ready(function(){
 //Inicalizamos los eventos ajax
 function IniciarEventos(){
 	$('#myTab a:last').tab('show')
-	$('#ClienteDocumento').attr('readonly',true)
-	$('#ClienteNombre').attr('readonly',true)
-	$('#ClienteFechanac').attr('readonly',true)
-	$('#ClienteApellido').attr('readonly',true)
-	$('#ClienteTelefono').attr('readonly',true)
-	$('#ClienteDomicilio').attr('readonly',true)
-	$('#ClienteDpto').attr('readonly',true)
-	$('#ClientePiso').attr('readonly',true)	
-	$('#ClienteBlock').attr('readonly',true)
+	$('#PersonaDocumento').attr('readonly',true)
+	$('#PersonaNombre').attr('readonly',true)
+	$('#PersonaFnac').attr('readonly',true)
+	$('#PersonaEmail').attr('readonly',true)
+	$('#PersonaApellido').attr('readonly',true)
+	$('#PersonaTelefono').attr('readonly',true)
+	$('#PersonaDomicilio').attr('readonly',true)
+	$('#PersonaDpto').attr('readonly',true)
+	$('#PersonaPiso').attr('readonly',true)	
+	$('#PersonaBlock').attr('readonly',true)
 	$('#guardar').click(guardardatos)
 	$('#cancelar').click(function(){window.history.back()})
 	$('#actualizarfoto').click(function(){
-		$('form#ClienteEditimageForm').submit()
+		$('form#UserEditimageForm').submit()
 	})	
+	
+    $('#UserPasswordc').keyup(function(){
+        $('#mensajecontrola').html(validarpassword($('#UserPasswordc').val(),'mensajecontrola'))
+    })	
+	
 	$('#actualizarpswd').click(function(){
 		var passwordc	= $('#UserPasswordc').val()
 		var passwordr	= $('#UserPasswordrepit').val()
+		var contraseniafortaliza = validarpassword($('#UserPasswordc').val(),'mensajecontrola')
+		if(contraseniafortaliza == 'Debil'){
+			$().toastmessage('showToast', {
+					text     : 'La Contraseña debe tener una fortaleza superior a Debil. para ello debe Ingresar letras y números',
+					sticky   : true,
+					position : 'top-center',
+					type     : 'error',
+					closeText: '',
+					close    : function () {
+						//console.log("toast is closed ...");
+					}
+				});	
+		
+			return;
+		}		
 		if(passwordc != passwordr){
 			$().toastmessage('showToast', {
 					text     : 'Las Contraseñas ingresadas no coinciden',
@@ -56,6 +77,7 @@ function IniciarEventos(){
 		$('form#UserCambiarcontraseniaForm').submit()
 	})
 	showmessage()
+	$('#myTab li:eq(0) a').tab('show')
 }
 
 function showmessage(){

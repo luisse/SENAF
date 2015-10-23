@@ -20,7 +20,7 @@
 class AccesorapidosController extends AppController{
 	var $name='Accesorapidos';
 	var $components=array('RequestHandler','Paginator');
-	var $uses=array('Accesorapido');
+	var $uses=array('Accesorapido','Ft');
 
 	public $helpers = array(
 		'Html' => array('className' => 'BoostCake.BoostCakeHtml'),
@@ -28,8 +28,7 @@ class AccesorapidosController extends AppController{
 		'Paginator' => array('className' => 'BoostCake.BoostCakePaginator'),
 	);
 	
-	function index(){
-		//$tallercito = $this->Session->read('tallercito');
+	public function index(){
 		$this->set('title_for_layout','Sistema - SENAF');
 		/*Totales de Bicicleta a reparar*/
 		$filter='';
@@ -45,19 +44,29 @@ class AccesorapidosController extends AppController{
 		$this->set('biciconfirmar',$biciconfirmar);
 	}
 	
-	function ejemplobootstrap(){
+	public function ejemplobootstrap(){
 		$this->layout='bootstrap3';
 	
 	}
 	
-	function listarclientes(){
+	public function listarclientes(){
 		$this->layout='bootstrap3';
 		$this->set('clientes',$this->Cliente->find('all'));
 	}
 	
-	function beforeFilter(){
-	   parent::beforeFilter();
-	   $this->Auth->allow('index', 'view');
+	public function seguridaderror($accessmodel = null){
+		$this->set('accessmodel',$accessmodel);
 	}
+	
+	public function beforeRender(){
+	   parent::beforeRender();
+	   // For CakePHP 2.0
+	  $this->Auth->allow('*');
+	  // For CakePHP 2.1 and up
+	   $this->Auth->allow();
+
+	}
+	
+
 }
 ?>

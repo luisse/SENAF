@@ -1,4 +1,4 @@
-<?php echo $this->Html->script(array('/js/categorias/index.js','jquery.toastmessage'),array('block'=>'scriptjs'));?>
+<?php echo $this->Html->script(array('/js/domicilios/index.js','jquery.toastmessage'),array('block'=>'scriptjs'));?>
 <?php echo $this->Html->css('message', null, array('inline' => false))?>
 	
 <?php echo $this->element('flash_message')?>
@@ -75,13 +75,13 @@
 					<li>
 							<?php 
 							echo $this->Html->link('<i class="fa fa-edit fa-fw"></i>&nbsp;'.__('Modificar'),array('controller'=>'domicilios',
-								'action'=>'edit',$domicilio['domicilio']['id']),
+								'action'=>'edit',$domicilio['Domicilio']['id']),
 								array('onclick'=>'','escape'=>false),
 								'');?>
 					</li>
 						<li>
 										<?php echo $this->Html->link('<i class="fa fa-trash-o fa-fw"></i>&nbsp;'.__('Borrar'),array('controller'=>'domicilios',
-											'action'=>'delete',$domicilio['domicilio']['id']),
+											'action'=>'delete',$domicilio['Domicilio']['id']),
 											array('onclick'=>"return confirm('¿Desea Borrar el Registro Seleccionado?')",'escape'=>false),'');?>						</li>
 					  </ul>
 			</div>
@@ -92,20 +92,28 @@
 	<tfoot>
 		<tr>
 		<td colspan="7" class='row1'>
-			<center>
-			<div class="pagination">
-					<?php echo $paginador = $this->paginator->numbers();<?php echo if(!empty()): ?>						<center>
-							<ul class="pagination">
-							  <li><?php echo $this->paginator->prev('<< ', null, null, array('class'=>'paginator'));?>
-</li>
-							  <li><?php echo $this->paginator->numbers(array('separator'=>''));?>
-</li>
-							  <li><?php echo $this->paginator->next('>>', null, null, array('class'=>'paginator'));?>
-</li>
-							</ul>
-						</center>
-					<?php endif;?>			</div>
-			</center>
+				<center>
+						<?php 
+							$paginador = $this->paginator->numbers(array(
+								    'before' => '',
+								    'separator' => '',
+								    'currentClass' => 'active',
+								    'tag' => 'li',
+									 'currentTag' => 'a',
+								    'after' => ''));
+						?>				
+						<div class="pagination">
+							<?php if(!empty($paginador)): ?>
+							<nav>
+								<ul class="pagination">
+  								  <li><?php echo $this->paginator->prev('<< ', null, null, array('class'=>'paginator'));?></li>
+								  <li><?php echo $paginador;?></li>
+								  <li><?php echo $this->paginator->next('>>', null, null, array('class'=>'paginator'));?></li>
+								</ul>
+							</nav>
+						<?php endif;?>			
+						</div>
+				</center>
 		</td>
 		</tr>
 	</tfoot>

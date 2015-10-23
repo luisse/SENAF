@@ -31,7 +31,7 @@
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
 			<div class='row'>
 				<div class="col-lg-10">
-					<a class="navbar-brand" href="#">Sistema Gestion de Taller 1.0</a>
+					<a class="navbar-brand" href="#"><?php echo __('Sistema Gestion de Niñez, Adolescensia y Familia') ?></a>
 				</div>
 			</div>
             <!-- /.navbar-header -->

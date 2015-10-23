@@ -21,7 +21,16 @@ $(document).ready(function(){
 );
 
 function IniciarEventos(){
-	$('#modalview').on('hidden.bs.modal', function () {
+	$('#buscar').click(function(){
+		BuscarPersona(peopleseach)
+	});
+	$('#PersonaBuscar').keypress(function (event) {
+	      if (event.keyCode == 10 || event.keyCode == 13) {
+    	    BuscarPersona(peopleseach)
+	        event.preventDefault();
+	      }
+	});
+	/****$('#modalview').on('hidden.bs.modal', function () {
 		$(this).data('bs.modal', null); //<---- empty() to clear the modal
 	})	
 	$('#centaller').hide(1);
@@ -74,11 +83,30 @@ function IniciarEventos(){
 			CargarMensajes(rmensajesmantenimiento);
 			//mensajes de servicio tecnico			
 			MostrarMensajes();
-			return false;})
+			return false;})****/
 }
 
 
-function verBicicleta(id){
+function BuscarPersona(rlink){
+	var serialize=$('#buscarpersona').serialize()
+	//alert(serialize)
+	$('#cargandodatos').show(1)
+	$.post(rlink,serialize,
+			function(data) {
+			$('#resultsearch').html(data);
+			var divPaginationLinks = '#resultsearch '+" .pagination a"; 
+			$(divPaginationLinks).click(function(){
+				var thisHref = $(this).attr("href");
+				BuscarPersona(thisHref);
+				//recarmamos el proceso de carga
+				return false;
+			});
+	}).always(function() {
+		$('#cargandodatos').hide(1)
+	});
+}
+
+/**function verBicicleta(id){
 	$('#modalview').modal({
 			show: true,
 			remote: '/bicicletas/view/'+id
@@ -126,4 +154,4 @@ function verCliente(id){
 			remote: '/clientes/view/'+id
 		});			
 		return false
-}
+}***/

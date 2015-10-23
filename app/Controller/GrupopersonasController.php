@@ -107,4 +107,31 @@ class GrupopersonasController extends AppController {
 				$this->Session->setFlash(__('Error: No se puede eliminar el registro. Atributo asignado a registro'));
 		}			
 		return $this->redirect(array('action' => 'index'));
-	}}
+	}
+
+	public function beforeFilter() {
+	    parent::beforeFilter();
+	
+	    // For CakePHP 2.0
+	    $this->Auth->allow('*');
+	
+	    // For CakePHP 2.1 and up
+	    $this->Auth->allow();
+	}
+	
+	
+	public function beforeRender(){
+		try{
+				$result =	$this->Acl->check(array(
+					'model' => 'Group',       # The name of the Model to check agains
+					'foreign_key' => $this->Session->read('tipousr') # The foreign key the Model is bind to
+					), ucfirst($this->params['controller']).'/'.$this->params['action']);
+				//SI NO TIENE PERMISOS DA ERROR!!!!!!
+	        	if(!$result)
+	        		$this->redirect(array('controller' => 'accesorapidos','action'=>'seguridaderror','Users-'.$this->params['action']));
+			}catch(Exeption $e){
+				
+			}
+		}
+	
+}

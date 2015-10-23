@@ -14,7 +14,7 @@
 	<?php echo $this->Html->css('plugins/morris/morris-0.4.3.min'); ?>
 	<?php echo $this->Html->css('sb-admin.css'); ?>
 	<?php echo $this->Html->css('ionicons.css'); ?>
-	<?php echo $this->fetch('css'); ?>
+	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>	
 	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -29,36 +29,72 @@
 
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Navegación</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#"><?php echo __('Sistema Gestion de Niñez, Adolescensia y Familia');?></a>
-            </div>
-            <!-- /.navbar-header -->
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+						<span class="sr-only"><?php echo __('Navegación')?></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+				</button>			
 
-            <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i><?php echo __('Usuario') ?>&nbsp;<?php echo $this->Session->read('username');?></a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i>&nbsp;<?php echo __('Configuraciones') ?></a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><?php echo $this->Html->link('<i class="fa fa-sign-out fa-fw"></i>&nbsp;'.__('Salir'),array('controller'=>'users',
-										'action'=>'logout',''),array('escape'=>false),'')?>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-user -->
-                </li>
-                <!-- /.dropdown -->
-            </ul>
-            <!-- /.navbar-top-links -->
+            </div>
+			<div class="row">
+					<div class='col-lg-2'>
+						<?php echo $this->Html->image('SENAY60PX.png', array('alt' => 'SENAyF'));?>
+					</div>
+					<div class='col-lg-7'>
+						<h3><?php echo __('Sistema Gestion de Niñez, Adolescencia y Familia');?></h3>
+					</div>
+					<div class='col-lg-3'>
+						<!-- /.navbar-header -->
+						<ul class="nav navbar-top-links navbar-right">
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+									
+									<?php  
+											$image=$this->Session->read('image');
+											if(!empty($image))
+												echo $this->Html->image(array ( 'controller' =>
+													'users' , 'action' => 'mostrarusuario' ,
+													0),
+													array ( 'title' =>__('Imagen de '.$this->Session->read('nomape')),'class'=>'img-rounded'));
+											else{
+												echo $this->Html->image('user_not.jpeg',
+													array ( 'title' =>__('Imagen de '.$this->Session->read('nomape')),'class'=>'img-rounded','width'=>'40px','height'=>'40px'));
+											}
+										?>
+								</a>				                    
+									<ul class="dropdown-menu dropdown-messages">
+									<li>
+										<a href="#">
+											<div>
+												<i class="fa fa-user fa-fw"></i>&nbsp;<strong><?php echo __('Usuario')?></strong>
+												<span class="pull-right text-muted">
+													<em><?php echo $this->Session->read('username')?></em>
+												</span>
+											</div>
+											<div>
+											<i class="fa fa-child fa-fw"></i>&nbsp;<strong><?php echo __('Nom. y Ape.')?></strong>
+											<span class="pull-right text-muted">
+												<em><?php echo $this->Session->read('nomape')?></em></div>
+											</span>
+											<div>
+											<i class="fa fa-envelope fa-fw"></i>&nbsp;<strong><?php echo __('Email')?></strong>
+											<span class="pull-right text-muted">
+												<em><?php echo $this->Session->read('email')?></em></div>
+											</span>								
+										</a>
+									</li>
+									<li class="divider"></li>
+									<li><?php echo $this->Html->link('<i class="fa fa-sign-out fa-fw"></i>&nbsp;'.__('Salir'),array('controller'=>'users',
+													'action'=>'logout',''),array('escape'=>false),'')?>
+									</li>                        
+								</ul>                    
+							</li>
+							<!-- /.dropdown -->
+						</ul>
+						<!-- /.navbar-top-links -->
+					</div>
+			</div>							
         </nav>
         <!-- /.navbar-static-top -->
         <nav class="navbar-default navbar-static-side" role="navigation">
@@ -85,6 +121,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<?php echo $this->fetch('content'); ?>
+						<?php echo $this->element('sql_dump'); ?>
 					</div>
 					<!-- /.col-lg-8 (nested) -->
 				</div>
@@ -98,6 +135,6 @@
 <!-- /#wrapper -->
 	<?php echo $this->Html->script(array('jquery','bootstrap.min.js','plugins/metisMenu/jquery.metisMenu.js','plugins/morris/raphael-2.1.0.min.js','plugins/morris/morris.js','sb-admin.js','moment.js','moment-spanish'));?>
 	<?php echo $this->fetch('scriptjs'); ?>
-	<script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+	<!-- <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script> -->
 </body>
 </html>
