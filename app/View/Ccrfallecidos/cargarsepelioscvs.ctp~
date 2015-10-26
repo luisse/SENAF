@@ -113,7 +113,7 @@
 				  <span><?php echo __('Registros con error')?>:&nbsp;</span><?php echo $conerror?>
 			</div>
 		</div>
-		<?php if(empty($fatal_error)):?>
+
 		<div class="col-lg-2">
 			<div class="center-block">
 				<button type="button" class="btn btn-success btn-lw" id='guardardatos'>
@@ -121,7 +121,6 @@
 				</button>	
 			</div>
 		</div>	
-		<?php endif;?>
 		<?php endif;?>
 		<div class="col-lg-2">
 			<center>
@@ -257,10 +256,10 @@
 			<table cellspacing="1" border="0">
 				<tr>
 					<td class="key"><strong><?php echo __('Servicio Id:');?></strong></td>
-					<td>&nbsp;<span class="label label-success"><?php echo $ccrfallecidodb['Ccrfallecido']['idservnume'].' - '.$ccrfallecidodb['Ccrfallecido']['idservletra'];?></span></td>
+					<td>&nbsp;<span class="label label-success"><?php echo $ccrfallecido['Ccrfallecido']['idservnume'].' - '.$ccrfallecido['Ccrfallecido']['idservletra'];?></span></td>
 					<td><strong><?php echo __('Fecha Fallece:');?></strong></td>
 					<td>&nbsp;<?php echo  $this->Time->format('d/m/Y',$ccrfallecidodb['Ccrfallecido']['fconfserv']).
-							$this->Time->format('H:i',$ccrfallecidodb['Ccrfallecido']['hconfserv']); ?></td>
+							$this->Time->format('d/m/Y',$ccrfallecidodb['Ccrfallecido']['hconfserv']); ?></td>
 				</tr>
 				<tr>
 					<td><strong><?php echo __('D.NI:');?></strong></td>

@@ -17,8 +17,8 @@
 		<td>
 			<table>
 				<tr>
-					<td><div class="sort"><?php echo $this->Paginator->sort('idservicio',__('Servicio Id:'));?></div></td>
-					<td>&nbsp;<span class="label label-success"><?php echo $fallecidosccr['Ccrfallecido']['idservicio'];?></span></td>
+					<td><div class="sort"><?php echo $this->Paginator->sort('idservnume',__('Servicio Id:'));?></div></td>
+					<td>&nbsp;<span class="label label-success"><?php echo $fallecidosccr['Ccrfallecido']['idservnume'].' - '.$fallecidosccr['Ccrfallecido']['idservletra'];?></span></td>
 					<td><div class="sort">&nbsp;<?php echo $this->Paginator->sort('fhconfserv',__('Fecha Fallece:'));?></div></td>
 					<td><div class="sort">&nbsp;<?php echo  $this->Time->format('d/m/Y',$fallecidosccr['Ccrfallecido']['fconfserv']); ?></div></td>
 				</tr>

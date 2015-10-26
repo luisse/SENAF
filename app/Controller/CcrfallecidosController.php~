@@ -213,6 +213,7 @@ class CcrfallecidosController extends AppController {
 								}
 						}else
 							$existe = 0;	
+						//echo $ccrfallecidores['Ccrfallecido']['idservletra'].' - '.$ccrfallecido['Ccrfallecido']['idservletra'];
 						/*Fin verificacion de existencia de servicio*/	
 							
 						if(!empty($fechahora[0]))
@@ -224,11 +225,8 @@ class CcrfallecidosController extends AppController {
 						if(trim($datas['Fallecido'])==''){
 							$datas['Fallecido']='NN';
 						}
-						$fecha_cargada = NULL;
-						//parseamos la fecha para convertila enforma mm/dd/yyy
-						$fecha_parse = split('/',$fechahora[0]);
-						$fecha_cargada = strtotime($fecha_parse[1].'/'.$fecha_parse[0].'/'.$fecha_parse[2]);
-						/*Fin convert fecha*/
+						$fecha_cargada = strtotime($fechahora[0]);
+						//echo $fecha_cargada.' - '.$fecha_hasta;
 						
 						$fec_fuera_rango=0;
 						if($fecha_cargada < $fecha_desde ||
@@ -289,10 +287,12 @@ class CcrfallecidosController extends AppController {
 					//verificamos is existe un valor igual en la DB para el archivo y cabecera no procesamos el archivo
 					$ccrcabfallecs=$this->Ccrcabfallec->find('first',array('conditions'=>array('Ccrcabfallec.nombarch'=>$this->request->data['Ccrfallecido']['File']['name'],
 																				'Ccrcabfallec.cantreg'=>$i)));
-					if(!empty($fatal_error_servletra) || !empty($fatal_error)){
-						$this->Session->setFlash($fatal_error_servletra.". ".$fatal_error);
-						
-						$fatal_error = $fatal_error.$fatal_error_servletra;
+					if(!empty($fatal_error)){
+						$this->Session->setFlash($fatal_error);
+					}
+
+					if(!empty($fatal_error_servletra)){
+						$this->Session->setFlash($fatal_error_servletra);
 					}
 					//Fin datos cabecera
 					$this->set(compact('ccrcabfallecs'));					
@@ -378,16 +378,13 @@ class CcrfallecidosController extends AppController {
 				if($ccrfallecido['guardar'] == 0){
 					$ccrfallecidos[$i]['ccrcodregfallec_id']=1;
 					$ccrcodregfallec_id=2;
-					//si los son iguales sin error marcamos el mismo con 3
-					if($ccrfallecido['distinct'] == 0)
-						$ccrcodregfallec_id = 3;
 				}else{
 					$ccrfallecidos[$i]['ccrcodregfallec_id']=2;
 					$ccrcodregfallec_id=1;
 				}
 			}else{
 				$ccrfallecidos[$i]['ccrcodregfallec_id']=1;
-				$ccrcodregfallec_id=3;
+				$ccrcodregfallec_id=2;
 			}	
 				//datos a actualizar con nuevo valor
 				if(!empty($ccrfallecido['id'])){
