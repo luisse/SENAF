@@ -1,4 +1,5 @@
-<?php if(!empty($ccrfallecidos)){?>
+<?php if(!empty($ccrfallecidos)){
+?>
 </br>
 <div class="table-responsive">
 	<table  class="table table-striped table-bordered table-hover dataTable table-responsive">
@@ -6,7 +7,6 @@
 		<tr>
 			<th><center><h4><strong><i class="fa fa-user fa-fw"></i><?php echo __('Datos Fallecido')?></strong></h4></center></th>
 			<th><center><h4><strong><i class="fa fa-info-circle fa-fw"></i><?php echo __('Datos Solicitante y Sepelio')?></strong></h4></center></th>
-			<th><?php __('Acciones');?></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -60,14 +60,6 @@
 					<td colspan="3"><?php echo wordwrap(trim($fallecidosccr['Ccrfallecido']['observ']),50, "<br />\n", false);; ?>&nbsp;</td>
 				</tr>
 			</table>
-		</td>
-		<td>
-		<div class="btn-group">
-			<?php echo $this->Html->link('<i class="fa fa-trash-o fa-fw"></i>&nbsp;'.__('Borrar'),array('controller'=>'fallecidosccrs',
-							'action'=>'delete',$fallecidosccr['Ccrfallecido']['id']),
-							array('onclick'=>"return confirm('¿Desea Borrar el Registro Seleccionado?')",'escape'=>false),'');?>
-		</div>						
-
 		</td>
 	</tr>
 	<?php endforeach; ?>

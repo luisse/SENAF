@@ -89,13 +89,12 @@
 				    </div>
 				</div>
 				<?php echo $this->Form->end()?>
+				<div id='cargandodatos' style='display:none;top: 50%;left: 50%;text-align:center'>
+						<?php echo $this->Html->image('carga.gif')?>
+				</div>		
+				<div id='fallecidosccrs'></div>				
 			</div>
-	<div id='cargandodatos' style='display:none;top: 50%;left: 50%;text-align:center'>
-			<?php echo $this->Html->image('carga.gif')?>
-	</div>		
-	<div id='fallecidosccrs'></div>
-
-	</div>
+</div>
 </div>
 <div id='message' style='hidden'>
 	<?php $this->Session->flash() ?>

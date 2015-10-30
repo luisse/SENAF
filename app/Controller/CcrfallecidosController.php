@@ -25,7 +25,7 @@ class CcrfallecidosController extends AppController {
         $this->set('title_for_layout',__('Listado de Fallecidos Cargados'));
 		$this->set('ccrfallecidos', $this->Paginator->paginate());
 	}
-	
+
 	public function listccrfallecidos(){
 		$this->layout='';
 		$this->Ccrfallecido->recursive = 0;
@@ -38,8 +38,8 @@ class CcrfallecidosController extends AppController {
 																			$this->Ccrfallecido->formatDate($this->request->data['Persona']['fechasta']),
 																			'fconfserv');
 			}
-			
-			
+
+
 			$this->request->data['Persona']['nrodoc'] = str_replace('.', '', $this->request->data['Persona']['nrodoc']);
 			if(!empty($this->request->data['Persona']['nrodoc'])){
 				$ls_filtro = "Ccrfallecido.dnifall like('%".$this->request->data['Persona']['nrodoc']."%')";
@@ -49,10 +49,10 @@ class CcrfallecidosController extends AppController {
 			}
 			if(!empty($this->request->data['Persona']['nombre'])){
 				$ls_filtro = "Upper(Ccrfallecido.fallecido)  like Upper('%".$this->request->data['Persona']['nombre']."%')";
-			}			
+			}
 		}
-		
-		$ls_filtronotexist=' 1=1 ';	
+
+		$ls_filtronotexist=' 1=1 ';
 		$ls_notexist = '';
 		$this->paginate=array('limit' => 8,
 							'page' => 1,
@@ -62,17 +62,9 @@ class CcrfallecidosController extends AppController {
 											'Ccrfallecido.fconfserv','Ccrfallecido.dnifall',
 											'Ccrfallecido.fallecido','Ccrfallecido.domicfall','Ccrfallecido.localdptofall',
 											'Ccrfallecido.solicitante','Ccrfallecido.dnisolic','Ccrfallecido.operador',
-											'Ccrfallecido.empresa','Ccrfallecido.observ'),
-							/***'joins'=>array(array('table'=>'personas',
-															'alias'=>'Persona',
-															'type'=>'LEFT',
-															'conditions'=>array('Persona.id = User.persona_id')),
-											array('table'=>'tipdocxpers',
-															'alias'=>'Tipdocxper',
-															'type'=>'LEFT',
-															'conditions'=>array('Tipdocxper.persona_id = User.persona_id'))
-			)***/);				
-			$this->set('ccrfallecidos', $this->paginate());	
+											'Ccrfallecido.empresa','Ccrfallecido.observ',
+											'Ccrfallecido.ccrcodregfallec_id'));
+			$this->set('ccrfallecidos', $this->paginate());
 	}
 
 /**
@@ -110,7 +102,7 @@ class CcrfallecidosController extends AppController {
 			}
 		}catch(Exception $e){
 				$this->Session->setFlash(__('Error: No se puede eliminar el registro. Atributo asignado a registro'));
-		}			
+		}
 		return $this->redirect(array('action' => 'index'));
 	}
 
@@ -118,7 +110,7 @@ class CcrfallecidosController extends AppController {
  * cargarsubtypeprodcvs method permite cargar los subtypos de productos desde un CVS
  *
  * @return void
- */	
+ */
 	public function cargarsepelioscvs(){
 		$this->set('title_for_layout',__('Carga Masiva de Cepelios',true));
 		if(!empty($this->request->data)){
@@ -134,7 +126,7 @@ class CcrfallecidosController extends AppController {
 				$fecha_desde = strtotime(str_replace('/', '-',$this->request->data['Ccrcabfallec']['fdde']));
 				$fecha_hasta = strtotime(str_replace('/', '-',$this->request->data['Ccrcabfallec']['fhta']));
 				if(!empty($cvs->data)){
-					
+
 					//validamos si algún dato existe lo marcamos como malo
 					$count = 0;
 					$i = 0;
@@ -147,7 +139,7 @@ class CcrfallecidosController extends AppController {
 					$fatal_error = '';
 					$fatal_error_servletra='';
 					foreach ($cvs->data as $datas){
-							
+
 						/*Validamos que existan los detalles de la cabecera de lo contrario no se procesa el archivo*/
 						if(!array_key_exists('Ord.',$datas))
 							$col_error='Ord. - Id de Servicio';
@@ -171,32 +163,32 @@ class CcrfallecidosController extends AppController {
 						if(!empty($col_error)){
 							$this->Session->setFlash(__('Error en Procesamiento de Archivo. No se encontro el nombre de columna ('.$col_error.'). Valide que el nombre existe en la cabecera del archivo'));
 							break;
-						}	
+						}
 
-						
-							
-						/*Creamos un array con los datos a guardar*/							
+
+
+						/*Creamos un array con los datos a guardar*/
 						$dnifall=str_replace('.', '', trim($datas['Documento']));
 						if(!is_numeric($dnifall)) $dnifall = 0;
-						
-													
-						
+
+
+
 						$dnisol=str_replace('.', '', trim($datas['DocumentoSol']));
 						if(!is_numeric($dnisol)) $dnisol =0;
-						
+
 						//Recuperamos la fecha y la hora
 						$fechahora = split('-', $datas['Fecha']);
 						$hora		= split(':',$fechahora[1]);
-						
+
 						$ccrfallecido=array();
 						/*Recuperamos en el caso de se necesario idsevicio y código*/
 						$idservicio = split('-',$datas['Ord.']);
 						$ccrfallecido['Ccrfallecido']['idservnume']	=	trim($idservicio[0]);
 						if(!empty($idservicio[1]))
 							$ccrfallecido['Ccrfallecido']['idservletra']	= trim($idservicio[1]);
-						else 
-							$ccrfallecido['Ccrfallecido']['idservletra']	= ''; 
-						
+						else
+							$ccrfallecido['Ccrfallecido']['idservletra']	= '';
+
 						$ccrfallecidores = $this->Ccrfallecido->find('first',
 										array('conditions'=>
 												array('Ccrfallecido.idservnume'=>$ccrfallecido['Ccrfallecido']['idservnume']),
@@ -209,17 +201,18 @@ class CcrfallecidosController extends AppController {
 							if(!empty($ccrfallecidores['Ccrfallecido']['idservletra']))
 								if(trim($ccrfallecidores['Ccrfallecido']['idservletra'])  != trim($ccrfallecido['Ccrfallecido']['idservletra'])){
 									$fatal_error_servletra='Uno o mas Código de Servicio difieren a lo cargado en DB';
-									$error_idservletra = 1;
+									$error_idservle
+									tra = 1;
 								}
 						}else
-							$existe = 0;	
-						/*Fin verificacion de existencia de servicio*/	
-							
+							$existe = 0;
+						/*Fin verificacion de existencia de servicio*/
+
 						if(!empty($fechahora[0]))
 							$ccrfallecido['Ccrfallecido']['fconfserv']	=	$fechahora[0];
-						if(!empty($hora[0]))	
+						if(!empty($hora[0]))
 							$ccrfallecido['Ccrfallecido']['hconfserv']	=	''.$hora[0].':'.$hora[1];
-						else 
+						else
 							$ccrfallecido['Ccrfallecido']['hconfserv']='';
 						if(trim($datas['Fallecido'])==''){
 							$datas['Fallecido']='NN';
@@ -229,22 +222,22 @@ class CcrfallecidosController extends AppController {
 						$fecha_parse = split('/',$fechahora[0]);
 						$fecha_cargada = strtotime($fecha_parse[1].'/'.$fecha_parse[0].'/'.$fecha_parse[2]);
 						/*Fin convert fecha*/
-						
+
 						$fec_fuera_rango=0;
 						if($fecha_cargada < $fecha_desde ||
 							$fecha_cargada > $fecha_hasta){
 							$fatal_error='Una o mas Fechas se encuentran fuera del rango de carga de fecha';
-							$fec_fuera_rango = 1;	
+							$fec_fuera_rango = 1;
 						}
-						
-							
+
+
 						$ccrfallecido['Ccrfallecido']['fallecido']			=	$datas['Fallecido'];
 						$ccrfallecido['Ccrfallecido']['dnifall']			=	$dnifall;
 						$ccrfallecido['Ccrfallecido']['domicfall']			=	$datas['Domicilio'];
 						$ccrfallecido['Ccrfallecido']['localdptofall']			=	$datas['Localidad'];
 						$ccrfallecido['Ccrfallecido']['solicitante']			=	$datas['Solicitado por'];
 						$ccrfallecido['Ccrfallecido']['dnisolic']			=	$dnisol;
-						$ccrfallecido['Ccrfallecido']['operador']			=	$datas['Operador']; 
+						$ccrfallecido['Ccrfallecido']['operador']			=	$datas['Operador'];
 						$ccrfallecido['Ccrfallecido']['empresa']			=	$datas['Empresa'];
 						$ccrfallecido['Ccrfallecido']['observ']				=	$datas['OBSERVACIONES'];
 						$ccrfallecido['Ccrfallecido']['existe']				=	$existe;
@@ -253,8 +246,8 @@ class CcrfallecidosController extends AppController {
 						$ccrfallecido['Ccrfallecido']['ipcrea']				= $this->request->clientIp();
 						$ccrfallecido['Ccrfallecido']['fecerror']			= $fec_fuera_rango;
 						$ccrfallecido['Ccrfallecido']['error_idservletra']		= $error_idservletra;
-						
-						
+
+
 						$distinct=0;
 						if(!empty($ccrfallecidores)){
 							if(($this->Ccrfallecido->formatDate($ccrfallecido['Ccrfallecido']['fconfserv']) !=  $ccrfallecidores['Ccrfallecido']['fconfserv']) ||
@@ -266,7 +259,7 @@ class CcrfallecidosController extends AppController {
 								($ccrfallecido['Ccrfallecido']['localdptofall'] !=	$ccrfallecidores['Ccrfallecido']['localdptofall']) ||
 								($ccrfallecido['Ccrfallecido']['solicitante']	!=	$ccrfallecidores['Ccrfallecido']['solicitante']) ||
 								($ccrfallecido['Ccrfallecido']['dnisolic']	  	!=	$ccrfallecidores['Ccrfallecido']['dnisolic']) ||
-								($ccrfallecido['Ccrfallecido']['operador']	  	!=	$ccrfallecidores['Ccrfallecido']['operador']) || 
+								($ccrfallecido['Ccrfallecido']['operador']	  	!=	$ccrfallecidores['Ccrfallecido']['operador']) ||
 								($ccrfallecido['Ccrfallecido']['empresa']		!=	$ccrfallecidores['Ccrfallecido']['empresa']) ||
 								($ccrfallecido['Ccrfallecido']['observ']		!=	$ccrfallecidores['Ccrfallecido']['observ'])){
 									$distinct=1;
@@ -274,7 +267,7 @@ class CcrfallecidosController extends AppController {
 								}
 						}
 						//or$distinct=1;
-						$ccrfallecido['Ccrfallecido']['distinct']	=	$distinct;	
+						$ccrfallecido['Ccrfallecido']['distinct']	=	$distinct;
 						if($existe == 1){
 							$ccrfallecido['Ccrfallecido']['db']=$ccrfallecidores;
 						}
@@ -291,11 +284,11 @@ class CcrfallecidosController extends AppController {
 																				'Ccrcabfallec.cantreg'=>$i)));
 					if(!empty($fatal_error_servletra) || !empty($fatal_error)){
 						$this->Session->setFlash($fatal_error_servletra.". ".$fatal_error);
-						
+
 						$fatal_error = $fatal_error.$fatal_error_servletra;
 					}
 					//Fin datos cabecera
-					$this->set(compact('ccrcabfallecs'));					
+					$this->set(compact('ccrcabfallecs'));
 					$this->set('ccrcabfallec',$this->request->data['Ccrcabfallec']);
 					$this->set('agregados',$agregados);
 					$this->set('totalregistros',$i);
@@ -303,19 +296,19 @@ class CcrfallecidosController extends AppController {
 					$this->set('col_error',$col_error);
 					$this->set('fatal_error',$fatal_error);
 					$this->set(compact('ccrfallecidostodos'));
-				}					
+				}
 			}else{
 				$this->set('error','El archivo ingresado no es válido. El formato debe ser un archivo tipo CVS. Formato Actual: '.$this->request->data['Ccrfallecido']['File']['type']);
 			}
-			
-		}	
+
+		}
 	}
 
 /**
  * procesarcvs permite procesar los datos recuperados desde CVS
  *
  * @return void
- */		
+ */
 	public function procesarcvs(){
 		$this->set('title_for_layout',__('Carga Masiva de Cepelios',true));
 		if(empty($this->request->data)){
@@ -354,7 +347,7 @@ class CcrfallecidosController extends AppController {
 			}
 		}
 	}
-	
+
 	public function beforeRender(){
 		/**try{
 				$result =	$this->Acl->check(array(
@@ -364,11 +357,11 @@ class CcrfallecidosController extends AppController {
 				if(!$result)
 	        		$this->redirect(array('controller' => 'accesorapidos','action'=>'seguridaderror',$this->params['controller'].'-'.$this->params['action']));
 			}catch(Exeption $e){
-				
+
 			}**/
-		
-	} 
-	
+
+	}
+
 	public function guardarccrfallecidos(){
 		$i=0;
 		$ccrfallecidos=$this->request->data['Ccrfallecido'];
@@ -388,7 +381,7 @@ class CcrfallecidosController extends AppController {
 			}else{
 				$ccrfallecidos[$i]['ccrcodregfallec_id']=1;
 				$ccrcodregfallec_id=3;
-			}	
+			}
 				//datos a actualizar con nuevo valor
 				if(!empty($ccrfallecido['id'])){
 					$ccrfallecidos_up['Ccrfallecido'][$i]['id']=$ccrfallecido['id'];
@@ -406,13 +399,13 @@ class CcrfallecidosController extends AppController {
 			return $this->redirect(array('action'=>'index'));
 		}
 	}
-	
+
 	public function beforeFilter() {
 	    parent::beforeFilter();
-	
+
 	    // For CakePHP 2.0
 	    $this->Auth->allow('*');
-	
+
 	    // For CakePHP 2.1 and up
 	    $this->Auth->allow();
 	}
