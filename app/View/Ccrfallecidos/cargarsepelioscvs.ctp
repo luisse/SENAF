@@ -1,9 +1,9 @@
 <?php echo $this->Html->script(array('/js/ccrfallecidos/cargarsepelioscvs.js','fgenerales','jquery.toastmessage','jquery.numeric','fmensajes.js','dateformat.js','bootstrap-datetimepicker'),array('block'=>'scriptjs'));	?>
-<?php echo $this->Html->css(array('bootstrap-datetimepicker','message'), null, array('inline' => false))?>			
+<?php echo $this->Html->css(array('bootstrap-datetimepicker','message'), null, array('inline' => false))?>
 <?php echo $this->element('flash_message')?>
 
 <?php if(empty($ccrfallecidostodos)):?>
-<?php echo $this->Form->create('Ccrfallecido',array('action'=>'cargarsepelioscvs',	
+<?php echo $this->Form->create('Ccrfallecido',array('action'=>'cargarsepelioscvs',
 				'type'=>'file',
 				'inputDefaults' => array(
 									'div' => 'form-group',
@@ -11,7 +11,7 @@
 									'class' => 'form-control'
 									),
 				'class' => 'well'));?>
-<legend><?php echo __('Nueva Carga de Cepelios')?></legend>
+<legend><?php echo __('Nueva Carga de Sepelios')?></legend>
 <div class="row">
 	<div class="row">
 		<div class="col-lg-2">
@@ -52,19 +52,19 @@
 												'error'=>array('attributes' =>array('class'=>'alert alert-danger'))))?>
 	</div>
 </div>
-<div class="row">	
+<div class="row">
 	<div class="col-lg-6">
 		<center>
 		<button type="button" class="btn btn-success btn-lw" id='guardar'>
 		  <span class="glyphicon glyphicon glyphicon-save"></span>&nbsp;<?php echo __('Procesar CVS') ?>
-		</button>	
+		</button>
 		</center>
 	</div>
 	<div class="col-lg-6">
 		<center>
 		<button type="button" class="btn btn-danger btn-lw" id='cancelar'>
 		  <span class="glyphicon glyphicon glyphicon-off"></span>&nbsp;<?php echo __(' Cancelar')?>
-		</button>	
+		</button>
 		</center>
 	</div>
 </div>
@@ -101,7 +101,7 @@
 			</div>
 		</div>
 		<?php endif;?>
-		<?php if(empty($ccrcabfallecs)):?>		
+		<?php if(empty($ccrcabfallecs)):?>
 		<div class="col-lg-3">
 			<div class="alert alert-success" role="alert">
 					<label for="name"><?php echo __('Total de Filas Procesadas:')?></strong><?php echo $totalregistros?>
@@ -118,20 +118,20 @@
 			<div class="center-block">
 				<button type="button" class="btn btn-success btn-lw" id='guardardatos'>
 				  <span class="glyphicon glyphicon glyphicon-off"></span>&nbsp;<?php echo __('Confirmar Guardado')?>
-				</button>	
+				</button>
 			</div>
-		</div>	
+		</div>
 		<?php endif;?>
 		<?php endif;?>
 		<div class="col-lg-2">
 			<center>
 			<button type="button" class="btn btn-danger btn-lw" id='cancelar'>
 			  <span class="glyphicon glyphicon glyphicon-off"></span>&nbsp;<?php echo __('Volver al Inicio')?>
-			</button>	
+			</button>
 			</center>
-		</div>		
+		</div>
 	</div>
-</div>	
+</div>
 	<div class="table-responsive">
 	<table  class="table table-striped table-bordered table-hover dataTable table-responsive">
 	<thead>
@@ -171,7 +171,7 @@
 				<tr>
 					<td class="key"><strong><?php echo __('Servicio Id:');?></strong></td>
 					<td>&nbsp;
-						<?php 
+						<?php
 							$ls_class='label-success';
 							if($ccrfallecido['Ccrfallecido']['error_idservletra'] == 1)
 								$ls_class='label-danger';
@@ -181,16 +181,16 @@
 							<?php echo $ccrfallecido['Ccrfallecido']['idservnume'].' - '.$ccrfallecido['Ccrfallecido']['idservletra'];?>
 						</span>
 					</td>
-					<td><strong><?php echo __('Fecha Fallece:');?></strong></td>
+					<td><strong><?php echo __('Fecha Servicio:');?></strong></td>
 					<td>&nbsp;
-						
+
 						<?php if($ccrfallecido['Ccrfallecido']['fecerror'] == 1 ):?>
 							<span class="label label-danger">
 						<?php endif;?>
-						<?php echo  $this->Time->format('d/m/Y',$ccrfallecido['Ccrfallecido']['fconfserv']).' - '.$this->Time->format('H:m',$ccrfallecido['Ccrfallecido']['hconfserv']);?></td>
+						<?php echo  $ccrfallecido['Ccrfallecido']['fconfserv'].' - '.$ccrfallecido['Ccrfallecido']['hconfserv'];?></td>
 						<?php if($ccrfallecido['Ccrfallecido']['fecerror'] == 1 ):?>
 							</span>
-						<?php endif;?>						
+						<?php endif;?>
 				</tr>
 				<tr>
 					<td><strong><?php echo __('D.NI:');?></strong></td>
@@ -217,9 +217,9 @@
 					<td><?php echo $ccrfallecido['Ccrfallecido']['solicitante']; ?>&nbsp;</td>
 				<tr>
 				<tr>
-					<td><strong><?php echo __('Operador:');?></strong></td>	
+					<td><strong><?php echo __('Operador:');?></strong></td>
 					<td  colspan="3"><?php echo $ccrfallecido['Ccrfallecido']['operador']; ?>&nbsp;</div></td>
-					
+
 				</tr>
 				<tr>
 					<td><strong><?php echo __('Empresa:');?></strong></td>
@@ -232,8 +232,8 @@
 			</table>
 		</td>
 		<td>
-		<?php 
-				if($ccrfallecido['Ccrfallecido']['distinct']==0) 
+		<?php
+				if($ccrfallecido['Ccrfallecido']['distinct']==0)
 					echo __('<h4><span class="label label-success"><i class="fa fa-check fa-fw"></i>'.__('Guardar').'</span></h4>');
 				else
 					echo __('<h4><span class="label label-danger"><i class="fa fa-thumbs-o-down fa-fw"></i>'.__('Distintos').'</span></h4>'); ?>&nbsp;
@@ -247,7 +247,7 @@
 			<!-- SOLO SE ACTUALIZA EL VALOR SI ES NECESARIO -->
 	<?php
 		if(!empty($ccrfallecido['Ccrfallecido']['db'])){
-			$ccrfallecidodb = $ccrfallecido['Ccrfallecido']['db']; 
+			$ccrfallecidodb = $ccrfallecido['Ccrfallecido']['db'];
 			echo $this->Form->hidden('Ccrfallecido.'.$i.'.id',array('value'=>$ccrfallecidodb['Ccrfallecido']['id']));
 		}
 		if($ccrfallecido['Ccrfallecido']['distinct'] == 1):
@@ -287,9 +287,9 @@
 					<td><?php echo $ccrfallecidodb['Ccrfallecido']['solicitante']; ?>&nbsp;</td>
 				<tr>
 				<tr>
-					<td><strong><?php echo __('Operador:');?></strong></td>	
+					<td><strong><?php echo __('Operador:');?></strong></td>
 					<td  colspan="3"><?php echo $ccrfallecidodb['Ccrfallecido']['operador']; ?>&nbsp;</div></td>
-					
+
 				</tr>
 				<tr>
 					<td><strong><?php echo __('Empresa:');?></strong></td>
@@ -308,21 +308,21 @@
 	</tr>
 	<?php endif;?>
 <?php
-$i++; 
+$i++;
 endforeach; ?>
 </tbody>
 </table>
 </center>
 </div>
 <div class="row">
-</div>		
+</div>
 </div>
 <?php echo $this->Form->end();?>
 <?php endif;?>
 
 <?php if(!empty($error)):?>
 	<div class="alert alert-warning" role="alert">
-		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>	
+		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
 		<strong><?php echo __('Advertencia!')?></strong>&nbsp;<?php echo $error;?></div>
 	</div>
 

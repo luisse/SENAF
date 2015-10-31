@@ -19,7 +19,7 @@
 				<tr>
 					<td><div class="sort"><?php echo $this->Paginator->sort('idservnume',__('Servicio Id:'));?></div></td>
 					<td>&nbsp;<span class="label label-success"><?php echo $fallecidosccr['Ccrfallecido']['idservnume'].' - '.$fallecidosccr['Ccrfallecido']['idservletra'];?></span></td>
-					<td><div class="sort">&nbsp;<?php echo $this->Paginator->sort('fhconfserv',__('Fecha Fallece:'));?></div></td>
+					<td><div class="sort">&nbsp;<?php echo $this->Paginator->sort('fhconfserv',__('Fecha Servicio:'));?></div></td>
 					<td><div class="sort">&nbsp;<?php echo  $this->Time->format('d/m/Y',$fallecidosccr['Ccrfallecido']['fconfserv']); ?></div></td>
 				</tr>
 				<tr>
@@ -47,9 +47,9 @@
 					<td><?php echo $fallecidosccr['Ccrfallecido']['solicitante']; ?>&nbsp;</td>
 				<tr>
 				<tr>
-					<td><div class='sort'><?php echo $this->Paginator->sort('operador',__('Operador:'));?></div></td>	
+					<td><div class='sort'><?php echo $this->Paginator->sort('operador',__('Operador:'));?></div></td>
 					<td  colspan="3"><?php echo $fallecidosccr['Ccrfallecido']['operador']; ?>&nbsp;</td>
-					
+
 				</tr>
 				<tr>
 					<td><div class='sort'><?php echo $this->Paginator->sort('operador',__('Empresa:'));?></div></td>
@@ -68,7 +68,7 @@
 			<tr>
 			<td colspan="4">
 					<div class="container" id='central'>
-							<?php 
+							<?php
 								$paginador = $this->paginator->numbers(array(
 									    'before' => '',
 									    'separator' => '',
@@ -76,7 +76,7 @@
 									    'tag' => 'li',
 										 'currentTag' => 'a',
 									    'after' => ''));
-							?>				
+							?>
 							<div class="pagination">
 								<?php if(!empty($paginador)): ?>
 								<nav>
@@ -86,7 +86,7 @@
 									  <li><?php echo $this->paginator->next('>>', null, null, array('class'=>'paginator'));?></li>
 									</ul>
 								</nav>
-							<?php endif;?>			
+							<?php endif;?>
 							</div>
 					</div>
 			</td>
@@ -97,7 +97,7 @@
 <?php }else{?>
 	<br>
 	<div class="alert alert-warning" role="alert">
-		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>	
+		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
 		<strong><?php echo __('Advertencia!')?></strong>&nbsp;<?php echo "No se recuperaron datos para los filtros seleccionados";?></div>
 	</div>
 <?php }?>

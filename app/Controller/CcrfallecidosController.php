@@ -112,7 +112,7 @@ class CcrfallecidosController extends AppController {
  * @return void
  */
 	public function cargarsepelioscvs(){
-		$this->set('title_for_layout',__('Carga Masiva de Cepelios',true));
+		$this->set('title_for_layout',__('Carga Masiva de Sepelios',true));
 		if(!empty($this->request->data)){
 			//validamos que el archivo sea del tipo string
 			if(strstr($this->request->data['Ccrfallecido']['File']['type'],'application/octet-stream') ||
@@ -201,8 +201,7 @@ class CcrfallecidosController extends AppController {
 							if(!empty($ccrfallecidores['Ccrfallecido']['idservletra']))
 								if(trim($ccrfallecidores['Ccrfallecido']['idservletra'])  != trim($ccrfallecido['Ccrfallecido']['idservletra'])){
 									$fatal_error_servletra='Uno o mas Código de Servicio difieren a lo cargado en DB';
-									$error_idservle
-									tra = 1;
+									$error_idservletra = 1;
 								}
 						}else
 							$existe = 0;
@@ -211,12 +210,13 @@ class CcrfallecidosController extends AppController {
 						if(!empty($fechahora[0]))
 							$ccrfallecido['Ccrfallecido']['fconfserv']	=	$fechahora[0];
 						if(!empty($hora[0]))
-							$ccrfallecido['Ccrfallecido']['hconfserv']	=	''.$hora[0].':'.$hora[1];
+							$ccrfallecido['Ccrfallecido']['hconfserv']	=	''.str_pad($hora[0],2,'0',STR_PAD_LEFT).':'.str_pad($hora[1],2,'0',STR_PAD_LEFT);
 						else
-							$ccrfallecido['Ccrfallecido']['hconfserv']='';
+							$ccrfallecido['Ccrfallecido']['hconfserv']='00:00';
 						if(trim($datas['Fallecido'])==''){
 							$datas['Fallecido']='NN';
 						}
+
 						$fecha_cargada = NULL;
 						//parseamos la fecha para convertila enforma mm/dd/yyy
 						$fecha_parse = split('/',$fechahora[0]);
