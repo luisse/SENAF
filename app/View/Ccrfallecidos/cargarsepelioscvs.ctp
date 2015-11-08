@@ -91,13 +91,14 @@
 
 	<div class="row">
 		<?php if(!empty($ccrcabfallecs)):?>
+			<?php print_r($ccrcabfallecs);?>
 		<div class="col-lg-8">
 			<div class="alert  alert-danger" role="alert">
-					<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span><label for="name"><?php echo __('Archivo ya Procesado!!')?></label><br>
-					<strong>Archivo Nombre:</strong>&nbsp;<?php echo $ccrcabfallecs['Ccrcabfallec']['nombarch']?> <br>
-					<strong>Fecha Desde:</strong>&nbsp;<?php echo $this->Time->format('d/m/Y',$ccrcabfallecs['Ccrcabfallec']['fdde']) ?><br>
-					<strong>Fecha Hasta:</strong>&nbsp;<?php echo $this->Time->format('d/m/Y',$ccrcabfallecs['Ccrcabfallec']['fhta'])?><br>
-					<strong>Usuario Carga:</strong>&nbsp;<?php echo $this->Time->format('d/m/Y',$ccrcabfallecs['Ccrcabfallec']['usuariocrea'])?>
+					<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span><label for="name"><?= __('Archivo ya Procesado!!')?></label><br>
+					<strong>Archivo Nombre:</strong>&nbsp;<?= $ccrcabfallecs['Ccrcabfallec']['nombarch']?> <br>
+					<strong>Fecha Desde:</strong>&nbsp;<?= $this->Time->format('d/m/Y',$ccrcabfallecs['Ccrcabfallec']['fdde']) ?><br>
+					<strong>Fecha Hasta:</strong>&nbsp;<?= $this->Time->format('d/m/Y',$ccrcabfallecs['Ccrcabfallec']['fhta'])?><br>
+					<strong>Usuario Carga:</strong>&nbsp;<?= $ccrcabfallecs['Ccrcabfallec']['usuariocrea']?>
 			</div>
 		</div>
 		<?php endif;?>

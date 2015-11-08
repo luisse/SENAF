@@ -63,7 +63,7 @@ class CcrfallecidosController extends AppController {
 											'Ccrfallecido.fallecido','Ccrfallecido.domicfall','Ccrfallecido.localdptofall',
 											'Ccrfallecido.solicitante','Ccrfallecido.dnisolic','Ccrfallecido.operador',
 											'Ccrfallecido.empresa','Ccrfallecido.observ',
-											'Ccrfallecido.ccrcodregfallec_id'));
+											'Ccrfallecido.ccrcodregfallec_id','Ccrfallecido.hconfserv'));
 			$this->set('ccrfallecidos', $this->paginate());
 	}
 
@@ -168,13 +168,11 @@ class CcrfallecidosController extends AppController {
 
 
 						/*Creamos un array con los datos a guardar*/
-						$dnifall=str_replace('.', '', trim($datas['Documento']));
-						if(!is_numeric($dnifall)) $dnifall = 0;
+						$dnifall	= $datas['Documento'];
+						if(!is_numeric($dnifall)) $dnifall = '';
 
-
-
-						$dnisol=str_replace('.', '', trim($datas['DocumentoSol']));
-						if(!is_numeric($dnisol)) $dnisol =0;
+						$dnisol=	$datas['DocumentoSol'];
+						if(!is_numeric($dnisol)) $dnisol = '';
 
 						//Recuperamos la fecha y la hora
 						$fechahora = split('-', $datas['Fecha']);
@@ -280,7 +278,8 @@ class CcrfallecidosController extends AppController {
 					$this->request->data['Ccrcabfallec']['usuariocrea']=strtolower ($this->Session->read('username'));;
 					$this->request->data['Ccrcabfallec']['ipcrea'] 	= $this->request->clientIp();
 					//verificamos is existe un valor igual en la DB para el archivo y cabecera no procesamos el archivo
-					$ccrcabfallecs=$this->Ccrcabfallec->find('first',array('conditions'=>array('Ccrcabfallec.nombarch'=>$this->request->data['Ccrfallecido']['File']['name'],
+					$this->Ccrcabfallec->unbindModel(array('hasMany'=>'Ccrfallecido'));
+					$ccrcabfallecs = $this->Ccrcabfallec->find('first',array('conditions'=>array('Ccrcabfallec.nombarch'=>$this->request->data['Ccrfallecido']['File']['name'],
 																				'Ccrcabfallec.cantreg'=>$i)));
 					if(!empty($fatal_error_servletra) || !empty($fatal_error)){
 						$this->Session->setFlash($fatal_error_servletra.". ".$fatal_error);
@@ -349,18 +348,7 @@ class CcrfallecidosController extends AppController {
 	}
 
 	public function beforeRender(){
-		/**try{
-				$result =	$this->Acl->check(array(
-					'model' => 'Group',       # The name of the Model to check agains
-					'foreign_key' => $this->Session->read('tipousr') # The foreign key the Model is bind to
-					), ucfirst($this->params['controller']).'/'.$this->params['action']);
-				if(!$result)
-	        		$this->redirect(array('controller' => 'accesorapidos','action'=>'seguridaderror',$this->params['controller'].'-'.$this->params['action']));
-			}catch(Exeption $e){
-
-			}**/
-
-	}
+}
 
 	public function guardarccrfallecidos(){
 		$i=0;
@@ -402,11 +390,15 @@ class CcrfallecidosController extends AppController {
 
 	public function beforeFilter() {
 	    parent::beforeFilter();
+			try{
+					$result =	$this->Acl->check(array(
+						'model' => 'Group',       # The name of the Model to check agains
+						'foreign_key' => $this->Session->read('tipousr') # The foreign key the Model is bind to
+						), ucfirst($this->params['controller']).'/'.$this->params['action']);
+					if(!$result)
+		        		$this->redirect(array('controller' => 'accesorapidos','action'=>'seguridaderror',$this->params['controller'].'-'.$this->params['action']));
+				}catch(Exeption $e){
 
-	    // For CakePHP 2.0
-	    $this->Auth->allow('*');
-
-	    // For CakePHP 2.1 and up
-	    $this->Auth->allow();
+				}
 	}
 }

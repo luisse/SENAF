@@ -41,20 +41,21 @@ class AppController extends Controller {
         	),
         	'Session'
     		);
-	
+
 	public function beforeRender(){
-		/***try{
-			$result =	$this->Acl->check(array(
-				'model' => 'Group',       # The name of the Model to check agains
-				'foreign_key' => $this->Session->read('tipousr') # The foreign key the Model is bind to
-				), ucfirst($this->params['controller']).'/'.$this->params['action']);
-	       	if(!$result)
-	       		$this->redirect(array('controller' => 'accesorapidos','action'=>'seguridaderror','Users-'.$this->params['action']));
-		}catch(Exeption $e){
-			
-		}****/
+    /***try{
+        $result =	$this->Acl->check(array(
+          'model' => 'Group',       # The name of the Model to check agains
+          'foreign_key' => $this->Session->read('tipousr') # The foreign key the Model is bind to
+          ), ucfirst($this->params['controller']).'/'.$this->params['action']);
+        if(!$result)
+              $this->redirect(array('controller' => 'accesorapidos','action'=>'seguridaderror',$this->params['controller'].'-'.$this->params['action']));
+      }catch(Exeption $e){
+
+      }****/
+
 	}
-	
+
 	/**
 	 * uploads files to the server
 	 * @params:
@@ -64,23 +65,23 @@ class AppController extends Controller {
 	 * @return:
 	 *		will return an array with the success of each file upload
 	 */
-	 
+
 	public function  beforeFilter(){
-		$this->Auth->actionPath = 'controllers/';
-		$this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
+		    $this->Auth->actionPath = 'controllers/';
+		    $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
         $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login');
-	    $this->Auth->allow('userajaxlogin');
+	      $this->Auth->allow('userajaxlogin');
    	    $this->Auth->allow('confirmarusuario');
-   	    $this->Auth->allow('usersactive');  
-		$this->Auth->allow('seguridaderror');
-		$this->Auth->allow('addusuario');
-		$this->Auth->allow('listproductos');
-		$this->Auth->allow('autocompletarpv');
-		$this->Auth->allow('editimage');
-		$this->Auth->allow('mostrarfoto');
-		$this->Auth->allow('mostrarusuario');
-		$this->Auth->allow('add');
-		$this->Auth->allow('seguridaderror');
+   	    $this->Auth->allow('usersactive');
+        $this->Auth->allow('seguridaderror');
+		    $this->Auth->allow('addusuario');
+        $this->Auth->allow('listproductos');
+        $this->Auth->allow('autocompletarpv');
+        $this->Auth->allow('editimage');
+        $this->Auth->allow('mostrarfoto');
+        $this->Auth->allow('mostrarusuario');
+		    $this->Auth->allow('add');
+		    $this->Auth->allow('seguridaderror');
 		//Usuario siempre debe tener una sesion para operar en el sistema
 		if($this->action != 'userajaxlogin' &&
 				$this->action != 'confirmarusuario' &&
@@ -91,12 +92,12 @@ class AppController extends Controller {
 					$this->redirect(array('controller'=>'users','action'=>'login'));
 					$this->Session->setFlash(__('La direccion requerida requiere de login'));
 				}
-				
+
 		}
 		$this->set('acl',$this->Acl);
 		//$this->Auth->allowedActions = array('*');
 	}
-	
+
 /**
  * Reconstruye el Acl basado en los controladores actuales de la aplicación.
  *
@@ -164,13 +165,13 @@ class AppController extends Controller {
         debug($log);
     }
 
-	
-	
+
+
 	/*
 	*Function: valida las aplicaciones que pueden ejecutar sin necesidad de estar logueados.
 	*/
     function __validateLoginStatus(){
-        
+
 		if($this->action != 'login' &&
                 $this->action != 'logout' &&
                 $this->action != 'userajaxlogin' &&
@@ -185,21 +186,21 @@ class AppController extends Controller {
 			//$this->set('usuario',$this->Session->read('username');
 		}
     }
-	 
+
 	function uploadFiles($folder, $formdata, $itemId = null) {
 		// setup dir names absolute and relative
 		$folder_url = WWW_ROOT.$folder;
 		$rel_url = $folder;
-		
+
 		// create the folder if it does not exist
 		if(!is_dir($folder_url)) {
 			mkdir($folder_url);
 		}
-			
+
 		// if itemId is set create an item folder
 		if($itemId) {
 			// set new absolute folder
-			$folder_url = WWW_ROOT.$folder.'/'.$itemId; 
+			$folder_url = WWW_ROOT.$folder.'/'.$itemId;
 			// set new relative folder
 			$rel_url = $folder.'/'.$itemId;
 			// create directory
@@ -207,11 +208,11 @@ class AppController extends Controller {
 				mkdir($folder_url);
 			}
 		}
-		
+
 		// list of permitted file types, this is only images but documents can be added
-		$permitted = array('image/gif','image/jpeg','image/pjpeg','image/png','application/pdf','application/vnd.openxmlformats-officedocument.wordprocessingml.document','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');		
+		$permitted = array('image/gif','image/jpeg','image/pjpeg','image/png','application/pdf','application/vnd.openxmlformats-officedocument.wordprocessingml.document','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 		// loop through and deal with the files
-		
+
 		foreach($formdata as $file) {
 			// replace spaces with underscores
 			$filename = str_replace(' ', '_', $file['name']);
@@ -271,7 +272,7 @@ class AppController extends Controller {
 		}
 	return $result;
 	}
-	
+
 		/*
 	*Funcion: permite convertir la fecha en un formato determinado para guardar la misma
 	*/
@@ -280,11 +281,11 @@ class AppController extends Controller {
 	    $pattern2 = '/^([0-9]{4})\/([0-9]{2})\/([0-9]{2})$/i';
 	    $pattern3 = '/^([0-9]{2})-([0-9]{2})-([0-9]{4})$/i';
 	    $pattern4 = '/^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/i';
-	
+
 	    $coincidences = array();
-	    
+
 	    if(preg_match($pattern1, $dateToFormat)){
-	        $newDate = $dateToFormat; 
+	        $newDate = $dateToFormat;
 	    }elseif(preg_match($pattern2, $dateToFormat, $coincidences)){
 	        $newDate = $coincidences[1] . '-' . $coincidences[2] . '-' . $coincidences[3];
 	    }elseif(preg_match($pattern3, $dateToFormat, $coincidences)){

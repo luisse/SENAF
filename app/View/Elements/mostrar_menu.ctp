@@ -140,10 +140,14 @@
                 	<?php echo $this->Html->link('<i class="fa fa-th-list fa-fw"></i>&nbsp;'.__('Fallecidos'),array('controller'=>'ccrfallecidos',
 					'action'=>'index',''),array('escape' => false))?>
                  </li>
+                 <?php if($acl->check(array(
+                   								'model' => 'Group',       # The name of the Model to check agains
+                   								'foreign_key' => $this->Session->read('tipousr') # The foreign key the Model is bind to
+                                ), 'Ccrfallecidos/cargarsepelioscvs')):?>
                  <li>
                 	<?php echo $this->Html->link('<i class="fa fa-plus fa-fw"></i>&nbsp;'.__('Cargar Sepelios'),array('controller'=>'ccrfallecidos',
-					'action'=>'cargarsepelioscvs',''),array('escape' => false))?>
+					               'action'=>'cargarsepelioscvs',''),array('escape' => false))?>
                  </li>
-
+               <?php endif;?>
 				</ul>
 			</li>

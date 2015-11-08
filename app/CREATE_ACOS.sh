@@ -247,13 +247,10 @@ sh lib/Cake/Console/cake acl create aco Userbuttongets view
 sh lib/Cake/Console/cake acl create aco Userbuttongets add
 sh lib/Cake/Console/cake acl create aco Userbuttongets edit
 sh lib/Cake/Console/cake acl create aco Userbuttongets delete
-/*Fallecidosccrs*/
-sh lib/Cake/Console/cake acl create aco controllers Fallecidosccrs
-sh lib/Cake/Console/cake acl create aco Fallecidosccrs index
-sh lib/Cake/Console/cake acl create aco Fallecidosccrs view
-sh lib/Cake/Console/cake acl create aco Fallecidosccrs add
-sh lib/Cake/Console/cake acl create aco Fallecidosccrs edit
-sh lib/Cake/Console/cake acl create aco Fallecidosccrs delete
-sh lib/Cake/Console/cake acl create aco Fallecidosccrs cargarsepelioscvs
-sh lib/Cake/Console/cake acl create aco Fallecidosccrs procesarcvs
-
+/*Ccrfallecidos*/
+sh lib/Cake/Console/cake acl create aco controllers Ccrfallecidos
+sh lib/Cake/Console/cake acl create aco Ccrfallecidos index
+sh lib/Cake/Console/cake acl create aco Ccrfallecidos cargarsepelioscvs
+sh lib/Cake/Console/cake acl create aco Ccrfallecidos procesarcvs
+sh lib/Cake/Console/cake acl create aco Ccrfallecidos guardarccrfallecidos
+sh lib/Cake/Console/cake acl create aco Ccrfallecidos listccrfallecidos

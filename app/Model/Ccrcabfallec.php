@@ -21,6 +21,7 @@ class Ccrcabfallec extends AppModel {
  *
  * @var array
  */
+ /***
 	public $hasMany = array(
 		'Ccrfallecido' => array(
 			'className' => 'Ccrfallecido',
@@ -36,7 +37,7 @@ class Ccrcabfallec extends AppModel {
 			'counterQuery' => ''
 		)
 	);
-	
+	***/
 	/*
 	* Funcion: antes de guardar es importante convertir la fecha al formato Unix/Mysql
 	*/
@@ -46,7 +47,7 @@ class Ccrcabfallec extends AppModel {
 			$this->data['Ccrcabfallec']['fdde'] = $this->formatDate($this->data['Ccrcabfallec']['fdde']);
 		if(!empty($this->data['Ccrcabfallec']['fhta']))
 			$this->data['Ccrcabfallec']['fhta'] = $this->formatDate($this->data['Ccrcabfallec']['fhta']);
-			
+
 		return true;
 	}
 
