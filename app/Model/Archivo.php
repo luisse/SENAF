@@ -28,7 +28,7 @@ class Archivo extends AppModel {
 						'extension' => array(
 								'rule' => array('extension',array('jpg','doc','docx','png','gif','pdf')),
 								'message' => 'Solo se pueden subir archivos jpg,doc,docx,png,gif,pdf'
-						),	
+						),
 						'upload-file' => array(
 									'rule' => array('uploadFile'),
 									'message' => 'Error al Cargar el Archivo'
@@ -91,7 +91,7 @@ class Archivo extends AppModel {
 	public function uploadFile(){
 		$fileinfo['File']=$this->data['Archivo']['archivo'];
 		$file = new File($fileinfo['File']['tmp_name']);
-		
+
 		if($file->exists()){
 			$binfile = $file->read(true,'rb');
 		}else
@@ -110,12 +110,15 @@ class Archivo extends AppModel {
 			$datasource->begin($this);
 			if($this->Save($data)){
 				//Guardamos el vinculo
-				$archxpersona['Archxpersona']['persona_id']=$data['Archivo']['persona_id'];
-				$archxpersona['Archxpersona']['archivo_id']=$this->id;;
-				$archxpersona['Archxpersona']['permiso_id']=1;//ver permisos
-				$archxpersona['Archxpersona']['observ']=$data['Archivo']['descgeneral'];//ver permisos
-				$archxpersona['Archxpersona']['usuariocrea']=$data['Archivo']['usuariocrea'];//ver permisos
-				$archxpersona['Archxpersona']['ipcrea']=$data['Archivo']['ipcrea'];//ver permisos
+				$archxpersona['Archxpersona']['persona_id']	= $data['Archivo']['persona_id'];
+				$archxpersona['Archxpersona']['archivo_id']	= $this->id;;
+				$archxpersona['Archxpersona']['permiso_id']	= 1;//ver permisos
+				$archxpersona['Archxpersona']['observ']			= $data['Archivo']['descgeneral'];//ver permisos
+				$archxpersona['Archxpersona']['usuariocrea']= $data['Archivo']['usuariocrea'];//ver permisos
+				$archxpersona['Archxpersona']['ipcrea']			= $data['Archivo']['ipcrea'];//ver permisos
+				$archxpersona['Archxpersona']['usuarioactu']= $data['Archivo']['usuariocrea'];//ver permisos
+				$archxpersona['Archxpersona']['ipactu']			= $data['Archivo']['ipcrea'];//ver permisos
+
 				if($Archxpersona->save($archxpersona)){
 					$datasource->commit($this);
 					$datasource->commit($this);
@@ -131,7 +134,7 @@ class Archivo extends AppModel {
 			}
 		}
 	}
-	
+
 	function getfotopersonal($persona_id = null){
 		ClassRegistry::init('Tiparchivo');
 		$Tiparchivo = new Tiparchivo();

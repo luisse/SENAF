@@ -240,8 +240,12 @@ class CcrfallecidosController extends AppController {
 						$ccrfallecido['Ccrfallecido']['observ']				=	$datas['OBSERVACIONES'];
 						$ccrfallecido['Ccrfallecido']['existe']				=	$existe;
 						$ccrfallecido['Ccrfallecido']['ccrcodregfallec_id'] 		= 1;//cargado sin errores
+						//Datos de usuario e IP del cliente
 						$ccrfallecido['Ccrfallecido']['usuariocrea']			= $this->Session->read('username');
 						$ccrfallecido['Ccrfallecido']['ipcrea']				= $this->request->clientIp();
+						$ccrfallecido['Ccrfallecido']['usuarioactu']			= $this->Session->read('username');
+						$ccrfallecido['Ccrfallecido']['ipactu']				= $this->request->clientIp();
+						//FIN DATOS DE USUARIO E IP
 						$ccrfallecido['Ccrfallecido']['fecerror']			= $fec_fuera_rango;
 						$ccrfallecido['Ccrfallecido']['error_idservletra']		= $error_idservletra;
 

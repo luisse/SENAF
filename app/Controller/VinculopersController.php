@@ -29,7 +29,7 @@ class VinculopersController extends AppController {
 		$this->set(compact('persona'));
 		$this->set('title_for_layout',__('Listado de Vinculos'));
 	}
-	
+
 	public function listvinculopers(){
 		$this->layout='';
 		$ls_filtro = '1=1';
@@ -49,7 +49,7 @@ class VinculopersController extends AppController {
 				$ls_filtro = $ls_filtro." AND Upper(Personaizq.apellido)  like Upper('%".$this->request->data['Persona']['apellido']."%')";
 			}
 		}
-		
+
 		$this->Vinculoper->recursive = 0;
 		$this->paginate=array('limit' => 10,
 				'page' => 1,
@@ -69,7 +69,7 @@ class VinculopersController extends AppController {
 									array('table'=>'parentescos',
 										'alias'=>'Parentesco',
 										'type'=>'LEFT',
-										'conditions'=>array('Parentesco.id = Vinculoper.parentesco_id'))						
+										'conditions'=>array('Parentesco.id = Vinculoper.parentesco_id'))
 				)
 		);
 		$this->set('vinculopers', $this->Paginator->paginate());
@@ -101,20 +101,25 @@ class VinculopersController extends AppController {
 			foreach($this->request->data as $vinculopers){
 				$i=0;
 				foreach($vinculopers as $vinculoper){
-					$vinculoperss['Vinculoper'][$i]['personaizq_id']=$vinculoper['personaizq_id'];
-					$vinculoperss['Vinculoper'][$i]['parentesco_id']=$vinculoper['parentesco_id'];
-					$vinculoperss['Vinculoper'][$i]['personadcha_id']=$vinculoper['personadcha_id'];
-					$vinculoperss['Vinculoper'][$i]['usuariocrea']=$this->Session->read('username');
-					$vinculoperss['Vinculoper'][$i]['ipcrea']=$this->request->clientIp();
+					$vinculoperss['Vinculoper'][$i]['personaizq_id']	= $vinculoper['personaizq_id'];
+					$vinculoperss['Vinculoper'][$i]['parentesco_id']	= $vinculoper['parentesco_id'];
+					$vinculoperss['Vinculoper'][$i]['personadcha_id']	= $vinculoper['personadcha_id'];
+					$vinculoperss['Vinculoper'][$i]['usuariocrea']		= $this->Session->read('username');
+					$vinculoperss['Vinculoper'][$i]['ipcrea']					= $this->request->clientIp();
+					$vinculoperss['Vinculoper'][$i]['usuarioactu']		= $this->Session->read('username');
+					$vinculoperss['Vinculoper'][$i]['ipactu']					= $this->request->clientIp();
+
 					//CREACION VINCULO INVERSO
 					$parentesco = $this->Parentesco->find('first',array('conditions'=>array('Parentesco.id'=>$vinculoper['parentesco_id'])));
 					if(!empty($parentesco)){
 						$i++;
-						$vinculoperss['Vinculoper'][$i]['personaizq_id']=$vinculoper['personadcha_id'];
-						$vinculoperss['Vinculoper'][$i]['parentesco_id']=$parentesco['Parentesco']['parentesco_id'];
-						$vinculoperss['Vinculoper'][$i]['personadcha_id']=$vinculoper['personaizq_id'];
-						$vinculoperss['Vinculoper'][$i]['usuariocrea']=$this->Session->read('username');
-						$vinculoperss['Vinculoper'][$i]['ipcrea']=$this->request->clientIp();
+						$vinculoperss['Vinculoper'][$i]['personaizq_id']	= $vinculoper['personadcha_id'];
+						$vinculoperss['Vinculoper'][$i]['parentesco_id']	= $parentesco['Parentesco']['parentesco_id'];
+						$vinculoperss['Vinculoper'][$i]['personadcha_id']	= $vinculoper['personaizq_id'];
+						$vinculoperss['Vinculoper'][$i]['usuariocrea']		= $this->Session->read('username');
+						$vinculoperss['Vinculoper'][$i]['ipcrea']					= $this->request->clientIp();
+						$vinculoperss['Vinculoper'][$i]['usuarioactu']		= $this->Session->read('username');
+						$vinculoperss['Vinculoper'][$i]['ipactu']					= $this->request->clientIp();
 					}
 					$i++;
 				}
@@ -124,7 +129,6 @@ class VinculopersController extends AppController {
 				return $this->redirect(array('action' => 'index'));
 			} else {
 				$error = $this->Vinculoper->invalidFields();
-				print_r($error);
 				$this->Session->setFlash(__('No se pudo Guardar el Registro. Por Favor Intente de Nuevo.'));
 			}
 		}
@@ -167,7 +171,7 @@ class VinculopersController extends AppController {
 					'fields'=>array('Vinculoper.personaizq_id','Vinculoper.parentesco_id','Vinculoper.id',
 							'Vinculoper.personadcha_id','Personaizq.nombre','Personaizq.apellido',
 							'Personadrch.nombre','Personadrch.apellido','Parentesco.descrip'
-					)	
+					)
 			);
 			$this->request->data = $this->Vinculoper->find('first', $options);
 		}
@@ -185,11 +189,11 @@ class VinculopersController extends AppController {
 		if (!$this->Vinculoper->exists()) {
 			throw new NotFoundException(__('Invalid vinculoper'));
 		}
-		
+
 		$vinculoper = $this->Vinculoper->find('first',array('conditions'=>array('Vinculoper.id'=>$id)));
 		if(!empty($vinculoper)){
 			$parentesco = $this->Parentesco->find('first',array('conditions'=>array('Parentesco.id'=>$vinculoper['Vinculoper']['parentesco_id'])));
-			
+
 		}
 		try {
 			if ($this->Vinculoper->delete()) {
@@ -197,7 +201,7 @@ class VinculopersController extends AppController {
 				if(!empty($parentesco)){
 					$this->Vinculoper->deleteAll(array('Vinculoper.personadcha_id'=>$vinculoper['Vinculoper']['personaizq_id'],
 																'Vinculoper.parentesco_id'=>$parentesco['Parentesco']['parentesco_id'],
-																'Vinculoper.personaizq_id'=>$vinculoper['Vinculoper']['personadcha_id']));	
+																'Vinculoper.personaizq_id'=>$vinculoper['Vinculoper']['personadcha_id']));
 				}
 				$this->Session->setFlash(__('El Registro fue eliminado.'));
 			} else {
@@ -208,7 +212,7 @@ class VinculopersController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
-	
+
 	public function beforeRender(){
 		if($this->params['action']=='edit' || $this->params['action']=='add'  || $this->params['action']=='index' ||
 				$this->params['action'] == 'agregarfila'){
@@ -217,10 +221,10 @@ class VinculopersController extends AppController {
 			if($this->params['action']=='index'){
 				//$parentescos[0]='Todas';
 			}
-	
+
 			$this->set(compact('parentescos'));
 		}
-		
+
 		try{
 			$result =	$this->Acl->check(array(
 				'model' => 'Group',       # The name of the Model to check agains
@@ -229,28 +233,28 @@ class VinculopersController extends AppController {
 			if(!$result)
 	       		$this->redirect(array('controller' => 'accesorapidos','action'=>'seguridaderror',$this->params['controller'].'-'.$this->params['action']));
 		}catch(Exeption $e){
-				
-		}			
+
+		}
 	}
-	
+
 	/**
 	 * agregarfila vista retorna fila nueva para cargar con ajax
 	 *
 	 * @throws NotFoundException
 	 * @param integer $row fila asignada
 	 * @return void
-	 */	
+	 */
 	public function agregarfila($row){
 		$this->layout='';
 		$this->set('row',$row);
 	}
-	
+
 	public function beforeFilter() {
 		parent::beforeFilter();
-	
+
 		// For CakePHP 2.0
 		$this->Auth->allow('*');
-	
+
 		// For CakePHP 2.1 and up
 		$this->Auth->allow();
 	}
@@ -263,7 +267,7 @@ class VinculopersController extends AppController {
 	 * @param integer $personadcha_id persona a vincular derecha
 	 * @return void
 	 */
-	
+
 	public function existepersonagrupo($personaizq_id = null,$parentesco_id = null,$personadcha_id = null){
 		$this->layout='';
 		$existe=0;

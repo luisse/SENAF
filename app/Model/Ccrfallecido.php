@@ -56,7 +56,7 @@ class Ccrfallecido extends AppModel {
 			'order' => ''
 		)
 	);
-	
+
 	function saveallccrfallecidos($array_insert_ccrfallecidos=null,$array_uptade_ccrfallecidos,$ccrcabfallec = null){
 		$datasource = $this->getDataSource();
 		ClassRegistry::init('Ccrcabfallec');
@@ -64,14 +64,17 @@ class Ccrfallecido extends AppModel {
 		$this->create();
 		$datasource->begin($this);
 		//Datos del header del archivo
-		$data['Ccrcabfallec']['fdde']=$ccrcabfallec['Ccrcabfallec']['fdde'];
-		$data['Ccrcabfallec']['fhta']=$ccrcabfallec['Ccrcabfallec']['fhta'];
-		$data['Ccrcabfallec']['nombarch']=$ccrcabfallec['Ccrcabfallec']['nombarch'];
-		$data['Ccrcabfallec']['cantreg']=$ccrcabfallec['Ccrcabfallec']['cantreg'];
-		$data['Ccrcabfallec']['usuariocrea']=$ccrcabfallec['Ccrcabfallec']['usuariocrea'];
-		$data['Ccrcabfallec']['ipcrea']=$ccrcabfallec['Ccrcabfallec']['ipcrea'];
+		$data['Ccrcabfallec']['fdde']				=	$ccrcabfallec['Ccrcabfallec']['fdde'];
+		$data['Ccrcabfallec']['fhta']				=	$ccrcabfallec['Ccrcabfallec']['fhta'];
+		$data['Ccrcabfallec']['nombarch']		=	$ccrcabfallec['Ccrcabfallec']['nombarch'];
+		$data['Ccrcabfallec']['cantreg']		=	$ccrcabfallec['Ccrcabfallec']['cantreg'];
+		$data['Ccrcabfallec']['usuariocrea']=	$ccrcabfallec['Ccrcabfallec']['usuariocrea'];
+		$data['Ccrcabfallec']['ipcrea']			=	$ccrcabfallec['Ccrcabfallec']['ipcrea'];
+		$data['Ccrcabfallec']['usuarioactu']=	$ccrcabfallec['Ccrcabfallec']['usuariocrea'];
+		$data['Ccrcabfallec']['ipactu']			=	$ccrcabfallec['Ccrcabfallec']['ipcrea'];
+
 		//Fin del Header
-		
+
 		if($ccrcabfallecs->Save($data)){
 			$id_cab = $ccrcabfallecs->id;
 			$ccrfallecidos = $array_insert_ccrfallecidos;
@@ -82,8 +85,8 @@ class Ccrfallecido extends AppModel {
 			}
 			unset($array_insert_ccrfallecidos['Ccrfallecido']);
 			if($this->SaveAll($array_insert_ccrfallecidos)){
-				
-				
+
+
 				if(!empty($array_uptade_ccrfallecidos)){
 					if($this->saveAll($array_uptade_ccrfallecidos['Ccrfallecido'])){
 						$datasource->commit($this);
@@ -98,7 +101,7 @@ class Ccrfallecido extends AppModel {
 				//print_r($array_insert_ccrfallecidos);
 			}
 		}
-		$datasource->rollback($this);			
+		$datasource->rollback($this);
 		return false;
 	}
 }

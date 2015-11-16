@@ -24,7 +24,7 @@ class CallesController extends AppController {
 		$this->set('title_for_layout','Listado de Calles');
 		$this->paginate=array('limit' => 8,
 							'page' => 1,
-							'order'=>array('descrip'=>'desc'));					
+							'order'=>array('descrip'=>'desc'));
 		$this->Calle->recursive = 0;
 		$this->set('calles', $this->Paginator->paginate());
 	}
@@ -55,7 +55,9 @@ class CallesController extends AppController {
 			$this->Calle->create();
 			$this->request->data['Calle']['usuariocrea']=trim($this->Session->read('username'));
 			$this->request->data['Calle']['ipcrea']=$this->request->clientIp();
-			
+			$this->request->data['Calle']['usuarioactu']=trim($this->Session->read('username'));
+			$this->request->data['Calle']['ipactu']=$this->request->clientIp();
+
 			if ($this->Calle->save($this->request->data)) {
 				$this->Session->setFlash(__('El registro fue guardado.'));
 				return $this->redirect(array('action' => 'index'));
@@ -111,10 +113,10 @@ class CallesController extends AppController {
 		}catch(Exception $e){
 			$this->Session->setFlash(__('Error: No se puede eliminar el registro. Atributo asignado a registro'));
 		}
-				
+
 		return $this->redirect(array('action' => 'index'));
 	}
-	
+
 	public function autocompletarcalle($filtro){
 		$this->layout ='';
 		$calles = $this->Calle->find('all',array('conditions'=>array("Upper(Calle.descrip) like Upper('%".$filtro."%')"),
@@ -126,14 +128,14 @@ class CallesController extends AppController {
 
 	public function beforeFilter() {
 	    parent::beforeFilter();
-	
+
 	    // For CakePHP 2.0
 	   // $this->Auth->allow('*');
-	
+
 	    // For CakePHP 2.1 and up
 	   // $this->Auth->allow();
-	}	
-	
+	}
+
 	public function beforeRender(){
 				try{
 				$result =	$this->Acl->check(array(
@@ -144,7 +146,7 @@ class CallesController extends AppController {
 	        	if(!$result)
 	        		$this->redirect(array('controller' => 'accesorapidos','action'=>'seguridaderror','Users-'.$this->params['action']));
 			}catch(Exeption $e){
-				
+
 			}
 	}
 }
