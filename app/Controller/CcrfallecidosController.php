@@ -169,10 +169,10 @@ class CcrfallecidosController extends AppController {
 
 						/*Creamos un array con los datos a guardar*/
 						$dnifall	= $datas['Documento'];
-						if(!is_numeric($dnifall)) $dnifall = '';
+						//if(!is_numeric($dnifall)) $dnifall = '';
 
 						$dnisol=	$datas['DocumentoSol'];
-						if(!is_numeric($dnisol)) $dnisol = '';
+						//if(!is_numeric($dnisol)) $dnisol = '';
 
 						//Recuperamos la fecha y la hora
 						$fechahora = split('-', $datas['Fecha']);

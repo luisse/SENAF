@@ -1,4 +1,6 @@
-<?php if(!empty($ccrfallecidos)){
+<?php
+if(!empty($ccrfallecidos)){
+	//print_r($ccrfallecidos);
 ?>
 </br>
 <div class="table-responsive">
