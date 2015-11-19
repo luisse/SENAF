@@ -72,7 +72,6 @@ class Ccrfallecido extends AppModel {
 		$data['Ccrcabfallec']['ipcrea']			=	$ccrcabfallec['Ccrcabfallec']['ipcrea'];
 		$data['Ccrcabfallec']['usuarioactu']=	$ccrcabfallec['Ccrcabfallec']['usuariocrea'];
 		$data['Ccrcabfallec']['ipactu']			=	$ccrcabfallec['Ccrcabfallec']['ipcrea'];
-
 		//Fin del Header
 
 		if($ccrcabfallecs->Save($data)){

@@ -70,16 +70,15 @@
 </div>
 <?php echo $this->Form->end()?>
 <?php endif;?>
-
 <?php if(!empty($ccrfallecidostodos)):?>
 <?php echo $this->element('flash_message')?>
 <?php echo $this->Form->create('Ccrfallecido',array('action'=>'guardarccrfallecidos'));?>
-<?php echo $this->Form->hidden('Ccrcabfallec.fdde')?>
-<?php echo $this->Form->hidden('Ccrcabfallec.fhta')?>
-<?php echo $this->Form->hidden('Ccrcabfallec.nombarch')?>
-<?php echo $this->Form->hidden('Ccrcabfallec.cantreg')?>
-<?php echo $this->Form->hidden('Ccrcabfallec.usuariocrea')?>
-<?php echo $this->Form->hidden('Ccrcabfallec.ipcrea')?>
+<?php echo $this->Form->hidden('Ccrcabfallec1.fdde',array('value'=>$ccrcabfallec['fdde']))?>
+<?php echo $this->Form->hidden('Ccrcabfallec1.fhta',array('value'=>$ccrcabfallec['fhta']))?>
+<?php echo $this->Form->hidden('Ccrcabfallec1.nombarch',array('value'=>$ccrcabfallec['nombarch']))?>
+<?php echo $this->Form->hidden('Ccrcabfallec1.cantreg',array('value'=>$ccrcabfallec['cantreg']))?>
+<?php echo $this->Form->hidden('Ccrcabfallec1.usuariocrea',array('value'=>$ccrcabfallec['usuariocrea']))?>
+<?php echo $this->Form->hidden('Ccrcabfallec1.ipcrea',array('value'=>$ccrcabfallec['ipcrea']))?>
 
 <div class="panel panel-primary">
 	<div class="panel-heading">
@@ -91,7 +90,6 @@
 
 	<div class="row">
 		<?php if(!empty($ccrcabfallecs)):?>
-			<?php print_r($ccrcabfallecs);?>
 		<div class="col-lg-8">
 			<div class="alert  alert-danger" role="alert">
 					<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span><label for="name"><?= __('Archivo ya Procesado!!')?></label><br>

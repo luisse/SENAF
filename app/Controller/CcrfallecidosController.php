@@ -282,7 +282,7 @@ class CcrfallecidosController extends AppController {
 					$this->request->data['Ccrcabfallec']['usuariocrea']=strtolower ($this->Session->read('username'));;
 					$this->request->data['Ccrcabfallec']['ipcrea'] 	= $this->request->clientIp();
 					//verificamos is existe un valor igual en la DB para el archivo y cabecera no procesamos el archivo
-					$this->Ccrcabfallec->unbindModel(array('hasMany'=>'Ccrfallecido'));
+					//$this->Ccrcabfallec->unbindModel(array('hasMany'=>'Ccrfallecido'));
 					$ccrcabfallecs = $this->Ccrcabfallec->find('first',array('conditions'=>array('Ccrcabfallec.nombarch'=>$this->request->data['Ccrfallecido']['File']['name'],
 																				'Ccrcabfallec.cantreg'=>$i)));
 					if(!empty($fatal_error_servletra) || !empty($fatal_error)){
@@ -383,7 +383,7 @@ class CcrfallecidosController extends AppController {
 				$i++;
 		}
 		//create headers
-		$cabecera['Ccrcabfallec']=$this->request->data['Ccrcabfallec'];
+		$cabecera['Ccrcabfallec']=$this->request->data['Ccrcabfallec1'];
 		if($this->Ccrfallecido->saveallccrfallecidos($ccrfallecidos,$ccrfallecidos_up,$cabecera)){
 			return $this->redirect(array('action' => 'index'));
 		}else{
