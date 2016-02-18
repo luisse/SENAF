@@ -363,9 +363,11 @@ class CcrfallecidosController extends AppController {
 				if($ccrfallecido['guardar'] == 0){
 					$ccrfallecidos[$i]['ccrcodregfallec_id']=1;
 					$ccrcodregfallec_id=2;
-					//si los son iguales sin error marcamos el mismo con 3
-					if($ccrfallecido['distinct'] == 0)
+					//si los datos son iguales sin error marcamos el mismo con 3
+					if($ccrfallecido['distinct'] == 0){
 						$ccrcodregfallec_id = 3;
+					}
+
 				}else{
 					$ccrfallecidos[$i]['ccrcodregfallec_id']=2;
 					$ccrcodregfallec_id=1;
@@ -385,16 +387,21 @@ class CcrfallecidosController extends AppController {
 		//create headers
 		$cabecera['Ccrcabfallec']=$this->request->data['Ccrcabfallec1'];
 		if($this->Ccrfallecido->saveallccrfallecidos($ccrfallecidos,$ccrfallecidos_up,$cabecera)){
-			return $this->redirect(array('action' => 'index'));
+			//return $this->redirect(array('action' => 'index'));
 		}else{
 			$this->Session->setFlash(__('No se pudieron guardar los datos en la base de datos.'));
-			return $this->redirect(array('action'=>'index'));
+			//return $this->redirect(array('action'=>'index'));
 		}
 	}
 
 	public function beforeFilter() {
 	    parent::beforeFilter();
-			try{
+			// For CakePHP 2.0
+	    $this->Auth->allow('*');
+
+	    // For CakePHP 2.1 and up
+	    $this->Auth->allow();
+			/***try{
 					$result =	$this->Acl->check(array(
 						'model' => 'Group',       # The name of the Model to check agains
 						'foreign_key' => $this->Session->read('tipousr') # The foreign key the Model is bind to
@@ -403,6 +410,6 @@ class CcrfallecidosController extends AppController {
 		        		$this->redirect(array('controller' => 'accesorapidos','action'=>'seguridaderror',$this->params['controller'].'-'.$this->params['action']));
 				}catch(Exeption $e){
 
-				}
+				}****/
 	}
 }
