@@ -65,7 +65,7 @@ class DATABASE_CONFIG {
 		'host' => 'localhost',
 		'login' => 'postgres',
 		'password' => '4Lso07',
-		'database' => 'SENAYF',
+		'database' => 'SENAY',
 		//'database' => 'SENAYFGROUP',
 		'schema'=>'public',
 		'prefix' => '',
