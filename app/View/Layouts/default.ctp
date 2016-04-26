@@ -14,7 +14,7 @@
 	<?php echo $this->Html->css('plugins/morris/morris-0.4.3.min'); ?>
 	<?php echo $this->Html->css('sb-admin.css'); ?>
 	<?php echo $this->Html->css('ionicons.css'); ?>
-	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>	
+	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -34,7 +34,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
-				</button>			
+				</button>
 
             </div>
 			<div class="row">
@@ -49,8 +49,8 @@
 						<ul class="nav navbar-top-links navbar-right">
 							<li class="dropdown">
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-									
-									<?php  
+
+									<?php
 											$image=$this->Session->read('image');
 											if(!empty($image))
 												echo $this->Html->image(array ( 'controller' =>
@@ -62,7 +62,7 @@
 													array ( 'title' =>__('Imagen de '.$this->Session->read('nomape')),'class'=>'img-rounded','width'=>'40px','height'=>'40px'));
 											}
 										?>
-								</a>				                    
+								</a>
 									<ul class="dropdown-menu dropdown-messages">
 									<li>
 										<a href="#">
@@ -81,20 +81,20 @@
 											<i class="fa fa-envelope fa-fw"></i>&nbsp;<strong><?php echo __('Email')?></strong>
 											<span class="pull-right text-muted">
 												<em><?php echo $this->Session->read('email')?></em></div>
-											</span>								
+											</span>
 										</a>
 									</li>
 									<li class="divider"></li>
 									<li><?php echo $this->Html->link('<i class="fa fa-sign-out fa-fw"></i>&nbsp;'.__('Salir'),array('controller'=>'users',
 													'action'=>'logout',''),array('escape'=>false),'')?>
-									</li>                        
-								</ul>                    
+									</li>
+								</ul>
 							</li>
 							<!-- /.dropdown -->
 						</ul>
 						<!-- /.navbar-top-links -->
 					</div>
-			</div>							
+			</div>
         </nav>
         <!-- /.navbar-static-top -->
         <nav class="navbar-default navbar-static-side" role="navigation">
@@ -121,7 +121,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<?php echo $this->fetch('content'); ?>
-						<?php echo $this->element('sql_dump'); ?>
+						<?php //echo $this->element('sql_dump'); ?>
 					</div>
 					<!-- /.col-lg-8 (nested) -->
 				</div>
