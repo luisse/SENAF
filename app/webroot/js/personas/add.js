@@ -99,7 +99,7 @@ function IniciarEventos(){
 function guardardatos(){
 	var fechanac = $("#PersonaFnac").val()
 	var fechaactual = new Date();
-	var st_fechaactual = fechaactual.getDate()+'/'+fechaactual.getMonth()+'/'+fechaactual.getFullYear()
+	var st_fechaactual = fechaactual.getDate()+'/'+(fechaactual.getMonth()+1)+'/'+fechaactual.getFullYear()
 	var isnn = $('#PersonaNn').val()
 	var personadetalle = $('#PersonaDetalle').val()
 	//SOLO VALIDA CUANDO LA PERSONA ES UN NN

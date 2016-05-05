@@ -1,0 +1,13 @@
+contorles js del sistema
+    Usuarios no elimina
+
+CONFIGURACIONES
+    * PARENTESCOS:
+        A: OK
+        M: OK
+        B: OK
+
+    * TIPO DOCUMENTO:
+        A: ERROR:
+        M: OK
+

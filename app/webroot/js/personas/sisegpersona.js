@@ -125,6 +125,6 @@ function borrarDomicilio(gruposocxdomi_id){
 function buscarpersonamodal(row){
 	$('#modalview').modal({
 		show: true,
-		remote: '/personas/seleccionapersona/'+row
+		remote: '/senayf/personas/seleccionapersona/'+row
 	});	
 }

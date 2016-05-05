@@ -53,7 +53,7 @@ function eliminarFila(fila){
 
 function filaNueva(){
 	$.ajax({type:'GET',
-			url:'/persxoficinas/agregarfila/'+oId,
+			url:'/senayf/persxoficinas/agregarfila/'+oId,
 			datatype:'html',
 			success:function(data){
 					var strHtml = "<tr id='vinculopers_"+oId+"'></tr>"
@@ -72,7 +72,7 @@ function filaNueva(){
 function buscarpersonamodal(row){
 	$('#modalview').modal({
 		show: true,
-		remote: '/personas/seleccionarpersonasgrupo/'+row
+		remote: '/senayf/personas/seleccionarpersonasgrupo/'+row
 	});	
 }
 

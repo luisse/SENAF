@@ -82,7 +82,7 @@ function procesarEnter(evento){
 
 function validarUsuarioAjax(){
 	serialize=$('#UserLoginForm').serialize()
-	$.post('/users/userajaxlogin',serialize,
+	$.post('/senayf/users/userajaxlogin',serialize,
 			function(data) {
 		if(data != ''){
 			mensaje(data,'Acceso Sistema')
